@@ -1,0 +1,12 @@
+---
+title: "Research Outputs"
+description: |
+  Research relating to the GHSI
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Academic Research
+Recent citations here

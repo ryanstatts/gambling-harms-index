@@ -1,0 +1,38 @@
+---
+title: "Gambling Harms Severity Index"
+description: |
+  A validated measurement tool for assessing gambling-related harm severity
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+# Learn more about publishing to GitHub Pages at:
+# https://rstudio.github.io/distill/publish_website.html#github-pages
+
+```
+
+# Gambling Harms Severity Index
+
+The Gambling Harms Severity Index (GHSI) is a validated measurement tool designed to assess the severity of gambling-related harms using Rasch modeling and Item Response Theory.
+Key Features
+
+- **Evidence-based** measurement developed through rigorous psychometric testing
+- **Standardized** scoring that transforms raw responses into interval-level measurements
+- **Benchmarking** to health utility decrements for meaningful interpretation
+- **Comparative framework** for evaluation against other harm measures
+
+# For Researchers
+
+The GHSI provides a psychometrically robust tool for measuring gambling harm severity in research contexts.
+
+# For Clinicians
+
+The GHSI offers an objective assessment tool to evaluate gambling-related harm and track changes over time.
+
+---
+GHSI University of Plymouth

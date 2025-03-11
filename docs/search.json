@@ -1,0 +1,29 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this site",
+      "description": "Some details about GHSI",
+      "author": [],
+      "contents": "\r\nResearch Background\r\nThe Gambling Harms Severity Index was developed to address limitations in existing measurement approaches. While many tools focus on problem gambling behaviors, the GHSI specifically measures the severity of experienced harms.\r\nMethodology\r\nThe GHSI was developed using:\r\nQualitative research with gambling harm experts and those with lived experience\r\nItem Response Theory to validate the measurement structure\r\nRasch analysis to create an interval scale of harm severity\r\nHealth utility mapping to benchmark severity against standardized health decrements\r\nTechnical Details\r\nThe GHSI employs a [technical details about your Rasch model]. This approach allows for:\r\nItem invariance across different populations\r\nConversion of ordinal responses to interval measurements\r\nRobust comparison between individuals and groups\r\nResearch Team\r\nDr. James Close - The University of Plymouth\r\nDr. Ryan Statton - The University of Plymouth\r\nContact\r\nFor research collaborations or technical questions about the GHSI, please contact [your email].\r\n\r\n\r\n\r\n",
+      "last_modified": "2025-03-11T10:08:08+00:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Gambling Harms Severity Index",
+      "description": "A validated measurement tool for assessing gambling-related harm severity\n",
+      "author": [],
+      "contents": "\r\nGambling Harms Severity Index\r\nThe Gambling Harms Severity Index (GHSI) is a validated measurement tool designed to assess the severity of gambling-related harms using Rasch modeling and Item Response Theory.\r\nKey Features\r\nEvidence-based measurement developed through rigorous psychometric testing\r\nStandardized scoring that transforms raw responses into interval-level measurements\r\nBenchmarking to health utility decrements for meaningful interpretation\r\nComparative framework for evaluation against other harm measures\r\nFor Researchers\r\nThe GHSI provides a psychometrically robust tool for measuring gambling harm severity in research contexts.\r\nFor Clinicians\r\nThe GHSI offers an objective assessment tool to evaluate gambling-related harm and track changes over time.\r\nGHSI University of Plymouth\r\n\r\n\r\n\r\n",
+      "last_modified": "2025-03-11T10:08:11+00:00"
+    },
+    {
+      "path": "papers.html",
+      "title": "Research Outputs",
+      "description": "Research relating to the GHSI",
+      "author": [],
+      "contents": "\r\nAcademic Research\r\nRecent citations here\r\n\r\n\r\n\r\n",
+      "last_modified": "2025-03-11T10:08:14+00:00"
+    }
+  ],
+  "collections": []
+}

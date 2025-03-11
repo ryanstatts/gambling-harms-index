@@ -1,0 +1,39 @@
+---
+title: "About this site"
+description: |
+  Some details about GHSI
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Research Background
+
+The Gambling Harms Severity Index was developed to address limitations in existing measurement approaches. While many tools focus on problem gambling behaviors, the GHSI specifically measures the severity of experienced harms.
+
+## Methodology
+
+The GHSI was developed using:
+
+1. Qualitative research with gambling harm experts and those with lived experience
+2. Item Response Theory to validate the measurement structure
+3. Rasch analysis to create an interval scale of harm severity
+4. Health utility mapping to benchmark severity against standardized health decrements
+
+## Technical Details
+
+The GHSI employs a [technical details about your Rasch model]. This approach allows for:
+
+- Item invariance across different populations
+- Conversion of ordinal responses to interval measurements
+- Robust comparison between individuals and groups
+
+# Research Team
+
+Dr. James Close - [The University of Plymouth](https://www.plymouth.ac.uk/staff/james-close)
+
+Dr. Ryan Statton - [The University of Plymouth](https://www.plymouth.ac.uk/staff/ryan-statton)
+
+## Contact
+For research collaborations or technical questions about the GHSI, please contact [your email].

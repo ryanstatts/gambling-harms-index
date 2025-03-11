@@ -1,0 +1,16 @@
+name: "gambling-harms-index"
+title: "Gambling Harms Severity Index"
+description: |
+  Gambling Harms Severity Index
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Resources"
+      menu:
+      - text: "Research"
+        href: papers.html
+output: distill::distill_article
