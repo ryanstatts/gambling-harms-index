@@ -33,6 +33,3 @@ The GHSI provides a psychometrically robust tool for measuring gambling harm sev
 # For Clinicians
 
 The GHSI offers an objective assessment tool to evaluate gambling-related harm and track changes over time.
-
----
-GHSI University of Plymouth

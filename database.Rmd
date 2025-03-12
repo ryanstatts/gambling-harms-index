@@ -1,0 +1,11 @@
+---
+title: "Item Database"
+description: |
+  A collection of different Gambling Harms and Gambling Severity measures
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Table of all measures

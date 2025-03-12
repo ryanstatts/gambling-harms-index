@@ -1,0 +1,21 @@
+---
+title: "GHSI Items"
+description: |
+  Short Form Measures from the GHSI
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# GHSI-SF
+Items for the Short Form GHSI
+
+# GHSI-SF AO
+Items for the Affected Others GHSI
+
+# GHRI-SF
+Items for the Short Form GHRI
+
+# GHRI-SF AO
+Items for the Affected Others GHSI

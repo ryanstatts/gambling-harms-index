@@ -1,9 +1,12 @@
 name: "gambling-harms-index"
 title: "Gambling Harms Severity Index"
+theme: theme.css
 description: |
   Gambling Harms Severity Index
 output_dir: "docs"
 navbar:
+  logo:
+    image: images/AI_Logo.jpg
   right:
     - text: "Home"
       href: index.html
@@ -11,6 +14,12 @@ navbar:
       href: about.html
     - text: "Resources"
       menu:
+      - text: "Items"
+        href: items.html
       - text: "Research"
         href: papers.html
+      - text: "Item Data Base"
+        href: database.html
+    - image: images/School_Logo.png
+      href: https://plymouth.ac.uk
 output: distill::distill_article
