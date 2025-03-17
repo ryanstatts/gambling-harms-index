@@ -88,29 +88,29 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Gambling Harms Severity Index: About this site</title>
+  <title>Gambling Harms Severity Index: GHSI Score Calculator</title>
 
-  <meta property="description" itemprop="description" content="Some details about GHSI"/>
+  <meta property="description" itemprop="description" content="Calculate your transformed GHSI-SF score"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Gambling Harms Severity Index: About this site"/>
+  <meta property="og:title" content="Gambling Harms Severity Index: GHSI Score Calculator"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Some details about GHSI"/>
+  <meta property="og:description" content="Calculate your transformed GHSI-SF score"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Gambling Harms Severity Index"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Gambling Harms Severity Index: About this site"/>
-  <meta property="twitter:description" content="Some details about GHSI"/>
+  <meta property="twitter:title" content="Gambling Harms Severity Index: GHSI Score Calculator"/>
+  <meta property="twitter:description" content="Calculate your transformed GHSI-SF score"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]},{"type":"character","attributes":{},"value":["Some details about GHSI"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["GHSI Score Calculator"]},{"type":"character","attributes":{},"value":["Calculate your transformed GHSI-SF score"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2435,7 +2435,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"About this site","description":"Some details about GHSI","authors":[]}
+{"title":"GHSI Score Calculator","description":"Calculate your transformed GHSI-SF score","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2485,37 +2485,99 @@ Resources
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>About this site</h1>
+<h1>GHSI Score Calculator</h1>
 
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Some details about GHSI</p></p>
+<p><p>Calculate your transformed GHSI-SF score</p></p>
 </div>
 
 
 <div class="d-article">
-<h1 id="research-background">Research Background</h1>
-<p>The Gambling Harms Severity Index was developed to address limitations in existing measurement approaches. While many tools focus on problem gambling behaviors, the GHSI specifically measures the severity of experienced harms.</p>
-<h2 id="methodology">Methodology</h2>
-<p>The GHSI was developed using:</p>
-<ol type="1">
-<li>Qualitative research with gambling harm experts and those with lived experience</li>
-<li>Item Response Theory to validate the measurement structure</li>
-<li>Rasch analysis to create an interval scale of harm severity</li>
-<li>Health utility mapping to benchmark severity against standardized health decrements</li>
-</ol>
-<h2 id="technical-details">Technical Details</h2>
-<p>The GHSI employs a [technical details about your Rasch model]. This approach allows for:</p>
+<h1 id="gambling-harms-severity-index-calculator">Gambling Harms Severity Index Calculator</h1>
+<p>Enter your raw GHSI score to see your transformed score and interpretation.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+<div class="calculator-container" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+  <h3 style="margin-top: 0;">Score Calculator</h3>
+  <div class="form-group">
+    <label for="rawScore">Enter your raw score (0-30):</label>
+    <input type="number" id="rawScore" min="0" max="30" value="0" style="width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box;">
+  </div>
+  <button id="calculateBtn" style="background-color: #698F3F; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px;">Calculate</button>
+  <div id="results" style="margin-top: 20px; padding: 15px; background-color: #f8f8f8; border-radius: 4px; display: none;">
+    <h4 style="margin-top: 0;">Results:</h4>
+    <p>Transformed Score: <span id="transformedScore" style="font-weight: bold;"></span></p>
+    <p>Severity Level: <span id="severityLevel" style="font-weight: bold;"></span></p>
+    <div id="interpretationText" style="margin-top: 10px; font-style: italic;"></div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var rawScoreInput = document.getElementById("rawScore");
+  var calculateBtn = document.getElementById("calculateBtn");
+  var results = document.getElementById("results");
+  var transformedScoreEl = document.getElementById("transformedScore");
+  var severityLevelEl = document.getElementById("severityLevel");
+  var interpretationTextEl = document.getElementById("interpretationText");
+  
+  calculateBtn.addEventListener("click", function() {
+    var rawScore = parseFloat(rawScoreInput.value);
+    
+    // Validate input
+    if (isNaN(rawScore) || rawScore < 0 || rawScore > 30) {
+      alert("Please enter a valid score between 0 and 30");
+      return;
+    }
+    
+    // Calculate transformed score using your formula
+    // Replace this with your actual transformation formula
+    var transformedScore = (rawScore * 0.8).toFixed(1);
+    
+    // Determine severity level
+    var severityLevel = "";
+    var interpretationText = "";
+    
+    if (rawScore <= 5) {
+      severityLevel = "Minimal";
+      interpretationText = "This score suggests minimal gambling-related harms.";
+    } else if (rawScore <= 10) {
+      severityLevel = "Low";
+      interpretationText = "This score suggests low levels of gambling-related harms.";
+    } else if (rawScore <= 15) {
+      severityLevel = "Moderate";
+      interpretationText = "This score suggests moderate levels of gambling-related harms.";
+    } else if (rawScore <= 20) {
+      severityLevel = "Moderately Severe";
+      interpretationText = "This score suggests moderately severe gambling-related harms.";
+    } else {
+      severityLevel = "Severe";
+      interpretationText = "This score suggests severe gambling-related harms.";
+    }
+    
+    // Update results
+    transformedScoreEl.textContent = transformedScore;
+    severityLevelEl.textContent = severityLevel;
+    interpretationTextEl.textContent = interpretationText;
+    
+    // Show results
+    results.style.display = "block";
+  });
+});
+</script>
+
+</div>
+<h1 id="about-the-ghsi-score">About the GHSI Score</h1>
+<p>The Gambling Harms Severity Index (GHSI) measures gambling-related harm severity. The transformation from raw scores to the GHSI metric has been validated through Rasch analysis to create an interval-level measure.</p>
+<h2 id="key-interpretations">Key Interpretations:</h2>
 <ul>
-<li>Item invariance across different populations</li>
-<li>Conversion of ordinal responses to interval measurements</li>
-<li>Robust comparison between individuals and groups</li>
+<li><strong>Minimal (0-5)</strong>: Few or no gambling-related harms</li>
+<li><strong>Low (6-10)</strong>: Minor harms with limited impact on wellbeing</li>
+<li><strong>Moderate (11-15)</strong>: Noticeable harms affecting multiple areas of life</li>
+<li><strong>Moderately Severe (16-20)</strong>: Significant harms with substantial impact on wellbeing</li>
+<li><strong>Severe (21-30)</strong>: Extensive harms with major consequences across multiple domains</li>
 </ul>
-<h1 id="research-team">Research Team</h1>
-<p>Dr. James Close - <a href="https://www.plymouth.ac.uk/staff/james-close">The University of Plymouth</a></p>
-<p>Dr. Ryan Statton - <a href="https://www.plymouth.ac.uk/staff/ryan-statton">The University of Plymouth</a></p>
-<h2 id="contact">Contact</h2>
-<p>For research collaborations or technical questions about the GHSI, please contact [your email].</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

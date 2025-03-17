@@ -10,14 +10,14 @@
 
 /* Optional: embed custom fonts here with `@import`          */
 /* This must remain at the top of this file.                 */
-@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 
 html {
   /*-- Main font sizes --*/
-  --title-size:      50px;
-  --body-size:       1.06rem;
+  --title-size:      1.25rem;
+  --body-size:       1rem;
   --code-size:       14px;
   --aside-size:      12px;
   --fig-cap-size:    13px;
@@ -28,9 +28,9 @@ html {
   --aside-color:     #252323;
   --fig-cap-color:   #252323;
   /*-- Specify custom fonts ~~~ must be imported above   --*/
-  --heading-font:   "Bitter" ,sans-serif;
+  --heading-font:   "Bitter" ,serif;
   --mono-font:       monospace;
-  --body-font:       "Montserrat", sans-serif;
+  --body-font:       "Hanken", sans-serif;
   --navbar-font:     "Bitter", sans-serif;  /* websites + blogs only */
 }
 
@@ -44,8 +44,8 @@ d-byline {
 
 /*-- ARTICLE TABLE OF CONTENTS --*/
 .d-contents {
-  --heading-size:    18px;
-  --contents-size:   13px;
+  --heading-size:    1.5rem;
+  --contents-size:   1.1rem;
 }
 
 /*-- ARTICLE APPENDIX --*/
@@ -80,5 +80,5 @@ d-appendix {
   padding-top: 1rem;
 }
 .distill-site-header .logo img{
-  max-height: 50px;
+  max-height: 40px;
 }

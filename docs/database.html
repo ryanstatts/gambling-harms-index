@@ -88,29 +88,29 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Gambling Harms Severity Index: Item Database</title>
+  <title>Gambling Harms Severity Index: Gambling Questionnaires Database</title>
 
-  <meta property="description" itemprop="description" content="A collection of different Gambling Harms and Gambling Severity measures"/>
+  <meta property="description" itemprop="description" content="An overview of Gambling Harms Measures searchable database of gambling measurement tools"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Gambling Harms Severity Index: Item Database"/>
+  <meta property="og:title" content="Gambling Harms Severity Index: Gambling Questionnaires Database"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="A collection of different Gambling Harms and Gambling Severity measures"/>
+  <meta property="og:description" content="An overview of Gambling Harms Measures searchable database of gambling measurement tools"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Gambling Harms Severity Index"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Gambling Harms Severity Index: Item Database"/>
-  <meta property="twitter:description" content="A collection of different Gambling Harms and Gambling Severity measures"/>
+  <meta property="twitter:title" content="Gambling Harms Severity Index: Gambling Questionnaires Database"/>
+  <meta property="twitter:description" content="An overview of Gambling Harms Measures searchable database of gambling measurement tools"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Item Database"]},{"type":"character","attributes":{},"value":["A collection of different Gambling Harms and Gambling Severity measures"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Gambling Questionnaires Database"]},{"type":"character","attributes":{},"value":["An overview of Gambling Harms Measures searchable database of gambling measurement tools"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2188,14 +2188,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /* Optional: embed custom fonts here with `@import`          */
   /* This must remain at the top of this file.                 */
-  @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 
   html {
     /*-- Main font sizes --*/
-    --title-size:      50px;
-    --body-size:       1.06rem;
+    --title-size:      1.25rem;
+    --body-size:       1rem;
     --code-size:       14px;
     --aside-size:      12px;
     --fig-cap-size:    13px;
@@ -2206,9 +2206,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color:     #252323;
     --fig-cap-color:   #252323;
     /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:   "Bitter" ,sans-serif;
+    --heading-font:   "Bitter" ,serif;
     --mono-font:       monospace;
-    --body-font:       "Montserrat", sans-serif;
+    --body-font:       "Hanken", sans-serif;
     --navbar-font:     "Bitter", sans-serif;  /* websites + blogs only */
   }
 
@@ -2222,8 +2222,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /*-- ARTICLE TABLE OF CONTENTS --*/
   .d-contents {
-    --heading-size:    18px;
-    --contents-size:   13px;
+    --heading-size:    1.5rem;
+    --contents-size:   1.1rem;
   }
 
   /*-- ARTICLE APPENDIX --*/
@@ -2258,7 +2258,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding-top: 1rem;
   }
   .distill-site-header .logo img{
-    max-height: 50px;
+    max-height: 40px;
   }</style>
   <style type="text/css">
   /* base style */
@@ -2416,6 +2416,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+  <link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+  <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+  <script src="site_libs/datatables-binding-0.33/datatables.js"></script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+  <script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="site_libs/jszip-1.13.6/jszip.min.js"></script>
+  <script src="site_libs/pdfmake-1.13.6/pdfmake.js"></script>
+  <script src="site_libs/pdfmake-1.13.6/vfs_fonts.js"></script>
+  <link href="site_libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+  <script src="site_libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+  <script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+  <script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+  <script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+  <link href="site_libs/dt-ext-responsive-1.13.6/css/responsive.dataTables.min.css" rel="stylesheet" />
+  <script src="site_libs/dt-ext-responsive-1.13.6/js/dataTables.responsive.min.js"></script>
+  <link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+  <script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2435,7 +2455,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Item Database","description":"A collection of different Gambling Harms and Gambling Severity measures","authors":[]}
+{"title":"Gambling Questionnaires Database","description":"An overview of Gambling Harms Measures searchable database of gambling measurement tools","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2450,7 +2470,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
-<a href="about.html">About</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+About
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="about.html">About us</a>
+<a href="papers.html">Research</a>
+</div>
+</div>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
 Resources
@@ -2459,8 +2489,8 @@ Resources
 </button>
 <div class="nav-dropdown-content">
 <a href="items.html">Items</a>
-<a href="papers.html">Research</a>
-<a href="database.html">Item Data Base</a>
+<a href="converter.html">Conversion Calculator</a>
+<a href="database.html">Item Database</a>
 </div>
 </div>
 <a href="https://plymouth.ac.uk" class="nav-image">
@@ -2475,16 +2505,38 @@ Resources
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Item Database</h1>
+<h1>Gambling Questionnaires Database</h1>
 
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A collection of different Gambling Harms and Gambling Severity measures</p></p>
+<p><p>An overview of Gambling Harms Measures searchable database of gambling measurement tools</p></p>
 </div>
 
 
 <div class="d-article">
-<h1 id="table-of-all-measures">Table of all measures</h1>
+<h1 id="gambling-measurement-tools-database">Gambling Measurement Tools Database</h1>
+<p>This database contains <strong>12 different gambling assessment measures</strong> with a total of <strong>201 individual items</strong>. You can explore this database in two different ways:</p>
+<h2 id="gambling-harms-measures-overview">Gambling Harms Measures Overview</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c259d75eb65f92c6a55e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c259d75eb65f92c6a55e">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Responsive"],"data":[["Unimpeachable Gambling Harm Screen","South Oaks Gambling Screen","Short Gambling Harms Screen - 18 items","Short Gambling Harms Screen - 10 items","Problem Gambling Severity Index","Central Queensland University Harms Inventory","Gambling Urges Scale","Gambling Related Cognition Scale","Gambling Commission Gambling Related Harms","DSM-IV diagnotistic criteria for Pathological Gambling","Domain General Gambling Harms Scale","Consumption Screen for Problem Gamblers"],["UGHS","SOGS","SGHS-18","SGHS-10","PGSI","Harms","GUS","GRCS","GCGRH","DSM-IV","DGHS-7","CSPG"],[10,20,18,10,9,72,6,23,13,10,7,3],["Boyle et al. ","Lesieur and Blume","Latvala et al. ","Browne et al.","Ferris and Wynne","Li et al. ","Raylu and Oei","Raylu and Oei","Wardle et al. ","Stinchfield et al. ","Syversten et al. ","Rockloff"],["Resources, Relationships, Health","Uncontrolled Gambling, Health, Relationships, Resources","Resources, Health, Relationships","Resources, Health, Relationships","Resources, Uncontrolled Gambling, Health, Relationships","Resources, Health, Uncontrolled Gambling, Relationships","Uncontrolled Gambling","Health, Uncontrolled Gambling","Resources, Health, Relationships","Health, Uncontrolled Gambling, Resources, Relationships","Resources, Relationships, Health","Uncontrolled Gambling"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Scale Name<\/th>\n      <th>Abbreviation<\/th>\n      <th>Number of Items<\/th>\n      <th>Authors<\/th>\n      <th>Main Components<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":[{"extend":"collection","buttons":["csv","excel","pdf"],"text":"Download"}],"pageLength":12,"autoWidth":true,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2},{"name":"Scale Name","targets":0},{"name":"Abbreviation","targets":1},{"name":"Number of Items","targets":2},{"name":"Authors","targets":3},{"name":"Main Components","targets":4}],"order":[],"orderClasses":false,"responsive":true,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="full-database">Full Database</h2>
+<p>The complete database containing all <strong>201 individual items</strong> items across all of the measures is available on our OSF repository.</p>
+<p><a href="https://osf.io">View Full Item Database on OSF</a></p>
+<p>The OSF repository includes:
+- Complete item text for all measures
+- Response options and scoring information
+- Detailed harm component categorizations
+- Full citations and measure information
+- Downloadable CSV and Excel formats</p>
+<h2 id="about-this-database">About This Database</h2>
+<p>This database was compiled as part of the Gambling Harms Severity Index project. If you would like to suggest additions or corrections to this database, please <a href="mailto:ryan.statton@plymouth.ac.uk">contact us</a>.</p>
+<hr />
+<p>Last updated: March 17, 2025</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

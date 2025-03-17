@@ -1,0 +1,100 @@
+---
+title: "GHSI Score Calculator"
+description: |
+  Calculate your transformed GHSI-SF score
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(htmlwidgets)
+```
+
+# Gambling Harms Severity Index Calculator
+
+Enter your raw GHSI score to see your transformed score and interpretation.
+
+``` {r}
+# Create a simpler HTML structure with inline JavaScript
+htmltools::HTML('
+<div class="calculator-container" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+  <h3 style="margin-top: 0;">Score Calculator</h3>
+  <div class="form-group">
+    <label for="rawScore">Enter your raw score (0-30):</label>
+    <input type="number" id="rawScore" min="0" max="30" value="0" style="width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box;">
+  </div>
+  <button id="calculateBtn" style="background-color: #698F3F; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px;">Calculate</button>
+  <div id="results" style="margin-top: 20px; padding: 15px; background-color: #f8f8f8; border-radius: 4px; display: none;">
+    <h4 style="margin-top: 0;">Results:</h4>
+    <p>Transformed Score: <span id="transformedScore" style="font-weight: bold;"></span></p>
+    <p>Severity Level: <span id="severityLevel" style="font-weight: bold;"></span></p>
+    <div id="interpretationText" style="margin-top: 10px; font-style: italic;"></div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var rawScoreInput = document.getElementById("rawScore");
+  var calculateBtn = document.getElementById("calculateBtn");
+  var results = document.getElementById("results");
+  var transformedScoreEl = document.getElementById("transformedScore");
+  var severityLevelEl = document.getElementById("severityLevel");
+  var interpretationTextEl = document.getElementById("interpretationText");
+  
+  calculateBtn.addEventListener("click", function() {
+    var rawScore = parseFloat(rawScoreInput.value);
+    
+    // Validate input
+    if (isNaN(rawScore) || rawScore < 0 || rawScore > 30) {
+      alert("Please enter a valid score between 0 and 30");
+      return;
+    }
+    
+    // Calculate transformed score using your formula
+    // Replace this with your actual transformation formula
+    var transformedScore = (rawScore * 0.8).toFixed(1);
+    
+    // Determine severity level
+    var severityLevel = "";
+    var interpretationText = "";
+    
+    if (rawScore <= 5) {
+      severityLevel = "Minimal";
+      interpretationText = "This score suggests minimal gambling-related harms.";
+    } else if (rawScore <= 10) {
+      severityLevel = "Low";
+      interpretationText = "This score suggests low levels of gambling-related harms.";
+    } else if (rawScore <= 15) {
+      severityLevel = "Moderate";
+      interpretationText = "This score suggests moderate levels of gambling-related harms.";
+    } else if (rawScore <= 20) {
+      severityLevel = "Moderately Severe";
+      interpretationText = "This score suggests moderately severe gambling-related harms.";
+    } else {
+      severityLevel = "Severe";
+      interpretationText = "This score suggests severe gambling-related harms.";
+    }
+    
+    // Update results
+    transformedScoreEl.textContent = transformedScore;
+    severityLevelEl.textContent = severityLevel;
+    interpretationTextEl.textContent = interpretationText;
+    
+    // Show results
+    results.style.display = "block";
+  });
+});
+</script>
+')
+```
+
+# About the GHSI Score
+
+The Gambling Harms Severity Index (GHSI) measures gambling-related harm severity. The transformation from raw scores to the GHSI metric has been validated through Rasch analysis to create an interval-level measure.
+
+## Key Interpretations:
+
+- **Minimal (0-5)**: Few or no gambling-related harms
+- **Low (6-10)**: Minor harms with limited impact on wellbeing
+- **Moderate (11-15)**: Noticeable harms affecting multiple areas of life
+- **Moderately Severe (16-20)**: Significant harms with substantial impact on wellbeing
+- **Severe (21-30)**: Extensive harms with major consequences across multiple domains

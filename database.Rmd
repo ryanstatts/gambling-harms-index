@@ -1,11 +1,78 @@
 ---
-title: "Item Database"
+title: "Gambling Questionnaires Database"
 description: |
-  A collection of different Gambling Harms and Gambling Severity measures
+  An overview of Gambling Harms Measures searchable database of gambling measurement tools
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(DT)
+library(dplyr)
+
+# Read the full dataset
+items <- read.csv("data/Gambling_Harms_Measure_Item_Bank_2024-12-11.csv", 
+                  stringsAsFactors = FALSE,
+                  check.names = F)
+
+
+# Create a summary dataframe with one row per measure
+measures_summary <- items %>%
+  group_by(`Scale Name`) %>%
+  summarize(
+    Abbreviation = first(`Scale Abreviation`),
+    `Number of Items` = n(),
+    Authors = first(Authors),
+    `Main Components` = paste(unique(`Harm Component`), collapse = ", ")
+  ) %>%
+  arrange(desc(`Abbreviation`))
 ```
 
-# Table of all measures
+# Gambling Measurement Tools Database
+
+This database contains **`r nrow(measures_summary)` different gambling assessment measures** with a total of **`r nrow(items)` individual items**. You can explore this database in two different ways:
+
+## Gambling Harms Measures Overview
+
+```{r}
+datatable(
+  measures_summary,
+  extensions = c('Buttons', 'Responsive'),
+  options = list(
+    dom = 'Bfrtip',
+    buttons = list(list(
+      extend = 'collection',
+      buttons = c('csv', 'excel', 'pdf'),
+      text = "Download")),
+    pageLength = 12,
+    autoWidth = TRUE,
+    scrollX = TRUE
+  ),
+  rownames = FALSE,
+  escape = FALSE,
+)
+```
+
+```{r, echo=FALSE}
+# If you want to add additional information or citations about these questionnaires
+```
+
+
+## Full Database
+The complete database containing all **`r nrow(items)` individual items** items across all of the measures is available on our OSF repository. 
+
+[View Full Item Database on OSF](https://osf.io)
+
+The OSF repository includes:
+- Complete item text for all measures
+- Response options and scoring information
+- Detailed harm component categorizations
+- Full citations and measure information
+- Downloadable CSV and Excel formats
+
+## About This Database
+
+This database was compiled as part of the Gambling Harms Severity Index project. If you would like to suggest additions or corrections to this database, please [contact us](mailto:ryan.statton@plymouth.ac.uk).
+
+---
+
+Last updated: `r format(Sys.Date(), "%B %d, %Y")`

@@ -11,14 +11,18 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "About"
-      href: about.html
+      menu:
+      - text: "About us"
+        href: about.html
+      - text: "Research"
+        href: papers.html
     - text: "Resources"
       menu:
       - text: "Items"
         href: items.html
-      - text: "Research"
-        href: papers.html
-      - text: "Item Data Base"
+      - text: "Conversion Calculator"
+        href: converter.html
+      - text: "Item Database"
         href: database.html
     - image: images/School_Logo.png
       href: https://plymouth.ac.uk

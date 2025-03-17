@@ -2188,14 +2188,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /* Optional: embed custom fonts here with `@import`          */
   /* This must remain at the top of this file.                 */
-  @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 
   html {
     /*-- Main font sizes --*/
-    --title-size:      50px;
-    --body-size:       1.06rem;
+    --title-size:      1.25rem;
+    --body-size:       1rem;
     --code-size:       14px;
     --aside-size:      12px;
     --fig-cap-size:    13px;
@@ -2206,9 +2206,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color:     #252323;
     --fig-cap-color:   #252323;
     /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:   "Bitter" ,sans-serif;
+    --heading-font:   "Bitter" ,serif;
     --mono-font:       monospace;
-    --body-font:       "Montserrat", sans-serif;
+    --body-font:       "Hanken", sans-serif;
     --navbar-font:     "Bitter", sans-serif;  /* websites + blogs only */
   }
 
@@ -2222,8 +2222,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /*-- ARTICLE TABLE OF CONTENTS --*/
   .d-contents {
-    --heading-size:    18px;
-    --contents-size:   13px;
+    --heading-size:    1.5rem;
+    --contents-size:   1.1rem;
   }
 
   /*-- ARTICLE APPENDIX --*/
@@ -2258,7 +2258,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding-top: 1rem;
   }
   .distill-site-header .logo img{
-    max-height: 50px;
+    max-height: 40px;
   }</style>
   <style type="text/css">
   /* base style */
@@ -2450,7 +2450,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
-<a href="about.html">About</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+About
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="about.html">About us</a>
+<a href="papers.html">Research</a>
+</div>
+</div>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
 Resources
@@ -2459,8 +2469,8 @@ Resources
 </button>
 <div class="nav-dropdown-content">
 <a href="items.html">Items</a>
-<a href="papers.html">Research</a>
-<a href="database.html">Item Data Base</a>
+<a href="converter.html">Conversion Calculator</a>
+<a href="database.html">Item Database</a>
 </div>
 </div>
 <a href="https://plymouth.ac.uk" class="nav-image">
@@ -2484,12 +2494,130 @@ Resources
 
 
 <div class="d-article">
+<h1 id="to-use">To Use</h1>
+<p>Before using any form of the GHSI, please register with us first. Treatment and support services, healthcare providers, and researchers do not have to pay to use the GHSI, but please complete our registration form.</p>
+<p><a href="https://www.google.com">Registration Form (Word document, 2.3MB)</a>.</p>
 <h1 id="ghsi-sf">GHSI-SF</h1>
 <p>Items for the Short Form GHSI</p>
+<p>It is normal to experience challenges with gambling, and support is available. Reflect honestly to understand any impacts on your life.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 7%" />
+<col style="width: 21%" />
+<col style="width: 20%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Over the last 3 months, how often has gambling led to issues with your…</strong></th>
+<th style="text-align: center;"><strong>Never<br><br>(0)</strong></th>
+<th><strong>Occasionally</strong><br>(e.g. once or twice a month)<br><br><strong>(1)</strong></th>
+<th><strong>Fairly Often</strong><br>(e.g. once or twice a week)<br><br><strong>(2)</strong></th>
+<th><strong>Very Often</strong><br>(e.g. most days)<br><br><strong>(3)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>… Mood and feelings. <em>Such as feeling down, stressed or anxious.</em></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>… Physical Health. <em>Such as eating poorly or losing sleep.</em></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>… Finances. <em>Such as issues with paying bills, borrowing money or using up savings.</em></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>… Hobbies, activities, work and study. <em>Such as losing focus, getting things wrong or missing work.</em></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>… Family and close relationships. <em>Such as tensions or being less involved with loved ones.</em></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>… Social life and community connection. <em>Such as feeling judged, lonely or isolated.</em></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>… Honest behaviour. <em>Such as hiding gambling and borrowing money without asking.</em></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Now looking ahead to the next 3 months, how often do you expect to…</strong></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>… Avoid tricky situations or use coping strategies to reduce the impacts of gambling.</td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>… Feel confident in making positive choices about gambling.</td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h1 id="ghsi-sf-ao">GHSI-SF AO</h1>
-<p>Items for the Affected Others GHSI</p>
+<p><strong>Items for the Affected Others GHSI</strong></p>
+<p>The GHSI-SF AO is proceeded by a <em>normalising statement</em> designed to support respondents and encourage honest engagement with the scale:</p>
+<blockquote>
+<p>It is normal to experience challenges when someone close to you is harmed by gambling. This questionnaire helps you reflect on how their gambling has affected your life.</p>
+</blockquote>
+<p>GHSI-SF AO comprises 7 items (below) about direct experience, scored from 0 - 3 (Never, Occasionally, Fairly Often, or Very Often):</p>
+<p><strong>Over the last 3 months, how often has gambling led to issues with your…</strong><br>
+… Mood and Feelings. <em>Such as feeling down, stressed or anxious.</em><br>
+… Physical Health. <em>Such as eating poorly or losing sleep.</em><br>
+… Finances. <em>Such as issues with paying bills, borrowing money, or using up savings.</em><br>
+… Hobbies, activities, work and study. <em>Such as losing focus, getting things wrong or missing work.</em><br>
+… Family and close relationships. <em>Such as tensions or being less involved with loved ones.</em><br>
+… Social life and community connection. <em>Such as feeling judged, lonely or isolated.</em><br>
+… Honest Behaviour. <em>Such as hiding gambling and borrowing money without asking.</em><br></p>
+<p>GHSI_SF AO also contains 4 items (below) to measure recovery from gambling related harms, scored from 3 - 0 (Never, Occasionally, Fairly Often, or Very Often):</p>
+<p><strong>Now looking ahead to the next 3 months, how often do you expect to…</strong><br>
+… Use self-care strategies or coping tools to support your wellbeing?<br>
+… Feel hopeful about improvements in your own wellbeing or the situation?<br>
+… Take steps to set boundaries or protect yourself from harm?<br>
+… Strengthen supportive relationships that helo you cope or recover?<br></p>
+<hr />
 <h1 id="ghri-sf">GHRI-SF</h1>
 <p>Items for the Short Form GHRI</p>
+<p>The GHRI-SF is a 9 item measure of recovery from gambling harm. Designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey.</p>
+<p><a href="https://google.com">Download GHSI-SF (Word format, 2.3MB)</a>.</p>
+<hr />
 <h1 id="ghri-sf-ao">GHRI-SF AO</h1>
 <p>Items for the Affected Others GHSI</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
