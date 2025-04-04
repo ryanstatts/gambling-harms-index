@@ -1,0 +1,17 @@
+---
+title: "Using the GHSI"
+description: |
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{css}
+d-title {
+  display: none;
+  }
+```
+
+# Using the Gambling Harms Severity Index

@@ -88,22 +88,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Gambling Harms Severity Index: Gambling Questionnaires Database</title>
+  <title>The Gambling Harms Scale Initiative: Gambling Questionnaires Database</title>
 
   <meta property="description" itemprop="description" content="An overview of Gambling Harms Measures searchable database of gambling measurement tools"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Gambling Harms Severity Index: Gambling Questionnaires Database"/>
+  <meta property="og:title" content="The Gambling Harms Scale Initiative: Gambling Questionnaires Database"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="An overview of Gambling Harms Measures searchable database of gambling measurement tools"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Gambling Harms Severity Index"/>
+  <meta property="og:site_name" content="The Gambling Harms Scale Initiative"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Gambling Harms Severity Index: Gambling Questionnaires Database"/>
+  <meta property="twitter:title" content="The Gambling Harms Scale Initiative: Gambling Questionnaires Database"/>
   <meta property="twitter:description" content="An overview of Gambling Harms Measures searchable database of gambling measurement tools"/>
 
   <!--/radix_placeholder_meta_tags-->
@@ -2176,8 +2176,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
   </style>
-  <style type="text/css">
-  /* base variables */
+  <style type="text/css">/* base variables */
 
   /* Edit the CSS properties in this file to create a custom
      Distill theme. Only edit values in the right column
@@ -2194,71 +2193,106 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   html {
     /*-- Main font sizes --*/
-    --title-size:      1.25rem;
+    --title-size:      2rem;
     --body-size:       1rem;
     --code-size:       14px;
-    --aside-size:      12px;
+    --aside-size:      0.8px;
     --fig-cap-size:    13px;
     /*-- Main font colors --*/
-    --title-color:     #252323;
+    --title-color:     #E6EFE9;
     --header-color:    #252323;
     --body-color:      #252323;
     --aside-color:     #252323;
     --fig-cap-color:   #252323;
     /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:   "Bitter" ,serif;
+    --heading-font:   "Hanken", sans-serif;
     --mono-font:       monospace;
-    --body-font:       "Hanken", sans-serif;
-    --navbar-font:     "Bitter", sans-serif;  /* websites + blogs only */
+    --body-font:       "Bitter", serif;
+    --navbar-font:     "Hanken", sans-serif;  /* websites + blogs only */
   }
 
   /*-- ARTICLE METADATA --*/
   d-byline {
-    --heading-size:    0.6rem;
-    --heading-color:   rgba(0, 0, 0, 0.5);
-    --body-size:       0.8rem;
-    --body-color:      rgba(0, 0, 0, 0.8);
+    --heading-size:    1.25rem;
+    --heading-color:   #252323;
+    --body-size:       1.0rem;
+    --body-color:      #252323;
   }
 
   /*-- ARTICLE TABLE OF CONTENTS --*/
   .d-contents {
-    --heading-size:    1.5rem;
-    --contents-size:   1.1rem;
+    --heading-size:    1.25rem;
+    --contents-size:   1rem;
   }
 
   /*-- ARTICLE APPENDIX --*/
   d-appendix {
     --heading-size:    15px;
-    --heading-color:   rgba(0, 0, 0, 0.65);
+    --heading-color:   #252323;
     --text-size:       0.8em;
-    --text-color:      rgba(0, 0, 0, 0.5);
+    --text-color:      #252323;
   }
 
   /*-- WEBSITE HEADER + FOOTER --*/
   /* These properties only apply to Distill sites and blogs  */
 
   .distill-site-header {
-    --title-size:       20px;
-    --text-color:       #E6EFE9;
-    --text-size:        18px;
+    --title-size:       16px;
+    --text-color:       #252323;
+    --text-size:        16px;
     --hover-color:      #EB6534;
-    --bkgd-color:       #698F3F;
+    --bkgd-color:       #fff9ef;
   }
 
   .distill-site-footer {
-    --text-color:       #E6EFE9;
-    --text-size:        15px;
-    --hover-color:      #E6EFE9;
-    --bkgd-color:       #698F3F;
+    --text-color:       #252323;
+    --text-size:        14px;
+    --hover-color:      #EB6534;
+    --bkgd-color:       #fff9ef;
+    --body-font:        "Hanken"
   }
 
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
-  .distill-site-header{
-    padding-top: 1rem;
+  .distill-site-header .title{
+    display: none;
   }
+
   .distill-site-header .logo img{
-    max-height: 40px;
+    max-height: 100px;
+    width: auto;
+  }
+
+  .distill-site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--bkgd-color);
+  }
+
+  /* Then add body padding to prevent content overlap */
+  body {
+    padding-top: 110px; /* Approximately the height of your header */
+  }
+
+
+  /* Change link appearance */
+  d-article a {
+    border-bottom: 2px solid #EB6534;
+    text-decoration: none;
+  }
+
+  /* setbackground for title container */
+  d-title {
+    text-align: center;
+    color: #E6EFE9;
+    background-color: #698F3F;
+    padding-top: 1.25rem;  /* Converted from 20px */
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
   }</style>
   <style type="text/css">
   /* base style */
@@ -2463,39 +2497,56 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a class="logo">
-<img src="images/AI_Logo.jpg" alt="Logo"/>
+<a class="logo" href="index.html">
+<img src="images/logo_name.png" alt="Logo"/>
 </a>
-<a href="index.html" class="title">Gambling Harms Severity Index</a>
+<a href="index.html" class="title">The Gambling Harms Scale Initiative</a>
 </div>
 <div class="nav-right">
 <a href="index.html">Home</a>
+<a href="framework.html">The Framework</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
-About
+The GHSI Measurement Tools
  
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="about.html">About us</a>
-<a href="papers.html">Research</a>
-</div>
-</div>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Resources
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
+<a href="GHSI_tools.html">About the Tools</a>
 <a href="items.html">Items</a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+For gambling Support Service Providers
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
 <a href="converter.html">Conversion Calculator</a>
-<a href="database.html">Item Database</a>
 </div>
 </div>
-<a href="https://plymouth.ac.uk" class="nav-image">
-<img src="images/School_Logo.png"/>
-</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+For researchers
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="papers.html">publications</a>
+<a href="database.html">Item bank of Gambling Related Harms</a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+For policymakers
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="converter.html">Conversion Calculator</a>
+</div>
+</div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2518,8 +2569,8 @@ Resources
 <p>This database contains <strong>12 different gambling assessment measures</strong> with a total of <strong>201 individual items</strong>. You can explore this database in two different ways:</p>
 <h2 id="gambling-harms-measures-overview">Gambling Harms Measures Overview</h2>
 <div class="layout-chunk" data-layout="l-body">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-149198f300daf59693e9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-149198f300daf59693e9">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Responsive"],"data":[["Unimpeachable Gambling Harm Screen","South Oaks Gambling Screen","Short Gambling Harms Screen - 18 items","Short Gambling Harms Screen - 10 items","Problem Gambling Severity Index","Central Queensland University Harms Inventory","Gambling Urges Scale","Gambling Related Cognition Scale","Gambling Commission Gambling Related Harms","DSM-IV diagnotistic criteria for Pathological Gambling","Domain General Gambling Harms Scale","Consumption Screen for Problem Gamblers"],["UGHS","SOGS","SGHS-18","SGHS-10","PGSI","Harms","GUS","GRCS","GCGRH","DSM-IV","DGHS-7","CSPG"],[10,20,18,10,9,72,6,23,13,10,7,3],["Boyle et al. ","Lesieur and Blume","Latvala et al. ","Browne et al.","Ferris and Wynne","Li et al. ","Raylu and Oei","Raylu and Oei","Wardle et al. ","Stinchfield et al. ","Syversten et al. ","Rockloff"],["Resources, Relationships, Health","Uncontrolled Gambling, Health, Relationships, Resources","Resources, Health, Relationships","Resources, Health, Relationships","Resources, Uncontrolled Gambling, Health, Relationships","Resources, Health, Uncontrolled Gambling, Relationships","Uncontrolled Gambling","Health, Uncontrolled Gambling","Resources, Health, Relationships","Health, Uncontrolled Gambling, Resources, Relationships","Resources, Relationships, Health","Uncontrolled Gambling"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Scale Name<\/th>\n      <th>Abbreviation<\/th>\n      <th>Number of Items<\/th>\n      <th>Authors<\/th>\n      <th>Main Components<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":[{"extend":"collection","buttons":["csv","excel","pdf"],"text":"Download"}],"pageLength":12,"autoWidth":true,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2},{"name":"Scale Name","targets":0},{"name":"Abbreviation","targets":1},{"name":"Number of Items","targets":2},{"name":"Authors","targets":3},{"name":"Main Components","targets":4}],"order":[],"orderClasses":false,"responsive":true,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ec955f9643bd6794bb70" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ec955f9643bd6794bb70">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Responsive"],"data":[["Unimpeachable Gambling Harm Screen","South Oaks Gambling Screen","Short Gambling Harms Screen - 18 items","Short Gambling Harms Screen - 10 items","Problem Gambling Severity Index","Central Queensland University Harms Inventory","Gambling Urges Scale","Gambling Related Cognition Scale","Gambling Commission Gambling Related Harms","DSM-IV diagnotistic criteria for Pathological Gambling","Domain General Gambling Harms Scale","Consumption Screen for Problem Gamblers"],["UGHS","SOGS","SGHS-18","SGHS-10","PGSI","Harms","GUS","GRCS","GCGRH","DSM-IV","DGHS-7","CSPG"],[10,20,18,10,9,72,6,23,13,10,7,3],["Boyle et al. ","Lesieur and Blume","Latvala et al. ","Browne et al.","Ferris and Wynne","Li et al. ","Raylu and Oei","Raylu and Oei","Wardle et al. ","Stinchfield et al. ","Syversten et al. ","Rockloff"],["Resources, Relationships, Health","Uncontrolled Gambling, Health, Relationships, Resources","Resources, Health, Relationships","Resources, Health, Relationships","Resources, Uncontrolled Gambling, Health, Relationships","Resources, Health, Uncontrolled Gambling, Relationships","Uncontrolled Gambling","Health, Uncontrolled Gambling","Resources, Health, Relationships","Health, Uncontrolled Gambling, Resources, Relationships","Resources, Relationships, Health","Uncontrolled Gambling"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Scale Name<\/th>\n      <th>Abbreviation<\/th>\n      <th>Number of Items<\/th>\n      <th>Authors<\/th>\n      <th>Main Components<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":[{"extend":"collection","buttons":["csv","excel","pdf"],"text":"Download"}],"pageLength":12,"autoWidth":true,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2},{"name":"Scale Name","targets":0},{"name":"Abbreviation","targets":1},{"name":"Number of Items","targets":2},{"name":"Authors","targets":3},{"name":"Main Components","targets":4}],"order":[],"orderClasses":false,"responsive":true,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -2527,16 +2578,18 @@ Resources
 <h2 id="full-database">Full Database</h2>
 <p>The complete database containing all <strong>201 individual items</strong> items across all of the measures is available on our OSF repository.</p>
 <p><a href="https://osf.io">View Full Item Database on OSF</a></p>
-<p>The OSF repository includes:
-- Complete item text for all measures
-- Response options and scoring information
-- Detailed harm component categorizations
-- Full citations and measure information
-- Downloadable CSV and Excel formats</p>
+<p>The OSF repository includes:</p>
+<ul>
+<li>Complete item text for all measures</li>
+<li>Response options and scoring information</li>
+<li>Detailed harm component categorizations</li>
+<li>Full citations and measure information</li>
+<li>Downloadable CSV and Excel formats</li>
+</ul>
 <h2 id="about-this-database">About This Database</h2>
 <p>This database was compiled as part of the Gambling Harms Severity Index project. If you would like to suggest additions or corrections to this database, please <a href="mailto:ryan.statton@plymouth.ac.uk">contact us</a>.</p>
 <hr />
-<p>Last updated: March 17, 2025</p>
+<p>Last updated: April 04, 2025</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2553,11 +2606,15 @@ Resources
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="distill-site-nav distill-site-footer">
-<p>The GHSI Project</p>
-<p>Funded by GambleAware in collaboration with the Univerity of
-Plymouth, the University of Bristol, and the National Centre for Social
-Research.</p>
+<p>The Gambling Harms Severity Project</p>
+<p>Funded by <a href="https://www.gambleaware.org/">GambleAware</a> in
+collaboration with the <a href="https://www.plymouth.ac.uk">Univerity of
+Plymouth</a>, the <a
+href="https://www.bristol.ac.uk/research/groups/gambling-harms/">University
+of Bristol</a>, and the <a href="https://natcen.ac.uk/">National Centre
+for Social Research</a>.</p>
 <p xmlns:cc="http://creativecommons.org/ns#" >This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+<p><link rel="shortcut icon" href="images/HolisticGamblingRecovery.png" /></p>
 </div>
 <!--/radix_placeholder_navigation_after_body-->
 

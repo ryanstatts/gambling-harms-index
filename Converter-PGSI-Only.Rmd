@@ -1,0 +1,311 @@
+---
+title: "Gambling Harms Severity Index Calculator"
+description: |
+  Calculate your transformed GHSI-SF score.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(htmlwidgets)
+library(htmltools)
+library(jsonlite)
+library(tidyverse)
+```
+
+Enter your raw GHSI score to see your transformed score and interpretation.
+
+```{r widget}
+# Create your Rasch conversion table
+rasch_table <- read.csv("data/all_pgsi_1+_SCFILE_2025-02-04.csv") %>% 
+  rename(
+    raw_score = SCORE,
+    measure = MEASURE,
+    standard_error = `S.E.`) %>% 
+  dplyr::select(raw_score, measure, standard_error)
+
+# Convert to JSON and create the complete HTML with the JSON data embedded directly
+rasch_json <- jsonlite::toJSON(rasch_table)
+
+# Create the HTML widget using htmltools::HTML for direct insertion
+htmltools::HTML(paste0('
+<div class="calculator-container" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+  <h3 style="margin-top: 0;">Rasch Measure Calculator</h3>
+  <div class="form-group">
+    <label for="rawScore">Enter your raw score (0-27):</label>
+    <input type="number" id="rawScore" min="0" max="27" value="0" style="width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box;">
+  </div>
+  <button id="calculateBtn" style="background-color: #698F3F; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px;">Calculate</button>
+  <div id="results" style="margin-top: 20px; padding: 15px; background-color: #f8f8f8; border-radius: 4px; display: none;">
+    <h4 style="margin-top: 0;">Results:</h4>
+    <p>Raw Score: <span id="rawScoreDisplay" style="font-weight: bold;"></span></p>
+    <p>Measure (logits): <span id="measureScore" style="font-weight: bold;"></span></p>
+    
+    <!-- Data Points Visualization using HTML -->
+    <div style="margin: 30px 0;">
+      <h5>Raw Score to Measure Relationship</h5>
+      <div style="padding: 0 45px 45px 45px;">
+        <div id="curveContainer" style="position: relative; width: 100%; height: 200px; border-left: 1px solid #999; border-bottom: 1px solid #999; margin: 10px 0 0 0; background-color: #f9f9f9;">
+          <!-- Points will be added dynamically by JavaScript -->
+          
+          <!-- User position marker -->
+          <div id="positionDot" style="position: absolute; width: 8px; height: 8px; background-color: #e74c3c; border-radius: 50%; display: none; transform: translate(-50%, -50%); z-index: 10;"></div>
+          
+          <!-- Guide lines -->
+          <div id="horizontalGuideLine" style="position: absolute; height: 1px; background-color: transparent; border-top: 1px dashed #999; display: none; z-index: 5;"></div>
+          <div id="verticalGuideLine" style="position: absolute; width: 1px; background-color: transparent; border-left: 1px dashed #999; display: none; z-index: 5;"></div>
+          
+          <!-- Axis labels -->
+          <div style="position: absolute; top: 90px; left: -40px; transform: rotate(-90deg); transform-origin: left center; font-size: 12px; white-space: nowrap;">Raw Score</div>
+          <div style="position: absolute; bottom: -30px; right: 0; left: 0; text-align: center; font-size: 12px;">Rasch Measure (logits)</div>
+          
+          <!-- Y axis ticks -->
+          <div style="position: absolute; top: 0%; left: -25px; font-size: 10px; transform: translateY(-50%);">27</div>
+          <div style="position: absolute; top: 25%; left: -25px; font-size: 10px; transform: translateY(-50%);">20</div>
+          <div style="position: absolute; top: 50%; left: -25px; font-size: 10px; transform: translateY(-50%);">13</div>
+          <div style="position: absolute; top: 75%; left: -25px; font-size: 10px; transform: translateY(-50%);">7</div>
+          <div style="position: absolute; top: 100%; left: -25px; font-size: 10px; transform: translateY(-50%);">0</div>
+          
+          <!-- X axis ticks -->
+          <div style="position: absolute; bottom: -20px; left: 0%; font-size: 10px; transform: translateX(-50%);">-5</div>
+          <div style="position: absolute; bottom: -20px; left: 20%; font-size: 10px; transform: translateX(-50%);">-3</div>
+          <div style="position: absolute; bottom: -20px; left: 40%; font-size: 10px; transform: translateX(-50%);">-1</div>
+          <div style="position: absolute; bottom: -20px; left: 60%; font-size: 10px; transform: translateX(-50%);">1</div>
+          <div style="position: absolute; bottom: -20px; left: 80%; font-size: 10px; transform: translateX(-50%);">3</div>
+        </div>
+      </div>
+      
+      <p style="margin-top: 20px;">Severity Level: <span id="severityLevel" style="font-weight: bold;"></span></p>
+      <div id="interpretationText" style="margin-top: 10px; font-style: italic;"></div>
+    </div>
+    
+    <!-- Wellbeing Decrement Visualization -->
+    <div style="margin: 30px 0;">
+      <h5>Wellbeing Decrement</h5>
+      <div style="position: relative; width: 100%; height: 40px; margin: 20px 0 40px 0;">
+        <!-- Bar background -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 20px; background: linear-gradient(to right, #e5f7e5, #ffcdd2); border-radius: 10px;"></div>
+        
+        <!-- Decrement indicator bar -->
+        <div id="wellbeingBar" style="position: absolute; top: 0; left: 0; height: 20px; background-color: rgba(231, 76, 60, 0.7); border-radius: 10px 0 0 10px; width: 0;"></div>
+        
+        <!-- Scale labels -->
+        <div style="position: absolute; bottom: -25px; left: 0; width: 100%; display: flex; justify-content: space-between; font-size: 12px;">
+          <div>0</div>
+          <div>-1</div>
+          <div>-2</div>
+          <div>-3</div>
+          <div>-4</div>
+          <div>-5</div>
+        </div>
+        
+        <!-- Marker arrow -->
+        <div id="wellbeingMarker" style="position: absolute; top: -15px; left: 0; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 12px solid #333; transform: translateX(-50%); display: none;"></div>
+      </div>
+      
+      <p>Wellbeing Decrement: <span id="wellbeing" style="font-weight: bold;"></span></p>
+      <div id="wellbeingText" style="margin-top: 10px; font-style: italic;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Immediately execute this function to avoid global scope issues
+(function() {
+  // Add an event listener for when the DOM is fully loaded
+  document.addEventListener("DOMContentLoaded", function() {
+    var rawScoreInput = document.getElementById("rawScore");
+    var calculateBtn = document.getElementById("calculateBtn");
+    var results = document.getElementById("results");
+    var rawScoreDisplay = document.getElementById("rawScoreDisplay");
+    var measureScoreEl = document.getElementById("measureScore");
+    var severityLevelEl = document.getElementById("severityLevel");
+    var interpretationTextEl = document.getElementById("interpretationText");
+    var wellbeingEl = document.getElementById("wellbeing");
+    var wellbeingTextEl = document.getElementById("wellbeingText");
+    var positionDot = document.getElementById("positionDot");
+    var horizontalGuideLine = document.getElementById("horizontalGuideLine");
+    var verticalGuideLine = document.getElementById("verticalGuideLine");
+    var wellbeingBar = document.getElementById("wellbeingBar");
+    var wellbeingMarker = document.getElementById("wellbeingMarker");
+    var curveContainer = document.getElementById("curveContainer");
+    
+    // Embed the Rasch data directly in the JavaScript
+    var raschData = ', rasch_json, ';
+    
+    // Constants for scale conversion
+    var scaleMin = -5;
+    var scaleMax = 4;
+    var scaleRange = scaleMax - scaleMin;
+    var maxRawScore = 27;
+    
+    // Sort data by raw score to ensure proper ordering
+    raschData.sort(function(a, b) {
+      return a.raw_score - b.raw_score;
+    });
+    
+    // Create data points
+    function createDataPoints() {
+      // Clear any existing points
+      var existingPoints = curveContainer.querySelectorAll(".data-point");
+      existingPoints.forEach(function(point) {
+        curveContainer.removeChild(point);
+      });
+      
+      // Add data points
+      for (var i = 0; i < raschData.length; i++) {
+        var entry = raschData[i];
+        
+        // Calculate position percentages
+        var xPercent = ((entry.measure - scaleMin) / scaleRange) * 100;
+        var yPercent = 100 - ((entry.raw_score / maxRawScore) * 100);
+        
+        // Create point element
+        var point = document.createElement("div");
+        point.className = "data-point";
+        point.style.position = "absolute";
+        point.style.width = "6px";
+        point.style.height = "6px";
+        point.style.backgroundColor = "#698F3F";
+        point.style.borderRadius = "50%";
+        point.style.left = xPercent + "%";
+        point.style.top = yPercent + "%";
+        point.style.transform = "translate(-50%, -50%)";
+        point.style.zIndex = "2";
+        
+        // Add to container
+        curveContainer.appendChild(point);
+      }
+    }
+    
+    // Create the data points immediately
+    createDataPoints();
+    
+    // Add click handler for the calculate button
+    calculateBtn.addEventListener("click", function() {
+      var rawScore = parseInt(rawScoreInput.value);
+      
+      // Validate input
+      if (isNaN(rawScore) || rawScore < 0 || rawScore > 27) {
+        alert("Please enter a valid score between 0 and 27");
+        return;
+      }
+      
+      // Find the matching entry in raschData
+      var entry = null;
+      for (var i = 0; i < raschData.length; i++) {
+        if (raschData[i].raw_score === rawScore) {
+          entry = raschData[i];
+          break;
+        }
+      }
+      
+      if (!entry) {
+        alert("Error: Score not found in conversion table");
+        return;
+      }
+      
+      var measure = entry.measure;
+      
+      // Determine severity level
+      var severityLevel = "";
+      var interpretationText = "";
+      
+      // Define severity levels based on the logit measure
+      if (measure < -2.0) {
+        severityLevel = "Minimal";
+        interpretationText = "This level indicates minimal gambling-related harms. Few to no significant problems related to gambling are present.";
+      } else if (measure < -1.0) {
+        severityLevel = "Low";
+        interpretationText = "This level indicates low gambling-related harms. Some minor problems may be present but they have limited impact on daily functioning.";
+      } else if (measure < 0.5) {
+        severityLevel = "Moderate";
+        interpretationText = "This level indicates moderate gambling-related harms with noticeable impact on some areas of life.";
+      } else if (measure < 2.0) {
+        severityLevel = "Moderately Severe";
+        interpretationText = "This level indicates significant gambling-related harms affecting multiple areas of life.";
+      } else {
+        severityLevel = "Severe";
+        interpretationText = "This level indicates severe gambling-related harms with substantial negative impacts across most areas of life.";
+      }
+      
+      // Determine wellbeing level
+      var wellbeing = "";
+      var wellbeingText = "";
+      var wellbeingValue = 0;
+      
+      // Define wellbeing levels based on the raw score
+      if (rawScore < 1) {
+        wellbeing = "No Decrement";
+        wellbeingText = "This level indicates no decrement to Mental Wellbeing on the WEMWBS inventory.";
+        wellbeingValue = 0;
+      } else if (rawScore < 3) {
+        wellbeing = "-2.14";
+        wellbeingText = "This level indicates a reduction in Mental Wellbeing on the WEMWBS that could be translated to a depression indicator of Possible or Mild Depression.";
+        wellbeingValue = 2.14;
+      } else if (rawScore < 8) {
+        wellbeing = "-4.38";
+        wellbeingText = "This level indicates a reduction in Mental Wellbeing on the WEMWBS that could be translated to a depression indicator of Possible or Mild Depression.";
+        wellbeingValue = 4.38;
+      } else {
+        wellbeing = "-4.01";
+        wellbeingText = "This level indicates a reduction in Mental Wellbeing on the WEMWBS that could be translated to a depression indicator of Possible or Mild Depression.";
+        wellbeingValue = 4.01;
+      }
+      
+      // Update results
+      rawScoreDisplay.textContent = rawScore;
+      measureScoreEl.textContent = measure.toFixed(2);
+      severityLevelEl.textContent = severityLevel;
+      interpretationTextEl.textContent = interpretationText;
+      wellbeingEl.textContent = wellbeing;
+      wellbeingTextEl.textContent = wellbeingText;
+      
+      // Calculate position for visualizations
+      var xPercent = ((measure - scaleMin) / scaleRange) * 100;
+      var yPercent = 100 - ((rawScore / maxRawScore) * 100);
+      
+      // Position the dot at the intersection
+      positionDot.style.left = xPercent + "%";
+      positionDot.style.top = yPercent + "%";
+      positionDot.style.display = "block";
+      
+      // Position horizontal guide line (from y-axis to the dot)
+      horizontalGuideLine.style.top = yPercent + "%";
+      horizontalGuideLine.style.left = "0";
+      horizontalGuideLine.style.width = xPercent + "%";
+      horizontalGuideLine.style.display = "block";
+      
+      // Position vertical guide line (from dot to x-axis)
+      verticalGuideLine.style.left = xPercent + "%";
+      verticalGuideLine.style.top = yPercent + "%";
+      verticalGuideLine.style.height = (100 - yPercent) + "%";
+      verticalGuideLine.style.display = "block";
+      
+      // Update wellbeing visualization
+      var wellbeingPercent = (wellbeingValue / 5) * 100;
+      wellbeingBar.style.width = wellbeingPercent + "%";
+      wellbeingMarker.style.left = wellbeingPercent + "%";
+      wellbeingMarker.style.display = "block";
+      
+      // Show results
+      results.style.display = "block";
+    });
+  });
+})();
+</script>
+'))
+```
+
+
+
+# About the GHSI Score
+
+The Gambling Harms Severity Index (GHSI) measures gambling-related harm severity. The transformation from raw scores to the GHSI metric has been validated through Rasch analysis to create an interval-level measure.
+
+## Key Interpretations:
+
+- **Minimal (0-5)**: Few or no gambling-related harms
+- **Low (6-10)**: Minor harms with limited impact on wellbeing
+- **Moderate (11-15)**: Noticeable harms affecting multiple areas of life
+- **Moderately Severe (16-20)**: Significant harms with substantial impact on wellbeing
+- **Severe (21-30)**: Extensive harms with major consequences across multiple domains

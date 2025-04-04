@@ -1,100 +1,417 @@
 ---
-title: "GHSI Score Calculator"
+title: "Gambling Harms Severity Index Calculator"
 description: |
-  Calculate your transformed GHSI-SF score
+  Calculate your transformed GHSI-SF score.
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(htmlwidgets)
+library(htmltools)
+library(jsonlite)
+library(tidyverse)
 ```
-
-# Gambling Harms Severity Index Calculator
 
 Enter your raw GHSI score to see your transformed score and interpretation.
 
-``` {r}
-# Create a simpler HTML structure with inline JavaScript
-htmltools::HTML('
+
+```{r widget}
+# Load the conversion table with multiple measures
+rasch_table <- read.csv("data/Converter_PGSI+DGHS7.csv") %>%
+  rename(
+    instrument = SCALE,  # Make sure column name matches your CSV
+    raw_score = SCORE,    # Make sure column name matches your CSV
+    measure = MEASURE,
+    standard_error = `S.E.`) %>% 
+  dplyr::select(instrument, raw_score, measure, standard_error)
+
+# Get unique instrument names for the dropdown
+instruments <- unique(rasch_table$instrument)
+
+# Convert to JSON and create the complete HTML with the JSON data embedded directly
+rasch_json <- jsonlite::toJSON(rasch_table)
+
+# Create the HTML widget using htmltools::HTML for direct insertion
+htmltools::HTML(paste0('
 <div class="calculator-container" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
-  <h3 style="margin-top: 0;">Score Calculator</h3>
+  <h3 style="margin-top: 0;">Gambling Harms Measure Calculator</h3>
+  
+  <!-- Instrument selection dropdown -->
+  <div class="form-group" style="margin-bottom: 15px;">
+    <label for="instrumentSelect">Select measurement instrument:</label>
+    <select id="instrumentSelect" style="width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box;">
+      <!-- Options will be populated dynamically -->
+    </select>
+  </div>
+  
   <div class="form-group">
-    <label for="rawScore">Enter your raw score (0-30):</label>
-    <input type="number" id="rawScore" min="0" max="30" value="0" style="width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box;">
+    <label for="rawScore">Enter your raw score: <span id="scoreRange">(0-27)</span></label>
+    <input type="number" id="rawScore" min="0" max="27" value="0" style="width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box;">
   </div>
   <button id="calculateBtn" style="background-color: #698F3F; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px;">Calculate</button>
   <div id="results" style="margin-top: 20px; padding: 15px; background-color: #f8f8f8; border-radius: 4px; display: none;">
     <h4 style="margin-top: 0;">Results:</h4>
-    <p>Transformed Score: <span id="transformedScore" style="font-weight: bold;"></span></p>
-    <p>Severity Level: <span id="severityLevel" style="font-weight: bold;"></span></p>
-    <div id="interpretationText" style="margin-top: 10px; font-style: italic;"></div>
+    <p>Instrument: <span id="instrumentDisplay" style="font-weight: bold;"></span></p>
+    <p>Raw Score: <span id="rawScoreDisplay" style="font-weight: bold;"></span></p>
+    <p>Measure (logits): <span id="measureScore" style="font-weight: bold;"></span></p>
+    
+    <!-- Data Points Visualization using HTML -->
+    <div style="margin: 30px 0;">
+      <h5>Raw Score to Measure Relationship</h5>
+      <div style="padding: 0 45px 45px 45px;">
+        <div id="curveContainer" style="position: relative; width: 100%; height: 200px; border-left: 1px solid #999; border-bottom: 1px solid #999; margin: 10px 0 0 0; background-color: #f9f9f9;">
+          <!-- Points will be added dynamically by JavaScript -->
+          
+          <!-- User position marker -->
+          <div id="positionDot" style="position: absolute; width: 8px; height: 8px; background-color: #e74c3c; border-radius: 50%; display: none; transform: translate(-50%, -50%); z-index: 10;"></div>
+          
+          <!-- Guide lines -->
+          <div id="horizontalGuideLine" style="position: absolute; height: 1px; background-color: transparent; border-top: 1px dashed #999; display: none; z-index: 5;"></div>
+          <div id="verticalGuideLine" style="position: absolute; width: 1px; background-color: transparent; border-left: 1px dashed #999; display: none; z-index: 5;"></div>
+          
+          <!-- Axis labels -->
+          <div style="position: absolute; top: 90px; left: -40px; transform: rotate(-90deg); transform-origin: left center; font-size: 12px; white-space: nowrap;">Raw Score</div>
+          <div style="position: absolute; bottom: -30px; right: 0; left: 0; text-align: center; font-size: 12px;">Rasch Measure (logits)</div>
+          
+          <!-- Y axis ticks (will be updated dynamically) -->
+          <div id="yAxis" style="position: absolute; top: 0; left: -30px; height: 100%;">
+            <!-- Y-axis ticks will be added dynamically -->
+          </div>
+          
+          <!-- X axis ticks -->
+          <div style="position: absolute; bottom: -20px; left: 0%; font-size: 10px; transform: translateX(-50%);">-5</div>
+          <div style="position: absolute; bottom: -20px; left: 20%; font-size: 10px; transform: translateX(-50%);">-3</div>
+          <div style="position: absolute; bottom: -20px; left: 40%; font-size: 10px; transform: translateX(-50%);">-1</div>
+          <div style="position: absolute; bottom: -20px; left: 60%; font-size: 10px; transform: translateX(-50%);">1</div>
+          <div style="position: absolute; bottom: -20px; left: 80%; font-size: 10px; transform: translateX(-50%);">3</div>
+        </div>
+      </div>
+      
+      <p style="margin-top: 20px;">Severity Level: <span id="severityLevel" style="font-weight: bold;"></span></p>
+      <div id="interpretationText" style="margin-top: 10px; font-style: italic;"></div>
+    </div>
+    
+    <!-- Wellbeing Decrement Visualization -->
+    <div style="margin: 30px 0;">
+      <h5>Wellbeing Decrement</h5>
+      <div style="position: relative; width: 100%; height: 40px; margin: 20px 0 40px 0;">
+        <!-- Bar background -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 20px; background: linear-gradient(to right, #e5f7e5, #ffcdd2); border-radius: 10px;"></div>
+        
+        <!-- Decrement indicator bar -->
+        <div id="wellbeingBar" style="position: absolute; top: 0; left: 0; height: 20px; background-color: rgba(231, 76, 60, 0.7); border-radius: 10px 0 0 10px; width: 0;"></div>
+        
+        <!-- Scale labels -->
+        <div style="position: absolute; bottom: -25px; left: 0; width: 100%; display: flex; justify-content: space-between; font-size: 12px;">
+          <div>0</div>
+          <div>-1</div>
+          <div>-2</div>
+          <div>-3</div>
+          <div>-4</div>
+          <div>-5</div>
+        </div>
+        
+        <!-- Marker arrow -->
+        <div id="wellbeingMarker" style="position: absolute; top: -15px; left: 0; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 12px solid #333; transform: translateX(-50%); display: none;"></div>
+      </div>
+      
+      <p>Wellbeing Decrement: <span id="wellbeing" style="font-weight: bold;"></span></p>
+      <div id="wellbeingText" style="margin-top: 10px; font-style: italic;"></div>
+    </div>
   </div>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  var rawScoreInput = document.getElementById("rawScore");
-  var calculateBtn = document.getElementById("calculateBtn");
-  var results = document.getElementById("results");
-  var transformedScoreEl = document.getElementById("transformedScore");
-  var severityLevelEl = document.getElementById("severityLevel");
-  var interpretationTextEl = document.getElementById("interpretationText");
-  
-  calculateBtn.addEventListener("click", function() {
-    var rawScore = parseFloat(rawScoreInput.value);
+// Immediately execute this function to avoid global scope issues
+(function() {
+  // Add an event listener for when the DOM is fully loaded
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get DOM elements
+    var instrumentSelect = document.getElementById("instrumentSelect");
+    var scoreRange = document.getElementById("scoreRange");
+    var rawScoreInput = document.getElementById("rawScore");
+    var calculateBtn = document.getElementById("calculateBtn");
+    var results = document.getElementById("results");
+    var instrumentDisplay = document.getElementById("instrumentDisplay");
+    var rawScoreDisplay = document.getElementById("rawScoreDisplay");
+    var measureScoreEl = document.getElementById("measureScore");
+    var severityLevelEl = document.getElementById("severityLevel");
+    var interpretationTextEl = document.getElementById("interpretationText");
+    var wellbeingEl = document.getElementById("wellbeing");
+    var wellbeingTextEl = document.getElementById("wellbeingText");
+    var positionDot = document.getElementById("positionDot");
+    var horizontalGuideLine = document.getElementById("horizontalGuideLine");
+    var verticalGuideLine = document.getElementById("verticalGuideLine");
+    var wellbeingBar = document.getElementById("wellbeingBar");
+    var wellbeingMarker = document.getElementById("wellbeingMarker");
+    var curveContainer = document.getElementById("curveContainer");
+    var yAxis = document.getElementById("yAxis");
     
-    // Validate input
-    if (isNaN(rawScore) || rawScore < 0 || rawScore > 30) {
-      alert("Please enter a valid score between 0 and 30");
-      return;
+    // Embed the Rasch data directly in the JavaScript
+    var allRaschData = ', rasch_json, ';
+    
+    // Group data by instrument
+    var instrumentData = {};
+    var instruments = [];
+    
+    // Process and organize the data
+    allRaschData.forEach(function(item) {
+      if (!instrumentData[item.instrument]) {
+        instrumentData[item.instrument] = [];
+        instruments.push(item.instrument);
+      }
+      instrumentData[item.instrument].push(item);
+    });
+    
+    // Populate instrument dropdown
+    instruments.forEach(function(instrument) {
+      var option = document.createElement("option");
+      option.value = instrument;
+      option.textContent = instrument;
+      instrumentSelect.appendChild(option);
+    });
+    
+    // Set default instrument
+    var currentInstrument = instruments[0];
+    var currentData = instrumentData[currentInstrument];
+    
+    // Update UI based on selected instrument
+    function updateInstrumentUI() {
+      // Sort data by raw score
+      currentData.sort(function(a, b) {
+        return a.raw_score - b.raw_score;
+      });
+      
+      // Get min/max scores for the current instrument
+      var minScore = Math.min(...currentData.map(item => item.raw_score));
+      var maxScore = Math.max(...currentData.map(item => item.raw_score));
+      
+      // Update score range display and input constraints
+      scoreRange.textContent = "(" + minScore + "-" + maxScore + ")";
+      rawScoreInput.min = minScore;
+      rawScoreInput.max = maxScore;
+      rawScoreInput.value = Math.min(Math.max(rawScoreInput.value, minScore), maxScore);
+      
+      // Update Y-axis ticks
+      updateYAxisTicks(maxScore);
+      
+      // Recreate data points for the visualization
+      createDataPoints();
+      
+      // Hide results if theyre currently showing
+      results.style.display = "none";
     }
     
-    // Calculate transformed score using your formula
-    // Replace this with your actual transformation formula
-    var transformedScore = (rawScore * 0.8).toFixed(1);
-    
-    // Determine severity level
-    var severityLevel = "";
-    var interpretationText = "";
-    
-    if (rawScore <= 5) {
-      severityLevel = "Minimal";
-      interpretationText = "This score suggests minimal gambling-related harms.";
-    } else if (rawScore <= 10) {
-      severityLevel = "Low";
-      interpretationText = "This score suggests low levels of gambling-related harms.";
-    } else if (rawScore <= 15) {
-      severityLevel = "Moderate";
-      interpretationText = "This score suggests moderate levels of gambling-related harms.";
-    } else if (rawScore <= 20) {
-      severityLevel = "Moderately Severe";
-      interpretationText = "This score suggests moderately severe gambling-related harms.";
-    } else {
-      severityLevel = "Severe";
-      interpretationText = "This score suggests severe gambling-related harms.";
+    // Create Y-axis ticks based on the max score
+    function updateYAxisTicks(maxScore) {
+      // Clear existing ticks
+      yAxis.innerHTML = "";
+      
+      // Create evenly spaced ticks
+      var tickCount = 5; // Number of ticks including min and max
+      
+      for (var i = 0; i < tickCount; i++) {
+        var percentage = i / (tickCount - 1) * 100;
+        var score = Math.round(maxScore - (percentage / 100 * maxScore));
+        
+        var tick = document.createElement("div");
+        tick.style.position = "absolute";
+        tick.style.top = percentage + "%";
+        tick.style.left = "-25px";
+        tick.style.fontSize = "10px";
+        tick.style.transform = "translateY(-50%)";
+        tick.textContent = score;
+        
+        yAxis.appendChild(tick);
+      }
     }
     
-    // Update results
-    transformedScoreEl.textContent = transformedScore;
-    severityLevelEl.textContent = severityLevel;
-    interpretationTextEl.textContent = interpretationText;
+    // Handle instrument change
+    instrumentSelect.addEventListener("change", function() {
+      currentInstrument = this.value;
+      currentData = instrumentData[currentInstrument];
+      updateInstrumentUI();
+    });
     
-    // Show results
-    results.style.display = "block";
+    // Constants for scale conversion
+    var scaleMin = -5;
+    var scaleMax = 4;
+    var scaleRange = scaleMax - scaleMin;
+    
+    // Create data points
+    function createDataPoints() {
+      // Clear any existing points
+      var existingPoints = curveContainer.querySelectorAll(".data-point");
+      existingPoints.forEach(function(point) {
+        curveContainer.removeChild(point);
+      });
+      
+      // Get max score for current instrument
+      var maxScore = Math.max(...currentData.map(item => item.raw_score));
+      
+      // Add data points
+      for (var i = 0; i < currentData.length; i++) {
+        var entry = currentData[i];
+        
+        // Calculate position percentages
+        var xPercent = ((entry.measure - scaleMin) / scaleRange) * 100;
+        var yPercent = 100 - ((entry.raw_score / maxScore) * 100);
+        
+        // Create point element
+        var point = document.createElement("div");
+        point.className = "data-point";
+        point.style.position = "absolute";
+        point.style.width = "6px";
+        point.style.height = "6px";
+        point.style.backgroundColor = "#698F3F";
+        point.style.borderRadius = "50%";
+        point.style.left = xPercent + "%";
+        point.style.top = yPercent + "%";
+        point.style.transform = "translate(-50%, -50%)";
+        point.style.zIndex = "2";
+        
+        // Add to container
+        curveContainer.appendChild(point);
+      }
+    }
+    
+    // Initialize UI with default instrument
+    updateInstrumentUI();
+    
+    // Add click handler for the calculate button
+    calculateBtn.addEventListener("click", function() {
+      var rawScore = parseInt(rawScoreInput.value);
+      var maxScore = Math.max(...currentData.map(item => item.raw_score));
+      
+      // Validate input
+      if (isNaN(rawScore) || rawScore < rawScoreInput.min || rawScore > rawScoreInput.max) {
+        alert("Please enter a valid score between " + rawScoreInput.min + " and " + rawScoreInput.max);
+        return;
+      }
+      
+      // Find the matching entry in current data
+      var entry = null;
+      for (var i = 0; i < currentData.length; i++) {
+        if (currentData[i].raw_score === rawScore) {
+          entry = currentData[i];
+          break;
+        }
+      }
+      
+      if (!entry) {
+        alert("Error: Score not found in conversion table");
+        return;
+      }
+      
+      var measure = entry.measure;
+      
+      // Determine severity level
+      var severityLevel = "";
+      var interpretationText = "";
+      
+      // Define severity levels based on the logit measure
+      if (measure < -2.0) {
+        severityLevel = "Minimal";
+        interpretationText = "This level indicates minimal gambling-related harms. Few to no significant problems related to gambling are present.";
+      } else if (measure < -1.0) {
+        severityLevel = "Low";
+        interpretationText = "This level indicates low gambling-related harms. Some minor problems may be present but they have limited impact on daily functioning.";
+      } else if (measure < 0.5) {
+        severityLevel = "Moderate";
+        interpretationText = "This level indicates moderate gambling-related harms with noticeable impact on some areas of life.";
+      } else if (measure < 2.0) {
+        severityLevel = "Moderately Severe";
+        interpretationText = "This level indicates significant gambling-related harms affecting multiple areas of life.";
+      } else {
+        severityLevel = "Severe";
+        interpretationText = "This level indicates severe gambling-related harms with substantial negative impacts across most areas of life.";
+      }
+      
+      // Determine wellbeing level - adjust for different instruments if needed
+      var wellbeing = "";
+      var wellbeingText = "";
+      var wellbeingValue = 0;
+      
+      // Define wellbeing levels based on the raw score and instrument
+      // This is an example - adjust based on your specific research for each instrument
+      if (rawScore < Math.ceil(maxScore * 0.04)) { // First ~4% of scale
+        wellbeing = "No Decrement";
+        wellbeingText = "This level indicates no decrement to Mental Wellbeing on the WEMWBS inventory.";
+        wellbeingValue = 0;
+      } else if (rawScore < Math.ceil(maxScore * 0.11)) { // First ~11% of scale
+        wellbeing = "-2.14";
+        wellbeingText = "This level indicates a reduction in Mental Wellbeing on the WEMWBS that could be translated to a depression indicator of Possible or Mild Depression.";
+        wellbeingValue = 2.14;
+      } else if (rawScore < Math.ceil(maxScore * 0.30)) { // First ~30% of scale
+        wellbeing = "-4.38";
+        wellbeingText = "This level indicates a reduction in Mental Wellbeing on the WEMWBS that could be translated to a depression indicator of Possible or Mild Depression.";
+        wellbeingValue = 4.38;
+      } else {
+        wellbeing = "-4.01";
+        wellbeingText = "This level indicates a reduction in Mental Wellbeing on the WEMWBS that could be translated to a depression indicator of Possible or Mild Depression.";
+        wellbeingValue = 4.01;
+      }
+      
+      // Update results
+      instrumentDisplay.textContent = currentInstrument;
+      rawScoreDisplay.textContent = rawScore;
+      measureScoreEl.textContent = measure.toFixed(2);
+      severityLevelEl.textContent = severityLevel;
+      interpretationTextEl.textContent = interpretationText;
+      wellbeingEl.textContent = wellbeing;
+      wellbeingTextEl.textContent = wellbeingText;
+      
+      // Calculate position for visualizations
+      var xPercent = ((measure - scaleMin) / scaleRange) * 100;
+      var yPercent = 100 - ((rawScore / maxScore) * 100);
+      
+      // Position the dot at the intersection
+      positionDot.style.left = xPercent + "%";
+      positionDot.style.top = yPercent + "%";
+      positionDot.style.display = "block";
+      
+      // Position horizontal guide line (from y-axis to the dot)
+      horizontalGuideLine.style.top = yPercent + "%";
+      horizontalGuideLine.style.left = "0";
+      horizontalGuideLine.style.width = xPercent + "%";
+      horizontalGuideLine.style.display = "block";
+      
+      // Position vertical guide line (from dot to x-axis)
+      verticalGuideLine.style.left = xPercent + "%";
+      verticalGuideLine.style.top = yPercent + "%";
+      verticalGuideLine.style.height = (100 - yPercent) + "%";
+      verticalGuideLine.style.display = "block";
+      
+      // Update wellbeing visualization
+      var wellbeingPercent = (wellbeingValue / 5) * 100;
+      wellbeingBar.style.width = wellbeingPercent + "%";
+      wellbeingMarker.style.left = wellbeingPercent + "%";
+      wellbeingMarker.style.display = "block";
+      
+      // Show results
+      results.style.display = "block";
+    });
   });
-});
+})();
 </script>
-')
+'))
 ```
 
-# About the GHSI Score
+# About the Gambling Harm Measures
 
-The Gambling Harms Severity Index (GHSI) measures gambling-related harm severity. The transformation from raw scores to the GHSI metric has been validated through Rasch analysis to create an interval-level measure.
+This calculator provides conversions for multiple gambling harm measurement instruments, transforming raw scores into interval-level Rasch measures (logits).
+
+## Available Instruments:
+
+- **PGSI (Problem Gambling Severity Index)**: A 9-item screening tool that assesses gambling behavior and related harm
+- **DGHS7 (Gambling Harms Scale)**: A 7-item scale assessing a range of negative consequences of gambling
 
 ## Key Interpretations:
 
-- **Minimal (0-5)**: Few or no gambling-related harms
-- **Low (6-10)**: Minor harms with limited impact on wellbeing
-- **Moderate (11-15)**: Noticeable harms affecting multiple areas of life
-- **Moderately Severe (16-20)**: Significant harms with substantial impact on wellbeing
-- **Severe (21-30)**: Extensive harms with major consequences across multiple domains
+- **Minimal (< -2.0 logits)**: Few or no gambling-related harms
+- **Low (-2.0 to -1.0 logits)**: Minor harms with limited impact on wellbeing
+- **Moderate (-1.0 to 0.5 logits)**: Noticeable harms affecting some areas of life
+- **Moderately Severe (0.5 to 2.0 logits)**: Significant harms with substantial impact
+- **Severe (> 2.0 logits)**: Extensive harms with major consequences across multiple domains
+
+The Rasch transformation produces an interval-level measure that more accurately represents the severity of gambling-related harm compared to raw scores.

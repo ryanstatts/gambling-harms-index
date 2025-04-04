@@ -63,6 +63,7 @@ The complete database containing all **`r nrow(items)` individual items** items 
 [View Full Item Database on OSF](https://osf.io)
 
 The OSF repository includes:
+
 - Complete item text for all measures
 - Response options and scoring information
 - Detailed harm component categorizations

@@ -1,0 +1,77 @@
+---
+title: "The GHSI Measurement tools"
+description: |
+  Validated measurement tools for assessing gambling-related harms and Recovery
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+# Learn more about publishing to GitHub Pages at:
+# https://rstudio.github.io/distill/publish_website.html#github-pages
+
+```
+The Gambling Harms Scale Initiative (GHSI) provides a set of innovative, evidence-based tools for measuring gambling-related harm and recovery. These tools go beyond identifying whether someone gambles “too much”—they capture the real impacts that gambling can have on people’s lives, in ways that are meaningful to individuals, practitioners, researchers, and policymakers alike.
+
+## Why we needed a new approach
+
+
+Most existing measures of gambling – such as the Problem Gambling Severity Index (PGSI) focus on financial loss or behavioural symptoms. But harm isn’t just about money or frequency—it’s about the broader consequences for a person’s health, relationships, and everyday wellbeing. The GHSI tools were created to fill this gap.
+
+## How the tools were developed
+
+The GHSI measures were developed through a multi-stage process that combined:
+
+
+-  **Lived experience** – Our tools were shaped by in-depth interviews and co-production with people affected by gambling (both directly and indirectly) and people delivering services to reduce gambling harms.
+-  **Rigorous psychometrics** – A large-scale national survey was used to refine and test items statistically, ensuring the tools are valid, reliable, and sensitive to change.
+-  **Iterative design** – Items were tested, revised, and scored using modern measurement theory (including Rasch Measurement Theory) to create high-quality, interval-level measures.
+
+## What the tools measure
+
+The GHSI tools assess **gambling-related harm across *three* domains**:
+
+
+-  **Health** – including mental and physical wellbeing
+- **Resources** – including financial hardship, work or study disruption, and legal consequences
+-  **Relationships** – including conflict, breakdown, and social isolation
+
+
+At the heart of the measure is **recovery**, which captures progress through four core areas: **control, insight, ownership,** and **behaviour change.**
+
+
+## How the tools are scored
+
+-  Each harm domain is scored on an **interval-level scale**, allowing meaningful comparisons between people and over time.
+-  Scores are **calibrated** to reflect both the severity and personal significance of the harm experienced.
+-  The scoring enables **tracking of change**, making it suitable for use in both clinical and community settings.
+-  A key advantage of the GHSI is that it allows the calculation of **decrements to wellbeing**, using standardised utility measures. 
+
+This means that gambling harms can be interpreted with the same approach used in wider public health and economic evaluations.
+
+## Compatibility with other tools
+
+To support continuity in the field:
+
+-  **GHSI score cam be inter-converted with the Problem Gambling Severity Index (PGSI)**, making it possible to compare data or transition smoothly from older tools. 
+-  This enables services and researchers to bridge between traditional “risk” assessments and more holistic harm-based approaches.
+
+## What the tools can be used for
+
+-  **In support services** – To assess clients’ starting points, track recovery, and guide tailored support.
+-  **In research** – To provide robust, person-centred data on gambling harms and their impact.
+-  **In policy** – To inform public health approaches, economic modelling, and evaluation of interventions or regulatory changes.
+-  **In population surveys** – To measure gambling harm and wellbeing impact at a national or regional level.
+
+## Putting people at the centre
+
+Unlike many existing measures, the GHSI tools were designed not just for analysis—but for use with real people. The language is clear, the questions are meaningful, and the scoring reflects what people themselves say matters most.
+
+
+Whether you're a frontline worker, academic, commissioner or advocate, these tools offer a more human, accurate and actionable way to understand and respond to gambling harm.
+
+

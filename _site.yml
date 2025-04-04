@@ -1,29 +1,36 @@
 name: "gambling-harms-index"
-title: "Gambling Harms Severity Index"
+title: "The Gambling Harms Scale Initiative"
 theme: theme.css
 description: |
-  Gambling Harms Severity Index
+  Gambling Harms Severity Project
 output_dir: "docs"
 navbar:
   logo:
-    image: images/AI_Logo.jpg
+    image: images/logo_name.png
+    href: index.html
   right:
     - text: "Home"
       href: index.html
-    - text: "About"
+    - text: "The Framework"
+      href: framework.html
+    - text: "The GHSI Measurement Tools"
       menu:
-      - text: "About us"
-        href: about.html
-      - text: "Research"
-        href: papers.html
-    - text: "Resources"
-      menu:
+      - text: "About the Tools"
+        href: GHSI_tools.html
       - text: "Items"
         href: items.html
+    - text: "For gambling Support Service Providers"
+      menu:
       - text: "Conversion Calculator"
         href: converter.html
-      - text: "Item Database"
+    - text: "For researchers"
+      menu:
+      - text: "publications"
+        href: papers.html
+      - text: "Item bank of Gambling Related Harms"
         href: database.html
-    - image: images/School_Logo.png
-      href: https://plymouth.ac.uk
+    - text: "For policymakers"
+      menu:
+      - text: "Conversion Calculator"
+        href: converter.html
 output: distill::distill_article

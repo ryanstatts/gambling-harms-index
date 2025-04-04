@@ -1,0 +1,50 @@
+---
+title: "A Holistic Framework of Gambling Harms & Recovery "
+description: |
+  Understanding the way in which both Harm and Recovery are experienced
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+# Learn more about publishing to GitHub Pages at:
+# https://rstudio.github.io/distill/publish_website.html#github-pages
+
+```
+
+Gambling harm isn’t just about losing money. It can affect people’s health, relationships, and everyday functioning—and these harms are often deeply connected. To truly understand gambling harm, we need to look beyond isolated symptoms and consider how harms build, overlap, and shift over time – including the reduction or recovery from these harms. 
+
+
+That’s the purpose of the GHSI’s holistic framework.
+
+## Seeing the full picture of harm - and recovery
+
+At the heart of the Gambling Harms Scale Initiative is a framework that maps the wide range of ways gambling can impact people. This model was developed from rich, in-depth interviews with people who had lived experience of gambling harm—whether through their own gambling or that of someone close to them.
+
+
+The framework doesn’t just identify harm—it helps us see how people recover.
+
+
+Many people move through cycles of harm, stability, and improvement. The framework recognises that recovery isn't always linear, and that progress can look different for different people. By showing how harms are connected, it also shows how positive change in one area—like mental health or financial stability—can unlock improvements in others.
+
+# The Framework at a Glance
+
+![](images/framework.png)
+This visual map of gambling harms is organised into three broad domains:
+
+-  **Health Harms** --- including mental and physical health impacts such as stress, anxiety, depression, and self-neglect.
+-  **Resource harms** --- such as financial strain, lost opportunities in work or study, or involvement with debt or crime.
+-  **Relationship harms** --- including “loss of presence” in family life and relationship tensions, breakdown or disconnection across personal, social, and community relationships.
+-  **At the center of the framework is recovery.** This represents the personal journey of moving out of harm, including regaining **control** over gambling and life decisions, developing **insight** into what led to harm, taking **ownership** of the steps forward, and making meaningful **behaviour change**. 
+
+Each area is interconnected. The diagram shows how harms flow, overlap, and compound. 
+
+## Why this framework matters
+
+-  **It centres lived experience** The model reflects how people *actually* experience harm and recovery, in their own words.
+-  **It informs better support.** From frontline services to national policy, this approach helps professionals recognise and respond to the full impact of gambling — and the pathways out of it.
+-  **It supports meaningful measurement.** This framework underpins the Gambling Harms Scale (GHS), which allows people and services to track harm and recovery over time
