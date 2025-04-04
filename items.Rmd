@@ -13,25 +13,22 @@ Before using any form of the GHSI, please register with us first. Treatment and 
 
 [Registration Form (Word document, 2.3MB)](https://www.google.com). 
 
+---
+
 # GHSI-SF
-Items for the Short Form GHSI
+
+**Items for the Short Form Gambling Harms Severity Index**
+
+The GHSI-SF is a 9 item measure of Gambling-Related Harms. 7 item assess experiences of harm from our framework, while 2 assess recovery. All items are scored from 0-3. Total scores range between 0 and 27, higher scores indicate a greater risk of harm.
+
+The measure has been co-designed with service and treatment providers and people with lived experience of gambling-related harms. It is designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
 
 
-It is normal to experience challenges with gambling, and support is available. Reflect honestly to understand any impacts on your life.
+GHSI has been mapped to decrements to health, and can be converted to other legacy measures of gambling-realted harm. 
 
 
-| **Over the last 3 months, how often has gambling led to issues with your...**                          | **Never<br><br>(0)** | **Occasionally**<br>(e.g. once or twice a month)<br><br>**(1)** | **Fairly Often**<br>(e.g. once or twice a week)<br><br>**(2)** | **Very Often**<br>(e.g. most days)<br><br>**(3)** |
-|--------------------------------------------------------------------------------------------------------|:--------------------:|-----------------------------------------------------------------|----------------------------------------------------------------|---------------------------------------------------|
-| ... Mood and feelings. _Such as feeling down, stressed or anxious._                                    |                      |                                                                 |                                                                |                                                   |
-| ... Physical Health. _Such as eating poorly or losing sleep._                                          |                      |                                                                 |                                                                |                                                   |
-| ... Finances. _Such as issues with paying bills, borrowing money or using up savings._                 |                      |                                                                 |                                                                |                                                   |
-| ... Hobbies, activities, work and study. _Such as losing focus, getting things wrong or missing work._  |                      |                                                                 |                                                                |                                                   |
-| ... Family and close relationships. _Such as tensions or being less involved with loved ones._         |                      |                                                                 |                                                                |                                                   |
-| ... Social life and community connection. _Such as feeling judged, lonely or isolated._                |                      |                                                                 |                                                                |                                                   |
-| ... Honest behaviour. _Such as hiding gambling and borrowing money without asking._                    |                      |                                                                 |                                                                |                                                   |
-| **Now looking ahead to the next 3 months, how often do you expect to...**                              |                      |                                                                 |                                                                |                                                   |
-| ... Avoid tricky situations or use coping strategies to reduce the impacts of gambling.                 |                      |                                                                 |                                                                |                                                   |
-| ... Feel confident in making positive choices about gambling.                                          |                      |                                                                 |                                                                |                                                   |
+[Download GHSI-SF (Word format, 2.3MB)](https://google.com). 
+
 
 ---
 
@@ -44,27 +41,12 @@ The GHSI-SF AO is proceeded by a _normalising statement_ designed to support res
 
 GHSI-SF AO comprises 7 items (below) about direct experience, scored from 0 - 3 (Never, Occasionally, Fairly Often, or Very Often):
 
- **Over the last 3 months, how often has gambling led to issues with your...**<br>
- ... Mood and Feelings. _Such as feeling down, stressed or anxious._<br>
- ... Physical Health. _Such as eating poorly or losing sleep._<br>
- ... Finances. _Such as issues with paying bills, borrowing money, or using up savings._<br>
- ... Hobbies, activities, work and study. _Such as losing focus, getting things wrong or missing work._<br>
- ... Family and close relationships. _Such as tensions or being less involved with loved ones._<br>
- ... Social life and community connection. _Such as feeling judged, lonely or isolated._<br>
- ... Honest Behaviour. _Such as hiding gambling and borrowing money without asking._<br>
- 
- GHSI_SF AO also contains 4 items (below) to measure recovery from gambling related harms, scored from 3 - 0 (Never, Occasionally, Fairly Often, or Very Often):
- 
- **Now looking ahead to the next 3 months, how often do you expect to...**<br>
- ... Use self-care strategies or coping tools to support your wellbeing?<br>
- ... Feel hopeful about improvements in your own wellbeing or the situation?<br>
- ... Take steps to set boundaries or protect yourself from harm?<br>
- ... Strengthen supportive relationships that helo you cope or recover?<br>
+[Download GHSI-SF AO (Word format, 2.3MB)](https://google.com). 
  
 ---
 
 # GHRI-SF
-Items for the Short Form GHRI
+**Items for the Short Form GHRI**
 
 The GHRI-SF is a 9 item measure of recovery from gambling harm. Designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
 
@@ -73,4 +55,4 @@ The GHRI-SF is a 9 item measure of recovery from gambling harm. Designed to be d
 ---
 
 # GHRI-SF AO
-Items for the Affected Others GHSI
+**Items for the Affected Others GHSI**
