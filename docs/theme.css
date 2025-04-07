@@ -15,7 +15,7 @@
 
 html {
   /*-- Main font sizes --*/
-  --title-size:      2rem;
+  --title-size:      1.6rem;
   --body-size:       1rem;
   --code-size:       14px;
   --aside-size:      0.8px;
@@ -106,7 +106,7 @@ d-article a {
   text-decoration: none;
 }
 
-/* setbackground for title container */
+/* set background for title container */
 d-title {
   text-align: center;
   color: #252323;
@@ -118,4 +118,13 @@ d-title {
   margin-top: 0;
   position: relative;
   z-index: 1;
+}
+
+/* set heading size */
+d-article h1 {
+  font-size: 26px;
+}
+
+d-article h2 {
+  font-size: 24px;
 }

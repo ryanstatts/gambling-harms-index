@@ -19,17 +19,17 @@ navbar:
         href: GHSI_tools.html
       - text: "Items"
         href: items.html
-    - text: "For gambling Support Service Providers"
+    - text: "For Gambling Support Service Providers"
       menu:
       - text: "Conversion Calculator"
         href: converter.html
-    - text: "For researchers"
+    - text: "For Researchers"
       menu:
       - text: "publications"
         href: papers.html
       - text: "Item bank of Gambling Related Harms"
         href: database.html
-    - text: "For policymakers"
+    - text: "For Policymakers"
       menu:
       - text: "Conversion Calculator"
         href: converter.html

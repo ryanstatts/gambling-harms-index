@@ -310,16 +310,16 @@ htmltools::HTML(paste0('
       var interpretationText = "";
       
       // Define severity levels based on the logit measure
-      if (measure < -2.0) {
+      if (measure < -6.0) {
         severityLevel = "Minimal";
         interpretationText = "This level indicates minimal gambling-related harms. Few to no significant problems related to gambling are present.";
-      } else if (measure < -1.0) {
+      } else if (measure < -3.5) {
         severityLevel = "Low";
         interpretationText = "This level indicates low gambling-related harms. Some minor problems may be present but they have limited impact on daily functioning.";
-      } else if (measure < 0.5) {
+      } else if (measure < -2.3) {
         severityLevel = "Moderate";
         interpretationText = "This level indicates moderate gambling-related harms with noticeable impact on some areas of life.";
-      } else if (measure < 2.0) {
+      } else if (measure < 0.5) {
         severityLevel = "Moderately Severe";
         interpretationText = "This level indicates significant gambling-related harms affecting multiple areas of life.";
       } else {
@@ -408,10 +408,10 @@ This calculator provides conversions for multiple gambling harm measurement inst
 
 ## Key Interpretations:
 
-- **Minimal (< -2.0 logits)**: Few or no gambling-related harms
-- **Low (-2.0 to -1.0 logits)**: Minor harms with limited impact on wellbeing
-- **Moderate (-1.0 to 0.5 logits)**: Noticeable harms affecting some areas of life
-- **Moderately Severe (0.5 to 2.0 logits)**: Significant harms with substantial impact
-- **Severe (> 2.0 logits)**: Extensive harms with major consequences across multiple domains
+- **Minimal (< -6.0 logits)**: Few or no gambling-related harms
+- **Low (-6.0 to -3.5 logits)**: Minor harms with limited impact on wellbeing
+- **Moderate (-3.5 to -2.3 logits)**: Noticeable harms affecting some areas of life
+- **Moderately Severe (-2.3 to 0.5 logits)**: Significant harms with substantial impact
+- **Severe (> 0.5 logits)**: Extensive harms with major consequences across multiple domains
 
 The Rasch transformation produces an interval-level measure that more accurately represents the severity of gambling-related harm compared to raw scores.
