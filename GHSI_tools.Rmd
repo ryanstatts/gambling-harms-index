@@ -1,5 +1,5 @@
 ---
-title: "The GHSI Measurement tools"
+title: "About the GHSI Measurement tools"
 description: |
   Validated measurement tools for assessing gambling-related harms and Recovery
 site: distill::distill_website

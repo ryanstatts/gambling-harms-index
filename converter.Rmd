@@ -12,7 +12,21 @@ library(jsonlite)
 library(tidyverse)
 ```
 
+## Converter Tool
+
+The converter tool lets you convert any score on one of our benchmarked scales to a *Rasch Measure*. The *Rasch Measure* lets you read compare to other scales that we also have benchmarked as well as comparing gambling-related hamrs to decrements to wellbeing. 
+
+For more details on the Rasch conversion process [click here](#rasch-details). 
+
+
+## Available Instruments:
+
+- **PGSI (Problem Gambling Severity Index)**: A 9-item screening tool that assesses gambling behavior and related harm
+- **DGHS7 (Gambling Harms Scale)**: A 7-item scale assessing a range of negative consequences of gambling
+
+
 Enter your raw GHSI score to see your transformed score and interpretation.
+
 
 
 ```{r widget}
@@ -53,7 +67,46 @@ htmltools::HTML(paste0('
     <h4 style="margin-top: 0;">Results:</h4>
     <p>Instrument: <span id="instrumentDisplay" style="font-weight: bold;"></span></p>
     <p>Raw Score: <span id="rawScoreDisplay" style="font-weight: bold;"></span></p>
-    <p>Measure (logits): <span id="measureScore" style="font-weight: bold;"></span></p>
+    <p>Measure (logits): <span id="measureScore" style="font-weight: bold;"></span> ± <span id="standardError" style="font-weight: bold;"></span></p>
+    
+    <!-- Measure Visualization with Standard Error -->
+    <div style="margin: 30px 0;">
+      <h5>Measure with Standard Error</h5>
+      <div style="position: relative; width: 100%; height: 60px; margin: 20px 0 40px 0;">
+        <!-- Bar background -->
+        <div style="position: absolute; top: 15px; left: 0; width: 100%; height: 20px; background: linear-gradient(to right, #e8f4f8, #d1e9f3, #a8d5e5, #7cbfd6, #4fa8c7, #2982a3, #165e78); border-radius: 10px;"></div>
+        
+        <!-- Severity zones with labels -->
+        <div style="position: absolute; top: 40px; left: 0; width: 100%; display: flex; font-size: 10px; color: #666;">
+          <div style="flex: 6; text-align: center; border-right: 1px solid #ccc;">Minimal</div>
+          <div style="flex: 2.5; text-align: center; border-right: 1px solid #ccc;">Low</div>
+          <div style="flex: 1.2; text-align: center; border-right: 1px solid #ccc;">Moderate</div>
+          <div style="flex: 2.8; text-align: center; border-right: 1px solid #ccc;">Mod. Severe</div>
+          <div style="flex: 3.5; text-align: center;">Severe</div>
+        </div>
+        
+        <!-- Standard Error Bar -->
+        <div id="errorBar" style="position: absolute; top: 15px; height: 20px; background-color: rgba(255, 255, 255, 0.5); border-radius: 10px; display: none;"></div>
+        
+        <!-- Marker for the measure point -->
+        <div id="measureMarker" style="position: absolute; top: 5px; width: 4px; height: 40px; background-color: #e74c3c; display: none;"></div>
+        
+        <!-- Scale labels -->
+        <div style="position: absolute; bottom: -25px; left: 0; width: 100%; display: flex; justify-content: space-between; font-size: 12px;">
+          <div>-8</div>
+          <div>-6</div>
+          <div>-4</div>
+          <div>-2</div>
+          <div>0</div>
+          <div>2</div>
+          <div>4</div>
+          <div>6</div>
+        </div>
+      </div>
+      
+      <p style="margin-top: 20px;">Severity Level: <span id="severityLevel" style="font-weight: bold;"></span></p>
+      <div id="interpretationText" style="margin-top: 10px; font-style: italic;"></div>
+    </div>
     
     <!-- Data Points Visualization using HTML -->
     <div style="margin: 30px 0;">
@@ -79,16 +132,16 @@ htmltools::HTML(paste0('
           </div>
           
           <!-- X axis ticks -->
-          <div style="position: absolute; bottom: -20px; left: 0%; font-size: 10px; transform: translateX(-50%);">-5</div>
-          <div style="position: absolute; bottom: -20px; left: 20%; font-size: 10px; transform: translateX(-50%);">-3</div>
-          <div style="position: absolute; bottom: -20px; left: 40%; font-size: 10px; transform: translateX(-50%);">-1</div>
-          <div style="position: absolute; bottom: -20px; left: 60%; font-size: 10px; transform: translateX(-50%);">1</div>
-          <div style="position: absolute; bottom: -20px; left: 80%; font-size: 10px; transform: translateX(-50%);">3</div>
+          <div style="position: absolute; bottom: -20px; left: 0%; font-size: 10px; transform: translateX(-50%);">-8</div>
+          <div style="position: absolute; bottom: -20px; left: 14.3%; font-size: 10px; transform: translateX(-50%);">-6</div>
+          <div style="position: absolute; bottom: -20px; left: 28.6%; font-size: 10px; transform: translateX(-50%);">-4</div>
+          <div style="position: absolute; bottom: -20px; left: 42.9%; font-size: 10px; transform: translateX(-50%);">-2</div>
+          <div style="position: absolute; bottom: -20px; left: 57.1%; font-size: 10px; transform: translateX(-50%);">0</div>
+          <div style="position: absolute; bottom: -20px; left: 71.4%; font-size: 10px; transform: translateX(-50%);">2</div>
+          <div style="position: absolute; bottom: -20px; left: 85.7%; font-size: 10px; transform: translateX(-50%);">4</div>
+          <div style="position: absolute; bottom: -20px; left: 100%; font-size: 10px; transform: translateX(-50%);">6</div>
         </div>
       </div>
-      
-      <p style="margin-top: 20px;">Severity Level: <span id="severityLevel" style="font-weight: bold;"></span></p>
-      <div id="interpretationText" style="margin-top: 10px; font-style: italic;"></div>
     </div>
     
     <!-- Wellbeing Decrement Visualization -->
@@ -135,6 +188,7 @@ htmltools::HTML(paste0('
     var instrumentDisplay = document.getElementById("instrumentDisplay");
     var rawScoreDisplay = document.getElementById("rawScoreDisplay");
     var measureScoreEl = document.getElementById("measureScore");
+    var standardErrorEl = document.getElementById("standardError");
     var severityLevelEl = document.getElementById("severityLevel");
     var interpretationTextEl = document.getElementById("interpretationText");
     var wellbeingEl = document.getElementById("wellbeing");
@@ -146,6 +200,8 @@ htmltools::HTML(paste0('
     var wellbeingMarker = document.getElementById("wellbeingMarker");
     var curveContainer = document.getElementById("curveContainer");
     var yAxis = document.getElementById("yAxis");
+    var measureMarker = document.getElementById("measureMarker");
+    var errorBar = document.getElementById("errorBar");
     
     // Embed the Rasch data directly in the JavaScript
     var allRaschData = ', rasch_json, ';
@@ -198,7 +254,7 @@ htmltools::HTML(paste0('
       // Recreate data points for the visualization
       createDataPoints();
       
-      // Hide results if theyre currently showing
+      // Hide results if they\'re currently showing
       results.style.display = "none";
     }
     
@@ -233,10 +289,15 @@ htmltools::HTML(paste0('
       updateInstrumentUI();
     });
     
-    // Constants for scale conversion
-    var scaleMin = -5;
-    var scaleMax = 4;
-    var scaleRange = scaleMax - scaleMin;
+    // Constants for scale conversion on graph
+    var graphScaleMin = -8;
+    var graphScaleMax = 6;
+    var graphScaleRange = graphScaleMax - graphScaleMin;
+    
+    // Constants for measure bar
+    var barScaleMin = -8;
+    var barScaleMax = 6;
+    var barScaleRange = barScaleMax - barScaleMin;
     
     // Create data points
     function createDataPoints() {
@@ -254,7 +315,7 @@ htmltools::HTML(paste0('
         var entry = currentData[i];
         
         // Calculate position percentages
-        var xPercent = ((entry.measure - scaleMin) / scaleRange) * 100;
+        var xPercent = ((entry.measure - graphScaleMin) / graphScaleRange) * 100;
         var yPercent = 100 - ((entry.raw_score / maxScore) * 100);
         
         // Create point element
@@ -304,6 +365,7 @@ htmltools::HTML(paste0('
       }
       
       var measure = entry.measure;
+      var standardError = entry.standard_error;
       
       // Determine severity level
       var severityLevel = "";
@@ -333,7 +395,6 @@ htmltools::HTML(paste0('
       var wellbeingValue = 0;
       
       // Define wellbeing levels based on the raw score and instrument
-      // This is an example - adjust based on your specific research for each instrument
       if (rawScore < Math.ceil(maxScore * 0.04)) { // First ~4% of scale
         wellbeing = "No Decrement";
         wellbeingText = "This level indicates no decrement to Mental Wellbeing on the WEMWBS inventory.";
@@ -356,13 +417,14 @@ htmltools::HTML(paste0('
       instrumentDisplay.textContent = currentInstrument;
       rawScoreDisplay.textContent = rawScore;
       measureScoreEl.textContent = measure.toFixed(2);
+      standardErrorEl.textContent = standardError.toFixed(2);
       severityLevelEl.textContent = severityLevel;
       interpretationTextEl.textContent = interpretationText;
       wellbeingEl.textContent = wellbeing;
       wellbeingTextEl.textContent = wellbeingText;
       
-      // Calculate position for visualizations
-      var xPercent = ((measure - scaleMin) / scaleRange) * 100;
+      // Calculate positions for graph visualization
+      var xPercent = ((measure - graphScaleMin) / graphScaleRange) * 100;
       var yPercent = 100 - ((rawScore / maxScore) * 100);
       
       // Position the dot at the intersection
@@ -381,6 +443,25 @@ htmltools::HTML(paste0('
       verticalGuideLine.style.top = yPercent + "%";
       verticalGuideLine.style.height = (100 - yPercent) + "%";
       verticalGuideLine.style.display = "block";
+      
+      // Update measure bar visualization
+      var barPercent = ((measure - barScaleMin) / barScaleRange) * 100;
+      measureMarker.style.left = barPercent + "%";
+      measureMarker.style.transform = "translateX(-50%)";
+      measureMarker.style.display = "block";
+      
+      // Calculate standard error bar width and position
+      var errorWidth = (standardError * 2 / barScaleRange) * 100;
+      var errorLeft = barPercent - (errorWidth / 2);
+      
+      // Make sure error bar doesn\'t go out of bounds
+      errorLeft = Math.max(0, errorLeft);
+      errorWidth = Math.min(100 - errorLeft, errorWidth);
+      
+      // Update standard error bar
+      errorBar.style.left = errorLeft + "%";
+      errorBar.style.width = errorWidth + "%";
+      errorBar.style.display = "block";
       
       // Update wellbeing visualization
       var wellbeingPercent = (wellbeingValue / 5) * 100;
@@ -401,10 +482,6 @@ htmltools::HTML(paste0('
 
 This calculator provides conversions for multiple gambling harm measurement instruments, transforming raw scores into interval-level Rasch measures (logits).
 
-## Available Instruments:
-
-- **PGSI (Problem Gambling Severity Index)**: A 9-item screening tool that assesses gambling behavior and related harm
-- **DGHS7 (Gambling Harms Scale)**: A 7-item scale assessing a range of negative consequences of gambling
 
 ## Key Interpretations:
 
@@ -414,4 +491,26 @@ This calculator provides conversions for multiple gambling harm measurement inst
 - **Moderately Severe (-2.3 to 0.5 logits)**: Significant harms with substantial impact
 - **Severe (> 0.5 logits)**: Extensive harms with major consequences across multiple domains
 
-The Rasch transformation produces an interval-level measure that more accurately represents the severity of gambling-related harm compared to raw scores.
+<a id = "rasch-details"></a>
+
+# Rasch Details
+
+## Understanding the Rasch Conversion
+
+When you take a gambling assessment like the PGSI, your raw score doesn't tell the complete story. The converter uses the Rasch measurement model—a sophisticated statistical approach—to transform these raw scores into more meaningful measures.
+
+Think of it like converting temperature from Fahrenheit to Celsius. Raw scores are like Fahrenheit: they count items but don't create equal intervals between points. Rasch measures are like Celsius: they place your score on a standard scale where each step represents an equal amount of change in gambling harm severity. This transformation accounts for the fact that some questions indicate more severe problems than others, and that moving from a score of 20 to 21 might not represent the same increase in severity as moving from 2 to 3.
+
+The standard error shown with your measure represents the precision of the measurement—smaller errors indicate more confidence in the score. The wider the error bar, the less certain we can be about the exact level of severity. This typically happens at the extreme ends of the scale where fewer people score, giving us less information to make precise estimates.
+
+## Technical Details 
+
+This calculator transforms ordinal raw scores from gambling harm assessment instruments into interval-level measures using Rasch Measurement Theory (RMT). The conversion implements a logit transformation derived from the Rasch model's probabilistic framework, where the log-odds of a person endorsing an item is a function of that person's ability (θ) minus the item's difficulty (δ).Item difficulty represents how hard it is to agree to an item based on one's underlying trait. Those high in a trait (in this instance gambling-related harm) will be able answer more difficult items in the affirmative, those low in the trait will not.  
+
+The measures are calibrated using a joint maximum likelihood estimation procedure where both person and item parameters are iteratively estimated. The output logits represent the location of each raw score on a latent continuum of gambling harm severity with standardized units. Unlike raw scores, these interval measures maintain equal distances between units across the scale, satisfying the mathematical requirements for parametric statistical analyses.
+
+The displayed standard errors quantify measurement precision as a function of information at each point along the continuum. In accordance with measurement theory, precision is highest near the center of the distribution where most respondents are measured, and decreases at the extremes. The standard error provides conditional standard deviations of measurement that can be used to construct confidence intervals around individual estimates.
+
+The severity classifications are empirically derived threshold points on the logit scale that correspond to clinically meaningful distinctions in gambling harm profiles informed by the PGSI. By utilising this interval-level metric rather than raw scores, the calculator enables more accurate assessment of severity, more appropriate measurement of change, and enhanced comparability across different instruments when equated to the same frame of reference.
+
+Decrements to wellbeing are calculated from a propensity weighted model of gambling-related harm (determined by the *PGSI*) on mental wellbeing (determined by the *Warick Edinburgh Mental Wellbeing Scale*). 

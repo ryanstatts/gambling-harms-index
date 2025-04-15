@@ -25,7 +25,7 @@ navbar:
         href: converter.html
     - text: "For Researchers"
       menu:
-      - text: "publications"
+      - text: "Publications"
         href: papers.html
       - text: "Item bank of Gambling Related Harms"
         href: database.html
