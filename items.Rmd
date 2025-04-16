@@ -1,5 +1,5 @@
 ---
-title: "GHSI Items"
+title: "Accessing the GHSI Tools"
 description: |
   Short Form Measures from the GHSI
 ---
@@ -9,13 +9,13 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 # To Use
-Before using any form of the GHSI, please register with us first. Treatment and support services, healthcare providers, and researchers do not have to pay to use the GHSI, but please complete our registration form.
+Before using any form of the GHSI, please register with us first. The tools are free to use for research, treatment and non-commercial uses..
 
-[Registration Form (Word document, 2.3MB)](https://www.google.com). 
+Registration Form (Link to come soon). 
 
 ---
 
-# GHSI-SF
+# GHSI
 
 **Items for the Short Form Gambling Harms Severity Index**
 
@@ -24,35 +24,26 @@ The GHSI-SF is a 9 item measure of Gambling-Related Harms. 7 item assess experie
 The measure has been co-designed with service and treatment providers and people with lived experience of gambling-related harms. It is designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
 
 
-GHSI has been mapped to decrements to health, and can be converted to other legacy measures of gambling-realted harm. 
+GHSI has been mapped to decrements to health, and can be converted to other legacy measures of gambling-related harm.To see how the conversion work, please see our [“Conversion Calculator”](converter.html).  
 
 
-[Download GHSI-SF (Word format, 2.3MB)](https://google.com). 
+[Download GHSI-SF (Word format, 2.3MB)] (Link to come soon). 
 
 
 ---
 
-# GHSI-SF AO
-**Items for the Affected Others GHSI**
+# GHSI-AO
+**The GHSI for Affected Others**
 
-The GHSI-SF AO is proceeded by a _normalising statement_ designed to support respondents and encourage honest engagement with the scale: 
 
->It is normal to experience challenges when someone close to you is harmed by gambling. This questionnaire helps you reflect on how their gambling has affected your life.
 
-GHSI-SF AO comprises 7 items (below) about direct experience, scored from 0 - 3 (Never, Occasionally, Fairly Often, or Very Often):
-
-[Download GHSI-SF AO (Word format, 2.3MB)](https://google.com). 
+[Download GHSI-AO (Word format, 2.3MB)] (Link to come soon). 
  
 ---
 
-# GHRI-SF
-**Items for the Short Form GHRI**
+# GHSI-Recovery
+**A Holistic Tool for Measuring Recovery from Gambling-Related Harms**
 
-The GHRI-SF is a 9 item measure of recovery from gambling harm. Designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
+The GHSI-R is a 9 item measure of recovery from gambling harm. Designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
 
-[Download GHSI-SF (Word format, 2.3MB)](https://google.com). 
-
----
-
-# GHRI-SF AO
-**Items for the Affected Others GHSI**
+[Download GHRI-R (Word format, 2.3MB)] (link to come soon). 

@@ -1,7 +1,7 @@
 ---
-title: "Gambling Harms Scale Iniatitive"
+title: "Gambling Harms Scale Initiative"
 description: |
-  A validated measurement tool for assessing gambling-related harm severity
+ Validated measurement tools for assessing gambling-related harms and recovery
 site: distill::distill_website
 ---
 
@@ -16,36 +16,34 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-**The Gambling Harms Scale Initiative (GHSI)** is a major UK-based research programme that’s transforming how we understand and respond to gambling-related harm. Working directly with people affected by gambling, we have developed the first comprehensive, person-centered tool for measuring the full range of gambling harms—not just financial loss, but also impacts on health, relationships, work, and wellbeing. 
+**The Gambling Harms Scale Initiative ** is a major UK-based research programme that’s transforming how we understand and respond to gambling-related harm. Working directly with people affected by gambling, we have developed a suite of comprehensive, person-centered tools for measuring the full range of gambling harms and recovery.
 
-By capturing these experiences in people’s own words and prioritising what matters most to them, the GHSI offers a clearer, fairer, and more accurate picture of harm. This helps ensure more useful information for providers of gambling support services, more robust information for researchers, and a clearer picture for data policymakers.
+There are three main measurement instruments:
+
+**The Gambling Harms Severity Index (GHSI):** Encapsulates all the core domains of gambling harm, including financial harms, mental and physical health harms, and relationship harms.  
+
+**The GHSI for Affected Others (GHSI-AO):** Mirroring the GSHI, the GHSI-AO is an instrument designed to specifically capture the harms experienced by people affected by someone else’s gambling. 
+
+**The Gambling Harms Recovery Index (GHRI):** A tool for measuring the recovery of harms from gambling. Having a more holistic perspective than simply measuring abstinence, the GHRI instead encapsulates aspects such as personal insight and behaviour change. 
+
 
 
 ## How is the GHSI different to other measurement tools, such as the Problem Gambling Severity Index (PGSI)?
 
+By capturing these experiences in people’s own words and prioritising what matters most to them, the GHSI tools offer a clearer, fairer, and more accurate picture of harm. This helps ensure more useful information for providers of gambling support services, more robust information for researchers, and a clearer picture for data policymakers.
+
+
+-   **Co-designed by those with lived experience, support and treatment backgrounds, and academic expertise.**
 -   **It turns personal experiences into meaningful data.** Harms from gambling are transformed into standardised, interval-level scores—allowing for precise tracking of harm severity and change over time.
+-   **The GHSI has been designed following the tenants of person-centredness and positive psychology, and avoids the pathologisation of gambling.**
 -   **It’s grounded in robust science.** The GHSI has been developed using rigorous psychometric testing to ensure that it measures gambling harms accurately, reliably, and fairly.
--   **It links to broader health outcomes.** By benchmarking GHSI scores against established health utility scales, the results can be interpreted in meaningful, real-world terms—helping decision-makers understand the true impact of gambling harm on people’s lives.
+-   **Through benchmarking to health utility decrements it links to broader health outcomes.** Providing healthcare professionals and policy makers alike the ability to better understand how harmful gambling may lead to decrements to health and wellbeing.
 -   **It enables clear comparisons.** The GHSI provides a framework for comparing gambling harm across populations, over time, and even compare results with other historic tools such as the PGSI—supporting better evaluation of interventions, services, and policy.
 
 
 ## Gambling Harms Framework
 
-The Gambling Harms Framework
+The GHSI scales are underpinned by a *Holistic Framework of Gambling Harms & Recovery*, which was iteratively developed through robust interrogation of academic literature, alongside in-depth qualitative interviews with people who gamble and affected others. Read more about [The Framework here](framework.html).  
 
-## Gambling Harms Severity Index
 
-The Gambling Harms Severity Index (GHSI) is a suite of measurement tools designed to assess the severity of gambling-related harms using Rasch modeling and Item Response Theory. Different, validated, version of the tool exist for both those directly affected and affected others. The GHSI has been designed following the tenants of person-centredness and positive psychology, and avoids the pathologisation of gambling.
-
-GHSI has been mapped to legacy measures of gambling-related harm that you might already be familiar with. This offers you the opportunity to compare against measures taken before the introduction of GHSI as well as research/guidance that refers to other measures of gambling-related harm.
-
-GHSI is also mapped to health-utility. Giving healthcare professionals and researchers alike the ability to better understand how harmful gambling may lead to decrements to health and wellbeing.
-
-Key Features
-
--   **Evidence-based** measurement developed through rigorous psychometric testing
--   **Co-designed** by those with lived experience, support and treatment backgrounds, and academic expertise
--   **Standardized** scoring that transforms raw responses into interval-level measurements
--   **Benchmarking** to health utility decrements for meaningful interpretation
--   **Comparative framework** for evaluation against other harm measures
 

@@ -1,7 +1,7 @@
 ---
 title: "About the GHSI Measurement tools"
 description: |
-  Validated measurement tools for assessing gambling-related harms and Recovery
+  Validated measurement tools for assessing gambling-related harms and recovery
 site: distill::distill_website
 ---
 
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # https://rstudio.github.io/distill/publish_website.html#github-pages
 
 ```
-The Gambling Harms Scale Initiative (GHSI) provides a set of innovative, evidence-based tools for measuring gambling-related harm and recovery. These tools go beyond identifying whether someone gambles “too much”—they capture the real impacts that gambling can have on people’s lives, in ways that are meaningful to individuals, practitioners, researchers, and policymakers alike.
+The Gambling Harms Severity Index (GHSI) provides a set of innovative, evidence-based tools for measuring gambling-related harm and recovery. These tools go beyond identifying whether someone gambles “too much”—they capture the real impacts that gambling can have on people’s lives, in ways that are meaningful to individuals, practitioners, researchers, and policymakers alike.
 
 ## Why we needed a new approach
 
@@ -37,11 +37,9 @@ The GHSI tools assess **gambling-related harm across *three* domains**:
 
 
 -  **Health** – including mental and physical wellbeing
-- **Resources** – including financial hardship, work or study disruption, and legal consequences
+- **Resources** – including financial hardship, and work or study disruption
 -  **Relationships** – including conflict, breakdown, and social isolation
-
-
-At the heart of the measure is **recovery**, which captures progress through four core areas: **control, insight, ownership,** and **behaviour change.**
+-  **Recovery** - we also have a tool to measure recovery, which captures progress through four core areas: **control, insight, ownership,** and **behaviour change.**
 
 
 ## How the tools are scored
@@ -57,7 +55,7 @@ This means that gambling harms can be interpreted with the same approach used in
 
 To support continuity in the field:
 
--  **GHSI score cam be inter-converted with the Problem Gambling Severity Index (PGSI)**, making it possible to compare data or transition smoothly from older tools. 
+-  **GHSI score can be inter-converted with the Problem Gambling Severity Index (PGSI)**, making it possible to compare data or transition smoothly from older tools. 
 -  This enables services and researchers to bridge between traditional “risk” assessments and more holistic harm-based approaches.
 
 ## What the tools can be used for
@@ -67,11 +65,5 @@ To support continuity in the field:
 -  **In policy** – To inform public health approaches, economic modelling, and evaluation of interventions or regulatory changes.
 -  **In population surveys** – To measure gambling harm and wellbeing impact at a national or regional level.
 
-## Putting people at the centre
-
-Unlike many existing measures, the GHSI tools were designed not just for analysis—but for use with real people. The language is clear, the questions are meaningful, and the scoring reflects what people themselves say matters most.
-
-
-Whether you're a frontline worker, academic, commissioner or advocate, these tools offer a more human, accurate and actionable way to understand and respond to gambling harm.
 
 

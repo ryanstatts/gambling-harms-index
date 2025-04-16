@@ -37,7 +37,7 @@ Many people move through cycles of harm, stability, and improvement. The framewo
 This visual map of gambling harms is organised into three broad domains:
 
 -  **Health Harms** --- including mental and physical health impacts such as stress, anxiety, depression, and self-neglect.
--  **Resource harms** --- such as financial strain, lost opportunities in work or study, or involvement with debt or crime.
+-  **Resource harms** --- such as financial strain and lost opportunities in work or study.
 -  **Relationship harms** --- including “loss of presence” in family life and relationship tensions, breakdown or disconnection across personal, social, and community relationships.
 -  **At the center of the framework is recovery.** This represents the personal journey of moving out of harm, including regaining **control** over gambling and life decisions, developing **insight** into what led to harm, taking **ownership** of the steps forward, and making meaningful **behaviour change**. 
 
@@ -47,4 +47,4 @@ Each area is interconnected. The diagram shows how harms flow, overlap, and comp
 
 -  **It centres lived experience** The model reflects how people *actually* experience harm and recovery, in their own words.
 -  **It informs better support.** From frontline services to national policy, this approach helps professionals recognise and respond to the full impact of gambling — and the pathways out of it.
--  **It supports meaningful measurement.** This framework underpins the Gambling Harms Scale (GHS), which allows people and services to track harm and recovery over time
+-  **It supports meaningful measurement.** This framework underpins the [Gambling Harms Severity Index](GHSI_tools.html), which allows people and services to track harm and recovery over time

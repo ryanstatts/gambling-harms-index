@@ -15,22 +15,14 @@ navbar:
       href: framework.html
     - text: "The GHSI Measurement Tools"
       menu:
-      - text: "About the Tools"
+      - text: "About the GHSI Tools"
         href: GHSI_tools.html
-      - text: "Items"
+      - text: "Accessing the GHSI Tools"
         href: items.html
-    - text: "For Gambling Support Service Providers"
-      menu:
-      - text: "Conversion Calculator"
-        href: converter.html
-    - text: "For Researchers"
-      menu:
-      - text: "Publications"
-        href: papers.html
       - text: "Item bank of Gambling Related Harms"
         href: database.html
-    - text: "For Policymakers"
-      menu:
-      - text: "Conversion Calculator"
-        href: converter.html
+    - text: "Conversion Calculator"
+      href: converter.html
+    - text: "Research Publications"
+      href: papers.html
 output: distill::distill_article
