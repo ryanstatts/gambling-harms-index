@@ -19,29 +19,38 @@ knitr::opts_chunk$set(echo = FALSE)
 Gambling harm isn’t just about losing money. It can affect people’s health, relationships, and everyday functioning—and these harms are often deeply connected. To truly understand gambling harm, we need to look beyond isolated symptoms and consider how harms build, overlap, and shift over time – including the reduction or recovery from these harms. 
 
 
-That’s the purpose of the GHSI’s holistic framework.
+That’s the purpose of the GHSI’s holistic frameworks.
 
 ## Seeing the full picture of harm - and recovery
 
 At the heart of the Gambling Harms Scale Initiative is a framework that maps the wide range of ways gambling can impact people. This model was developed from rich, in-depth interviews with people who had lived experience of gambling harm—whether through their own gambling or that of someone close to them.
 
 
-The framework doesn’t just identify harm—it helps us see how people recover.
+The Framework comes in two parts, the first part represents that interconnected network of harm. But the Framework doesn’t just identify harm, it helps us see how people build resilience and recover from gambling harms - this is the second part of the Framework.
 
 
-Many people move through cycles of harm, stability, and improvement. The framework recognises that recovery isn't always linear, and that progress can look different for different people. By showing how harms are connected, it also shows how positive change in one area—like mental health or financial stability—can unlock improvements in others.
+Many people move through cycles of harm, stability, and improvement. The Framework recognises that recovery isn't always linear, and that progress can look different for different people. By showing how harms are connected, it also shows how positive change in one area—like mental health or financial stability—can unlock improvements in others.
 
-# The Framework at a Glance
+# The Frameworks at a Glance
 
-![](images/framework.png)
-This visual map of gambling harms is organised into three broad domains:
+![](images/HarmsFramework_Image.png)
+This visual map of gambling harms is organised into three broad components:
 
--  **Health Harms** --- including mental and physical health impacts such as stress, anxiety, depression, and self-neglect.
--  **Resource harms** --- such as financial strain and lost opportunities in work or study.
--  **Relationship harms** --- including “loss of presence” in family life and relationship tensions, breakdown or disconnection across personal, social, and community relationships.
--  **At the center of the framework is recovery.** This represents the personal journey of moving out of harm, including regaining **control** over gambling and life decisions, developing **insight** into what led to harm, taking **ownership** of the steps forward, and making meaningful **behaviour change**. 
+-  **Wellbeing Harms** --- including mental and physical wellbeing impacts such as stress, anxiety, depression, and self-neglect.
+-  **Resource Harms** --- such as financial strain, impacts to important activities like work or study, and instances of ethical lapses.
+-  **Relationship Harms** --- including “loss of presence” in family life and relationship tensions, breakdown or disconnection across personal, social, and community relationships.
 
 Each area is interconnected. The diagram shows how harms flow, overlap, and compound. 
+
+
+
+![](images/RecoveryFramework_Image.png)
+
+-  **From Harms to Capital.** This change represents the resilience building at the heart of recovery. Recovery is focused on rebuilding from previous experience of harm. 
+-  **More than abstinence.** Our lived experience and service provider experts helped us steer the Framework towards a more nuanced definition of recovery that works for as many people as possible. 
+-  **At the center of the framework is recovery.** This represents the personal journey of moving out of harm, including regaining **control** over gambling and life decisions, developing **insight** into what led to harm, taking **ownership** of the steps forward, and making meaningful **behaviour change**. 
+
+
 
 ## Why this framework matters
 

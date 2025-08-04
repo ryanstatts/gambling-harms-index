@@ -24,7 +24,7 @@ There are three main measurement instruments:
 
 **The GHSI for Affected Others (GHSI-AO):** Mirroring the GSHI, the GHSI-AO is an instrument designed to specifically capture the harms experienced by people affected by someone else’s gambling. 
 
-**The Gambling Harms Recovery Index (GHRI):** A tool for measuring the recovery of harms from gambling. Having a more holistic perspective than simply measuring abstinence, the GHRI instead encapsulates aspects such as personal insight and behaviour change. 
+**The Gambling Harms Recovery Index (GHSI-Recovery):** A tool for measuring the recovery of harms from gambling. Having a more holistic perspective than simply measuring abstinence, the GHRI instead encapsulates aspects such as personal insight and behaviour change. 
 
 
 
@@ -38,7 +38,7 @@ By capturing these experiences in people’s own words and prioritising what mat
 -   **The GHSI has been designed following the tenants of person-centredness and positive psychology, and avoids the pathologisation of gambling.**
 -   **It’s grounded in robust science.** The GHSI has been developed using rigorous psychometric testing to ensure that it measures gambling harms accurately, reliably, and fairly.
 -   **Through benchmarking to health utility decrements it links to broader health outcomes.** Providing healthcare professionals and policy makers alike the ability to better understand how harmful gambling may lead to decrements to health and wellbeing.
--   **It enables clear comparisons.** The GHSI provides a framework for comparing gambling harm across populations, over time, and even compare results with other historic tools such as the PGSI—supporting better evaluation of interventions, services, and policy.
+-   **It enables clear comparisons.** The GHSI provides a framework for comparing gambling harm across populations, over time, and even compare results with other historic tools (such as the PGSI) supporting better evaluation of interventions, services, and policy.
 
 
 ## Gambling Harms Framework

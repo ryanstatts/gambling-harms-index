@@ -9,7 +9,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 # To Use
-Before using any form of the GHSI, please register with us first. The tools are free to use for research, treatment and non-commercial uses..
+Before using any form of the GHSI, please register with us first. The tools are free to use for research, treatment and non-commercial uses.
+
+All measures are currently in their final draft stage. If you are interested in making use of our tools, please get in touch with the [research team](mailto:ryan.statton@plymouth.ac.uk). 
 
 Registration Form (Link to come soon). 
 
@@ -17,33 +19,74 @@ Registration Form (Link to come soon).
 
 # GHSI
 
-**Items for the Short Form Gambling Harms Severity Index**
+The GHSI has been co-designed with people who have lived experience of gambling-related harms, service and treatment providers, and affected others. It exist in three versions: 
+- the GHSI-SF for online screening and monitoring. 
+- the GHSI-10 for face-to-face consultation with service providers and treatment professionals
+- the GHSI-3 for rapid screening. 
 
-The GHSI-SF is a 9 item measure of Gambling-Related Harms. 7 item assess experiences of harm from our framework, while 2 assess recovery. All items are scored from 0-3. Total scores range between 0 and 27, higher scores indicate a greater risk of harm.
-
-The measure has been co-designed with service and treatment providers and people with lived experience of gambling-related harms. It is designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
-
+GHSI is designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey.
 
 GHSI has been mapped to decrements to health, and can be converted to other legacy measures of gambling-related harm.To see how the conversion work, please see our [“Conversion Calculator”](converter.html).  
 
 
-[Download GHSI-SF (Word format, 2.3MB)] (Link to come soon). 
+**The Gambling Harms Severity Index - Short Form (GHSI-SF)**
+
+The GHSI-SF is a 7 item measure of Gambling-Related Harms. GHSI-SF is designed for both online and in-person deployment, to measure population experiences of gambling related-harm. The 7 item assess experiences of harm from our [Framework](framework.html) across the 3 major components: *Wellbeing*, *Resources*, and *Relationships*. The measure asks respondents to think back across the previous three months, and consider changes in behaviour as they relate to gambling. All items are scored from 0-3. Total scores range between 0 and 21, higher scores indicate a greater experience of harm.
+
+
+[Download GHSI-SF (PDF format, 1.3MB)] (Link to come soon). 
+
+
+**The Gambling Harms Severity Index - 10 items (GHSI-10)**
+
+The GHSI-10 is a 10 item measure of Gambling-Related Harms. GHSI-10 is designed for face-to-face settings, where an expert service provider or clinician is in conversation with a client. The first 7 items assess experiences of harm from our [Framework](framework.html) across the 3 major components: *Wellbeing*, *Resources*, and *Relationships*. A final 3 additional items assess experiences of higher order harms in the 3 components. Finally, there is space and encouragement for the expression of other experiences of harm. The measure asks respondents to think back across the previous three months, and consider changes in behaviour as they relate to gambling. All items are scored from 0-3. Total scores range between 0 and 30, higher scores indicate a greater experience of harm.
+
+
+[Download GHSI-10 (PDF format, 1.3MB)] (Link to come soon). 
+
+**The Gambling Harms Severity Index - Screening Tool (GHSI-3)**
+
+The GHSI-3 is a 3 item, rapid assessment tool of Gambling-Related Harms. GHSI-3 is designed for quick assessment at touch points where longer scales are not feasible. The 3 items assess experiences of harm from our [Framework](framework.html) across the 3 major components: *Wellbeing*, *Resources*, and *Relationships*. The measure asks respondents to think back across the previous three months, and consider changes in behaviour as they relate to gambling. All items are scored from 0-3. Total scores range between 0 and 9, higher scores indicate a greater experience of harm.
+
+
+[Download GHSI-3 (PDF format, 1.3MB)] (Link to come soon). 
 
 
 ---
 
 # GHSI-AO
-**The GHSI for Affected Others**
+
+The GHSI for Affected Others (GHSI-AO) has been co-designed with affected others, treatment and service providers, and those with lived experience of gambling-related harms. It exists in two versions:
+- the GHSI-AO-SF for online screening and monitoring
+- the GHSI-AO-10 for face-to-face consultation with service providers and treatment professionals
+
+GHSI-AO is designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms as a result of someone else's gambling at all stages of their personal recovery journey. It is not a measure of harm or recovery in the person that gambles. 
+
+GHSI-AO has been mapped to decrements to health, to see how they relate please see our [“Conversion Calculator”](converter.html). 
+
+
+**The GHSI for Affected Others - Short Form (GHSI-AO-SF)**
+
+The GHSI-AO-SF is a 7 item measure of harm resulting from someone else's gambling. GHSI-AO-SF is designed for both online and in-person deployment, to measure population experiences of gambling-related harm as a result of someone else's gambling. The 7 items assess experiences of harm from our [Framework](framework.html) across the 3 major components: *Wellbeing*, *Resources*, and *Relationships* and is worded to focus on their own experience. The measure asks respondents to think back across the previous three months, and consider changes in behaviour as a result of the gambling of someone close to them. All items are scored from 0-3. Total scores range between 0 and 21, higher scores indicate a greater experience of harm.
+
+
+[Download GHSI-AO-SF (Word format, 1.2MB)] (Link to come soon). 
+
+**The GHSI for Affected Others - 10 items (GHSI-AO-10)**
+
+The GHSI-AO-10 is a 10 item measure of harm resulting from someone else's gambling. GHSI-AO-SF is designed for both online and in-person deployment, to measure population experiences of gambling-related harm as a result of someone else's gambling. The first 7 items assess experiences of harm from our [Framework](framework.html) across the 3 major components: *Wellbeing*, *Resources*, and *Relationships* and is worded to focus on their own experience. A final 3 additional items assess experiences of higher order harms in the 3 components. Finally, there is space and encouragement for the expression of other experiences of harm. The measure asks respondents to think back across the previous three months, and consider changes in behaviour as a result of the gambling of someone close to them. All items are scored from 0-3. Total scores range between 0 and 21, higher scores indicate a greater experience of harm.
 
 
 
-[Download GHSI-AO (Word format, 2.3MB)] (Link to come soon). 
+[Download GHSI-AO-10 (PDF format, 1.3MB)] (Link to come soon). 
  
 ---
 
 # GHSI-Recovery
 **A Holistic Tool for Measuring Recovery from Gambling-Related Harms**
 
-The GHSI-R is a 9 item measure of recovery from gambling harm. Designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
+GHSI-Recovery has been co-designed with people who have lived experience of gambling-related harms, service and treatment providers, and affected others. It draws from the tenets of Positive Psychology and Recovery Capital to focus on the journey of recovery. Items are worded such that they focus on moving forwards and building capacity, capability, and resilience. 
 
-[Download GHRI-R (Word format, 2.3MB)] (link to come soon). 
+The GHSI-Recovery is a 10 item measure of recovery from gambling-related harms. The first 6 items assess recovery from harms that align with the components of recovery capital from our [Framework](framework.html). The final 4 items assess the drivers and enablers of recovery. Designed to be delivered either in person or online, the measure is suitable for people experiencing gambling-related harms at all stages of their personal recovery journey. 
+
+[Download GHRI-R (PDF format, 1.3MB)] (link to come soon). 

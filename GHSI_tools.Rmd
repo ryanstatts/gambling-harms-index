@@ -33,11 +33,11 @@ The GHSI measures were developed through a multi-stage process that combined:
 
 ## What the tools measure
 
-The GHSI tools assess **gambling-related harm across *three* domains**:
+The GHSI tools assess **gambling-related harm across *three* components**:
 
 
--  **Health** – including mental and physical wellbeing
-- **Resources** – including financial hardship, and work or study disruption
+-  **Wellbeing** – including mental and physical wellbeing
+-  **Resources** – including financial hardship, and work or study disruption
 -  **Relationships** – including conflict, breakdown, and social isolation
 -  **Recovery** - we also have a tool to measure recovery, which captures progress through four core areas: **control, insight, ownership,** and **behaviour change.**
 
