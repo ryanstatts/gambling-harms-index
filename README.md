@@ -23,13 +23,14 @@ The GHSI scales are underpinned by a **Holistic Framework of Gambling Harms & Re
 ## Research Team
 
 ### University of Plymouth
-- **Ryan Statton** - Research Fellow
-- **James Close** - Research Associate  
-- **Sharon Collard** - Principal Investigator
+- **Dr. Ryan Statton** - Research Fellow in Psychology
+- **Dr. James Close** - Lecturer in Clincal Education Principal Investigator  
+
 
 ### University of Bristol
-- **Jamie Wheaton** - Research Associate
-- **Sara Davies** - Co-investigator
+- **Prof. Sharon Collard** - Chair in Personal Finance
+- **Dr. Jamie Wheaton** - Lecturer in Marketing
+- **Ms. Sara Davies** - Associate Professor in Household Finance
 
 ### NatCen Social Research
 - **Sokratis Dinos** - Senior Researcher
