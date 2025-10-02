@@ -33,7 +33,7 @@ The GHSI scales are underpinned by a **Holistic Framework of Gambling Harms & Re
 - **Ms. Sara Davies** - Associate Professor in Household Finance
 
 ### NatCen Social Research
-- **Sokratis Dinos** - Senior Researcher
+- **Dr. Sokratis Dinos** - Senior Researcher
 - **Imogen Martin** - Researcher
 - **Crescenzo Pinto** - Researcher
 
