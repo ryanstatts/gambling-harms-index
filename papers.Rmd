@@ -8,5 +8,18 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Preprints
+
+Collard, S., Wheaton, J., Davies, S., Statton, R., Martin, I., Pinto, C., Browne, M., Conway, M., Walsh, C., Dobson, N., & Close, J. (2025). *A Holistic Framework of Gambling Harms and Recovery, Derived from a Rapid Evidence Assessment and Qualitative Interviews with People who Gamble and Affected Others*. PsyArXiv. https://doi.org/10.31234/osf.io/yudq6_v1
+
+This study developed a holistic, empirically grounded framework of gambling-related harm and recovery tailored to the Great Britain context. Through a Rapid Evidence Assessment and 40 qualitative interviews with people experiencing gambling harms and affected others, the framework encompasses three broad components of harm: resources, wellbeing, and relationships. It explicitly acknowledges stigma as a gambling harm and conceptualises recovery as a multidimensional process involving financial stability, identity repair, and social connection, underpinned by support networks alongside control, insight, behaviour change, and ownership. The framework advances gambling harms research by integrating lived experience, acknowledging affected others, and embedding recovery as a central component.
+
+Close, J., Statton, R., Collard, S., Wheaton, J., Davies, S., Martin, I., Pinto, C., Conway, M., Walsh, C., & Browne, M. (2025). *Development and Validation of the Gambling Harms Severity Index (GHSI-10) and the GHSI for Affected Others (GHSI-AO-10): Measurement Instruments for People Experiencing Gambling Related Harms and Affected Others*. PsyArXiv. https://doi.org/10.31234/osf.io/w8fb6_v1
+
+This study reports the development and validation of the GHSI-10 and GHSI-AO-10, co-designed instruments for measuring gambling-related harms among people who gamble and affected others. Using a multi-phase, mixed-methods approach grounded in a holistic framework of gambling harm and recovery, items were co-produced with individuals with lived experience, affected others, practitioners, and academic experts. Psychometric validation conducted with over 3,000 participants in the UK demonstrated strong reliability, convergent validity with existing measures, and good fit using both classical test theory and Rasch measurement approaches. The instruments use non-stigmatising, person-centred language designed to reduce denial and social desirability biases, with a focus on harms that are dynamic and responsive to recovery pathways.
+
+
+
 # Academic Research
+
 Recent citations here
