@@ -24,7 +24,7 @@ Most existing measures of gambling – such as the Problem Gambling Severity Ind
 
 ## How the tools were developed
 
-The GHSI measures were developed through a multi-stage process that combined:
+For details of the development process, see our [publications](papers.html). The GHSI measures were developed through a multi-stage process that combined:
 
 
 -  **Lived experience** – Our tools were shaped by in-depth interviews and co-production with people affected by gambling (both directly and indirectly) and people delivering services to reduce gambling harms.
@@ -39,24 +39,16 @@ The GHSI tools assess **gambling-related harm across *three* components**:
 -  **Wellbeing** – including mental and physical wellbeing
 -  **Resources** – including financial hardship, and work or study disruption
 -  **Relationships** – including conflict, breakdown, and social isolation
--  **Recovery** - we also have a tool to measure recovery, which captures progress through four core areas: **control, insight, ownership,** and **behaviour change.**
 
 
 ## How the tools are scored
 
--  Each harm domain is scored on an **interval-level scale**, allowing meaningful comparisons between people and over time.
--  Scores are **calibrated** to reflect both the severity and personal significance of the harm experienced.
+-  Each harm component is scored on an **interval-level scale**, allowing meaningful comparisons between people and over time.
 -  The scoring enables **tracking of change**, making it suitable for use in both clinical and community settings.
 -  A key advantage of the GHSI is that it allows the calculation of **decrements to wellbeing**, using standardised utility measures. 
 
 This means that gambling harms can be interpreted with the same approach used in wider public health and economic evaluations.
 
-## Compatibility with other tools
-
-To support continuity in the field:
-
--  **GHSI score can be inter-converted with the Problem Gambling Severity Index (PGSI)**, making it possible to compare data or transition smoothly from older tools. 
--  This enables services and researchers to bridge between traditional “risk” assessments and more holistic harm-based approaches.
 
 ## What the tools can be used for
 

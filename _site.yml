@@ -15,10 +15,10 @@ navbar:
       href: framework.html
     - text: "The GHSI Measurement Tools"
       menu:
-      - text: "About the GHSI Tools"
-        href: GHSI_tools.html
       - text: "Accessing the GHSI Tools"
         href: items.html
+      - text: "About the GHSI Tools"
+        href: GHSI_tools.html
       - text: "Item bank of Gambling Related Harms"
         href: database.html
     - text: "Conversion Calculator"

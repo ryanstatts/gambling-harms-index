@@ -16,20 +16,20 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-Gambling harm isn’t just about losing money. It can affect people’s health, relationships, and everyday functioning—and these harms are often deeply connected. To truly understand gambling harm, we need to look beyond isolated symptoms and consider how harms build, overlap, and shift over time – including the reduction or recovery from these harms. 
+Gambling harm isn’t just about losing money. It can affect people’s wellbeing, relationships, and everyday functioning—and these harms are often deeply connected. To truly understand gambling harm, we need to look beyond isolated symptoms and consider how harms build, overlap, and shift over time – including the reduction or recovery from these harms. 
 
 
 That’s the purpose of the GHSI’s holistic frameworks.
 
 ## Seeing the full picture of harm - and recovery
 
-At the heart of the Gambling Harms Scale Initiative is a framework that maps the wide range of ways gambling can impact people. This model was developed from rich, in-depth interviews with people who had lived experience of gambling harm—whether through their own gambling or that of someone close to them.
+At the heart of the Gambling Harms Scale Initiative is a framework that maps the wide range of ways gambling can impact people. This model was developed from rich, in-depth interviews with people who had lived experience of gambling harm—whether through their own gambling or that of someone close to them. For details of the development process, please see our [publications](papers.html).
 
 
-The Framework comes in two parts, the first part represents that interconnected network of harm. But the Framework doesn’t just identify harm, it helps us see how people build resilience and recover from gambling harms - this is the second part of the Framework.
+The Framework comes in two parts, the first part represents that interconnected network of harm. But the Framework doesn’t just identify harm, it helps us see how people build resilience and recover from gambling harms - this is encapsulated in our Recovery Framework.
 
 
-Many people move through cycles of harm, stability, and improvement. The Framework recognises that recovery isn't always linear, and that progress can look different for different people. By showing how harms are connected, it also shows how positive change in one area—like mental health or financial stability—can unlock improvements in others.
+Many people move through cycles of harm, stability, and improvement. The Framework recognises that recovery isn't always linear, and that progress can look different for different people. By showing how harms are connected, it also shows how positive change in one area—like mental wellbeing or financial stability—can unlock improvements in others.
 
 # The Frameworks at a Glance
 

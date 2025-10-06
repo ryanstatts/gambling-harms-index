@@ -16,21 +16,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-**The Gambling Harms Scale Initiative ** is a major UK-based research programme that’s transforming how we understand and respond to gambling-related harm. Working directly with people affected by gambling, we have developed a suite of comprehensive, person-centered tools for measuring the full range of gambling harms and recovery.
+**The Gambling Harms Scale Initiative ** is a suite of comprehensive, person-centered tools for measuring the full range of gambling harms and recovery. 
 
-There are three main measurement instruments:
-
-**The Gambling Harms Severity Index (GHSI):** Encapsulates all the core domains of gambling harm, including financial harms, mental and physical health harms, and relationship harms.  
+**The Gambling Harms Severity Index (GHSI):** Encapsulates all the core components of gambling harm, including financial harms, mental and physical wellbeing harms, and relationship harms.  
 
 **The GHSI for Affected Others (GHSI-AO):** Mirroring the GSHI, the GHSI-AO is an instrument designed to specifically capture the harms experienced by people affected by someone else’s gambling. 
 
-**The Gambling Harms Recovery Index (GHSI-Recovery):** A tool for measuring the recovery of harms from gambling. Having a more holistic perspective than simply measuring abstinence, the GHRI instead encapsulates aspects such as personal insight and behaviour change. 
 
 
 
-## How is the GHSI different to other measurement tools, such as the Problem Gambling Severity Index (PGSI)?
+## How is the GHSI different to other measurement tools?
 
-By capturing these experiences in people’s own words and prioritising what matters most to them, the GHSI tools offer a clearer, fairer, and more accurate picture of harm. This helps ensure more useful information for providers of gambling support services, more robust information for researchers, and a clearer picture for data policymakers.
+Co-developed with lived-experience input, the GHSI prioritises what matters most, thereby offering a clearer and more accurate picture of harm. This helps ensure more useful information for providers of gambling support services, more robust information for researchers, and a clearer picture for data policymakers. 
 
 
 -   **Co-designed by those with lived experience, support and treatment backgrounds, and academic expertise.**

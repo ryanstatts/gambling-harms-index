@@ -14,22 +14,9 @@ library(tidyverse)
 
 ## Converter Tool
 
-The converter tool lets you convert any score on one of our benchmarked scales to a *Rasch Measure*. The *Rasch Measure* lets you compare to other scales that we also have benchmarked as well as comparing gambling-related harms to decrements to wellbeing. Typical GHSI-10 scores are roughly equivalent to PGSI. 
+The GHSI allows scores to be converted into decrements in health utility and capability on both the SF-6D and the [ICECAP-A](https://www.bristol.ac.uk/population-health-sciences/projects/icecap/icecap-a/) (which is [recommended by NICE](https://www.nice.org.uk/process/pmg20/chapter/incorporating-economic-evaluation) when measuring and valuing effects for non-health interventions). This enables health economic benchmarking to be derived from the GSHI.  
 
-For more details on the Rasch conversion process [click here](#rasch-details). 
-
-
-## Available Instruments:
-
-- **PGSI (Problem Gambling Severity Index)**: A 9-item screening tool that assesses gambling behavior and related harm
-- **GHS-10 (Gambling Harms Scale - 10)**: A 10-item scale assessing a range of negative consequences of gambling
-
-
-**As we work on updating our benchmarking of health utilities, the converter tool is currently offline. Please check back soon for an updated version of the tool.**
-
-Enter your raw GHSI score to see your transformed score and interpretation.
-
-
+<center>**A conversion tool will soon be available on this page.**</center> 
 
 
 
