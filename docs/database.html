@@ -2491,8 +2491,115 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
+  <script src="cookie-consent.js"></script>
+  <style type="text/css">
+  /* Cookie Consent Banner Styles */
+  /* Matches your existing Gambling Harms Severity Project theme */
+
+  #cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff9ef;
+    border-top: 3px solid #698F3F;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    padding: 1.5rem;
+    font-family: "Bitter", serif;
+    /* Ensure banner appears above fixed header */
+    margin-top: 110px;
+  }
+
+  .cookie-consent-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .cookie-consent-text {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .cookie-consent-text p {
+    margin: 0;
+    color: #252323;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .cookie-consent-text p:first-child {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .cookie-consent-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cookie-btn {
+    font-family: "Hanken", sans-serif;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .cookie-accept {
+    background-color: #698F3F;
+    color: #E6EFE9;
+  }
+
+  .cookie-accept:hover {
+    background-color: #5a7835;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(105, 143, 63, 0.3);
+  }
+
+  .cookie-decline {
+    background-color: transparent;
+    color: #252323;
+    border: 2px solid #252323;
+  }
+
+  .cookie-decline:hover {
+    background-color: #252323;
+    color: #fff9ef;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .cookie-consent-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .cookie-consent-buttons {
+      justify-content: stretch;
+    }
+    
+    .cookie-btn {
+      flex: 1;
+    }
+    
+    #cookie-consent-banner {
+      padding: 1rem;
+    }
+  }
+  </style>
   <!--/radix_placeholder_site_in_header-->
 
+  <link rel="stylesheet" href="cookie-consent.css" type="text/css"/>
 
 </head>
 
@@ -2553,8 +2660,8 @@ The GHSI Measurement Tools
 <p>This database contains <strong>12 different gambling assessment measures</strong> with a total of <strong>201 individual items</strong>. You can explore this database in two different ways:</p>
 <h2 id="gambling-harms-measures-overview">Gambling Harms Measures Overview</h2>
 <div class="layout-chunk" data-layout="l-body">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a34ee2f43aac3cde5750" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a34ee2f43aac3cde5750">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Responsive"],"data":[["Unimpeachable Gambling Harm Screen","South Oaks Gambling Screen","Short Gambling Harms Screen - 18 items","Short Gambling Harms Screen - 10 items","Problem Gambling Severity Index","Central Queensland University Harms Inventory","Gambling Urges Scale","Gambling Related Cognition Scale","Gambling Commission Gambling Related Harms","DSM-IV diagnotistic criteria for Pathological Gambling","Domain General Gambling Harms Scale","Consumption Screen for Problem Gamblers"],["UGHS","SOGS","SGHS-18","SGHS-10","PGSI","Harms","GUS","GRCS","GCGRH","DSM-IV","DGHS-7","CSPG"],[10,20,18,10,9,72,6,23,13,10,7,3],["Boyle et al. ","Lesieur and Blume","Latvala et al. ","Browne et al.","Ferris and Wynne","Li et al. ","Raylu and Oei","Raylu and Oei","Wardle et al. ","Stinchfield et al. ","Syversten et al. ","Rockloff"],["Resources, Relationships, Health","Uncontrolled Gambling, Health, Relationships, Resources","Resources, Health, Relationships","Resources, Health, Relationships","Resources, Uncontrolled Gambling, Health, Relationships","Resources, Health, Uncontrolled Gambling, Relationships","Uncontrolled Gambling","Health, Uncontrolled Gambling","Resources, Health, Relationships","Health, Uncontrolled Gambling, Resources, Relationships","Resources, Relationships, Health","Uncontrolled Gambling"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Scale Name<\/th>\n      <th>Abbreviation<\/th>\n      <th>Number of Items<\/th>\n      <th>Authors<\/th>\n      <th>Main Components<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":[{"extend":"collection","buttons":["csv","excel","pdf"],"text":"Download"}],"pageLength":12,"autoWidth":true,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2},{"name":"Scale Name","targets":0},{"name":"Abbreviation","targets":1},{"name":"Number of Items","targets":2},{"name":"Authors","targets":3},{"name":"Main Components","targets":4}],"order":[],"orderClasses":false,"responsive":true,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-7e95d1370a7c635aea33" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7e95d1370a7c635aea33">{"x":{"filter":"none","vertical":false,"extensions":["Buttons","Responsive"],"data":[["Unimpeachable Gambling Harm Screen","South Oaks Gambling Screen","Short Gambling Harms Screen - 18 items","Short Gambling Harms Screen - 10 items","Problem Gambling Severity Index","Central Queensland University Harms Inventory","Gambling Urges Scale","Gambling Related Cognition Scale","Gambling Commission Gambling Related Harms","DSM-IV diagnotistic criteria for Pathological Gambling","Domain General Gambling Harms Scale","Consumption Screen for Problem Gamblers"],["UGHS","SOGS","SGHS-18","SGHS-10","PGSI","Harms","GUS","GRCS","GCGRH","DSM-IV","DGHS-7","CSPG"],[10,20,18,10,9,72,6,23,13,10,7,3],["Boyle et al. ","Lesieur and Blume","Latvala et al. ","Browne et al.","Ferris and Wynne","Li et al. ","Raylu and Oei","Raylu and Oei","Wardle et al. ","Stinchfield et al. ","Syversten et al. ","Rockloff"],["Resources, Relationships, Health","Uncontrolled Gambling, Health, Relationships, Resources","Resources, Health, Relationships","Resources, Health, Relationships","Resources, Uncontrolled Gambling, Health, Relationships","Resources, Health, Uncontrolled Gambling, Relationships","Uncontrolled Gambling","Health, Uncontrolled Gambling","Resources, Health, Relationships","Health, Uncontrolled Gambling, Resources, Relationships","Resources, Relationships, Health","Uncontrolled Gambling"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Scale Name<\/th>\n      <th>Abbreviation<\/th>\n      <th>Number of Items<\/th>\n      <th>Authors<\/th>\n      <th>Main Components<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":[{"extend":"collection","buttons":["csv","excel","pdf"],"text":"Download"}],"pageLength":12,"autoWidth":true,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":2},{"name":"Scale Name","targets":0},{"name":"Abbreviation","targets":1},{"name":"Number of Items","targets":2},{"name":"Authors","targets":3},{"name":"Main Components","targets":4}],"order":[],"orderClasses":false,"responsive":true,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -2573,7 +2680,7 @@ The GHSI Measurement Tools
 <h2 id="about-this-database">About This Database</h2>
 <p>This database was compiled as part of the Gambling Harms Severity Index project. If you would like to suggest additions or corrections to this database, please <a href="mailto:ryan.statton@plymouth.ac.uk">contact us</a>.</p>
 <hr />
-<p>Last updated: October 06, 2025</p>
+<p>Last updated: October 07, 2025</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
