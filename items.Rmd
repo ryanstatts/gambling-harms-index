@@ -61,7 +61,7 @@ A ten-item version of the scale, which mirrors the GSHI but reworded with the em
 
 
 
-[Download GHSI-AO-10 (PDF format, 0.8MB)](GHSI-AO-10.pdf). 
+[Download GHSI-AO-10 (PDF format, 0.8MB)](files/GHSI-AO-10.pdf). 
 
 
 **The GHSI for Affected Others - 7 (GHSI-AO-7)**
@@ -69,7 +69,7 @@ A ten-item version of the scale, which mirrors the GSHI but reworded with the em
 A seven-item version that does not include the three higher harm items at the end, and is therefore more applicable in situations where safeguarding is not such a concern, such as online use.
 
 
-[Download GHSI-AO-SF (PDF format, 0.8MB)](files/GHSI-AO-7.pdf). 
+[Download GHSI-AO-7 (PDF format, 0.8MB)](files/GHSI-AO-7.pdf). 
 
 
  
