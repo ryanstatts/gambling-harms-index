@@ -23,7 +23,7 @@ That’s the purpose of the GHSI’s holistic frameworks.
 
 ## Seeing the full picture of harm - and recovery
 
-At the heart of the Gambling Harms Scale Initiative is a framework that maps the wide range of ways gambling can impact people. This model was developed from rich, in-depth interviews with people who had lived experience of gambling harm—whether through their own gambling or that of someone close to them. For details of the development process, please see our [publications](papers.html).
+At the heart of the Gambling Harms Scale Initiative is a framework that maps the wide range of ways gambling can impact people. This model was jointly developed from rich, in-depth interviews with people who had lived experience of gambling harm—whether through their own gambling or that of someone close to them and from an existing body of literature. The framework was influenced by Wardle *et al*.'s [Framework for Action](https://eprints.lse.ac.uk/89248/1/McDaid_Gambling-Related_harms_Published.pdf), Langham *et al*.'s [Gambling Harms Framework](https://bmcpublichealth.biomedcentral.com/articles/10.1186/s12889-016-2747-0), and a range of demographically diverse studies. For details of the development process, please see our [publications](papers.html).
 
 
 The Framework comes in two parts, the first part represents that interconnected network of harm. But the Framework doesn’t just identify harm, it helps us see how people build resilience and recover from gambling harms - this is encapsulated in our Recovery Framework.
