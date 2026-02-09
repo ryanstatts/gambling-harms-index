@@ -1,0 +1,44 @@
+---
+title: "Gambling Harms Severity Index Calculator"
+description: |
+  Calculate your transformed GHSI-SF score.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(htmlwidgets)
+library(htmltools)
+library(jsonlite)
+library(tidyverse)
+```
+
+## Converter Tool
+
+The GHSI allows scores to be converted into decrements in health utility and capability on both the SF-6D and the [ICECAP-A](https://www.bristol.ac.uk/population-health-sciences/projects/icecap/icecap-a/) (which is [recommended by NICE](https://www.nice.org.uk/process/pmg20/chapter/incorporating-economic-evaluation) when measuring and valuing effects for non-health interventions). This enables health economic benchmarking to be derived from the GSHI.  
+
+<center>**A conversion tool will soon be available on this page.**</center> 
+
+
+
+
+# Rasch Details
+
+## Understanding the Rasch Conversion
+
+When you take a gambling assessment like the PGSI, your raw score doesn't tell the complete story. The converter uses the Rasch measurement model—a sophisticated statistical approach—to transform these raw scores into more meaningful measures.
+
+Think of it like converting temperature from Fahrenheit to Celsius. Raw scores are like Fahrenheit: they count items but don't create equal intervals between points. Rasch measures are like Celsius: they place your score on a standard scale where each step represents an equal amount of change in gambling harm severity. This transformation accounts for the fact that some questions indicate more severe problems than others, and that moving from a score of 20 to 21 might not represent the same increase in severity as moving from 2 to 3.
+
+The standard error shown with your measure represents the precision of the measurement—smaller errors indicate more confidence in the score. The wider the error bar, the less certain we can be about the exact level of severity. This typically happens at the extreme ends of the scale where fewer people score, giving us less information to make precise estimates.
+
+## Technical Details 
+
+This calculator transforms ordinal raw scores from gambling harm assessment instruments into interval-level measures using Rasch Measurement Theory (RMT). The conversion implements a logit transformation derived from the Rasch model's probabilistic framework, where the log-odds of a person endorsing an item is a function of that person's ability (θ) minus the item's difficulty (δ).Item difficulty represents how hard it is to agree to an item based on one's underlying trait. Those high in a trait (in this instance gambling-related harm) will be able answer more difficult items in the affirmative, those low in the trait will not.  
+
+The measures are calibrated using a joint maximum likelihood estimation procedure where both person and item parameters are iteratively estimated. The output logits represent the location of each raw score on a latent continuum of gambling harm severity with standardized units. Unlike raw scores, these interval measures maintain equal distances between units across the scale, satisfying the mathematical requirements for parametric statistical analyses.
+
+The displayed standard errors quantify measurement precision as a function of information at each point along the continuum. In accordance with measurement theory, precision is highest near the center of the distribution where most respondents are measured, and decreases at the extremes. The standard error provides conditional standard deviations of measurement that can be used to construct confidence intervals around individual estimates.
+
+The severity classifications are empirically derived threshold points on the logit scale that correspond to clinically meaningful distinctions in gambling harm profiles informed by the PGSI. By utilising this interval-level metric rather than raw scores, the calculator enables more accurate assessment of severity, more appropriate measurement of change, and enhanced comparability across different instruments when equated to the same frame of reference.
+
+Decrements to wellbeing are calculated from a propensity weighted model of gambling-related harm (determined by the *PGSI*) on mental wellbeing (determined by the *Warick Edinburgh Mental Wellbeing Scale*). 
