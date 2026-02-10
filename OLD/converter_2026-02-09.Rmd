@@ -1,7 +1,7 @@
 ---
 title: "GHSI Score Converter"
-description: "Convert GHSI-3, GHSI-7, and GHSI-10 scores to harm categories, ICECAP-A
-  and SF-6D tariffs.\n"
+description: "Convert GHSI-7 and GHSI-10 scores to harm categories, ICECAP-A and SF-6D
+  tariffs.\n"
 site: distill::distill_website
 ---
 
@@ -11,7 +11,7 @@ library(jsonlite)
 library(tidyverse)
 
 # Read lookup table -- update this CSV to change the conversion data
-lookup <- read_csv("data/GHSI_Rasch_Lookup_2026-02-10.csv", show_col_types = FALSE)
+lookup <- read_csv("data/GHSI_Rasch_Lookup_2026-02-06.csv", show_col_types = FALSE)
 
 # Build JSON array for JavaScript, indexed by GHSI10_estimate (0-30)
 js_rows <- lookup %>%
@@ -20,13 +20,9 @@ js_rows <- lookup %>%
   mutate(
     js = paste0(
       '{ ghsi7: ', ifelse(is.na(GHSI7_score), 'null', GHSI7_score),
-      ', ghsi7_10_precise: ', ifelse(is.na(GHSI7_10_precise), 'null', sprintf("%.2f", GHSI7_10_precise)),
-      ', ghsi7_10_lower: ', ifelse(is.na(GHSI7_10_lower), 'null', sprintf("%.2f", GHSI7_10_lower)),
-      ', ghsi7_10_upper: ', ifelse(is.na(GHSI7_10_upper), 'null', sprintf("%.2f", GHSI7_10_upper)),
-      ', ghsi3: ', ifelse(is.na(GHSI3_score), 'null', GHSI3_score),
-      ', ghsi3_10_precise: ', ifelse(is.na(GHSI3_10_precise), 'null', sprintf("%.2f", GHSI3_10_precise)),
-      ', ghsi3_10_lower: ', ifelse(is.na(GHSI3_10_lower), 'null', sprintf("%.2f", GHSI3_10_lower)),
-      ', ghsi3_10_upper: ', ifelse(is.na(GHSI3_10_upper), 'null', sprintf("%.2f", GHSI3_10_upper)),
+      ', ghsi10_precise: ', ifelse(is.na(GHSI10_precise), 'null', sprintf("%.2f", GHSI10_precise)),
+      ', ghsi10_lower: ', ifelse(is.na(GHSI10_lower), 'null', sprintf("%.2f", GHSI10_lower)),
+      ', ghsi10_upper: ', ifelse(is.na(GHSI10_upper), 'null', sprintf("%.2f", GHSI10_upper)),
       ', category: "', GHSI_Category, '"',
       ', icecap: ', sprintf("%.2f", ICECAP),
       ', icecap_dis: ', sprintf("%.2f", ICECAP_disutility),
@@ -40,7 +36,7 @@ js_rows <- lookup %>%
 lookup_json <- paste0("[\n    ", paste(js_rows, collapse = ",\n    "), "\n  ]")
 ```
 
-This tool converts scores from the [**GHSI-3**](items.html) (3-item), [**GHSI-7**](items.html) (7-item), or [**GHSI-10**](items.html) (10-item) Gambling Harms Severity Index into a GHSI harm category and estimated health utility tariffs on the [ICECAP-A](https://www.bristol.ac.uk/population-health-sciences/projects/icecap/icecap-a/) and SF-6D scales. If you enter a GHSI-3 or GHSI-7 score, it will first be converted to a GHSI-10 equivalent.
+This tool converts scores from the **GHSI-7** (7-item) or **GHSI-10** (10-item) Gambling Harms Severity Index into a GHSI harm category and estimated health utility tariffs on the [ICECAP-A](https://www.bristol.ac.uk/population-health-sciences/projects/icecap/icecap-a/) and SF-6D scales. If you enter a GHSI-7 score, it will first be converted to a GHSI-10 equivalent.
 
 <style type="text/css">
 .converter-container {
@@ -233,7 +229,6 @@ d-article .converter-container label {
 <div class="form-group">
 <label>Which GHSI version are you converting from?</label>
 <div class="radio-group">
-<label><input type="radio" name="ghsi-version" value="ghsi3" /> GHSI-3</label>
 <label><input type="radio" name="ghsi-version" value="ghsi7" checked /> GHSI-7</label>
 <label><input type="radio" name="ghsi-version" value="ghsi10" /> GHSI-10</label>
 </div>
@@ -289,13 +284,9 @@ cat(paste0('
   var LOOKUP = ', lookup_json, ';
 
   var GHSI7_TO_GHSI10 = {};
-  var GHSI3_TO_GHSI10 = {};
   for (var i = 0; i < LOOKUP.length; i++) {
     if (LOOKUP[i].ghsi7 !== null) {
       GHSI7_TO_GHSI10[LOOKUP[i].ghsi7] = i;
-    }
-    if (LOOKUP[i].ghsi3 !== null) {
-      GHSI3_TO_GHSI10[LOOKUP[i].ghsi3] = i;
     }
   }
 
@@ -326,11 +317,7 @@ cat(paste0('
 
   function updateFormForVersion() {
     var version = getSelectedVersion();
-    if (version === "ghsi3") {
-      scoreLabel.textContent = "Enter your GHSI-3 score";
-      scoreInput.max = 9;
-      rangeHint.textContent = "Valid range: 0 \\u2013 9";
-    } else if (version === "ghsi7") {
+    if (version === "ghsi7") {
       scoreLabel.textContent = "Enter your GHSI-7 score";
       scoreInput.max = 21;
       rangeHint.textContent = "Valid range: 0 \\u2013 21";
@@ -379,7 +366,7 @@ cat(paste0('
       return;
     }
 
-    var maxScore = (version === "ghsi3") ? 9 : (version === "ghsi7") ? 21 : 30;
+    var maxScore = (version === "ghsi7") ? 21 : 30;
     if (score < 0 || score > maxScore) {
       showError("Score must be between 0 and " + maxScore + ".");
       return;
@@ -388,13 +375,7 @@ cat(paste0('
     errorMsg.classList.remove("visible");
 
     var ghsi10Score;
-    if (version === "ghsi3") {
-      ghsi10Score = GHSI3_TO_GHSI10[score];
-      if (ghsi10Score === undefined) {
-        showError("No GHSI-10 conversion available for this GHSI-3 score.");
-        return;
-      }
-    } else if (version === "ghsi7") {
+    if (version === "ghsi7") {
       ghsi10Score = GHSI7_TO_GHSI10[score];
     } else {
       ghsi10Score = score;
@@ -402,16 +383,11 @@ cat(paste0('
 
     var row = LOOKUP[ghsi10Score];
 
-    if (version === "ghsi3") {
+    if (version === "ghsi7") {
       ghsi10Card.style.display = "block";
       ghsi10Value.textContent = ghsi10Score;
-      ghsi10Detail.textContent = "Precise estimate: " + formatNum(row.ghsi3_10_precise) +
-        " (95% CI: " + formatNum(row.ghsi3_10_lower) + " \\u2013 " + formatNum(row.ghsi3_10_upper) + ")";
-    } else if (version === "ghsi7") {
-      ghsi10Card.style.display = "block";
-      ghsi10Value.textContent = ghsi10Score;
-      ghsi10Detail.textContent = "Precise estimate: " + formatNum(row.ghsi7_10_precise) +
-        " (95% CI: " + formatNum(row.ghsi7_10_lower) + " \\u2013 " + formatNum(row.ghsi7_10_upper) + ")";
+      ghsi10Detail.textContent = "Precise estimate: " + formatNum(row.ghsi10_precise) +
+        " (95% CI: " + formatNum(row.ghsi10_lower) + " \\u2013 " + formatNum(row.ghsi10_upper) + ")";
     } else {
       ghsi10Card.style.display = "none";
     }
