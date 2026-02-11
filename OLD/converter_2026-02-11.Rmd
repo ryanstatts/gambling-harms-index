@@ -1,0 +1,453 @@
+---
+title: "GHSI Score Converter"
+description: "Convert GHSI-3, GHSI-7, and GHSI-10 scores to harm categories, ICECAP-A
+  and SF-6D tariffs.\n"
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(jsonlite)
+library(tidyverse)
+
+# Read lookup table -- update this CSV to change the conversion data
+lookup <- read_csv("data/GHSI_Rasch_Lookup_2026-02-10.csv", show_col_types = FALSE)
+
+# Build JSON array for JavaScript, indexed by GHSI10_estimate (0-30)
+js_rows <- lookup %>%
+  arrange(GHSI10_estimate) %>%
+  rowwise() %>%
+  mutate(
+    js = paste0(
+      '{ ghsi7: ', ifelse(is.na(GHSI7_score), 'null', GHSI7_score),
+      ', ghsi7_10_precise: ', ifelse(is.na(GHSI7_10_precise), 'null', sprintf("%.2f", GHSI7_10_precise)),
+      ', ghsi7_10_lower: ', ifelse(is.na(GHSI7_10_lower), 'null', sprintf("%.2f", GHSI7_10_lower)),
+      ', ghsi7_10_upper: ', ifelse(is.na(GHSI7_10_upper), 'null', sprintf("%.2f", GHSI7_10_upper)),
+      ', ghsi3: ', ifelse(is.na(GHSI3_score), 'null', GHSI3_score),
+      ', ghsi3_10_precise: ', ifelse(is.na(GHSI3_10_precise), 'null', sprintf("%.2f", GHSI3_10_precise)),
+      ', ghsi3_10_lower: ', ifelse(is.na(GHSI3_10_lower), 'null', sprintf("%.2f", GHSI3_10_lower)),
+      ', ghsi3_10_upper: ', ifelse(is.na(GHSI3_10_upper), 'null', sprintf("%.2f", GHSI3_10_upper)),
+      ', category: "', GHSI_Category, '"',
+      ', icecap: ', sprintf("%.2f", ICECAP),
+      ', icecap_dis: ', sprintf("%.2f", ICECAP_disutility),
+      ', sf6d: ', sprintf("%.2f", SF6D),
+      ', sf6d_dis: ', sprintf("%.2f", SF6D_disutility),
+      ' }'
+    )
+  ) %>%
+  pull(js)
+
+lookup_json <- paste0("[\n    ", paste(js_rows, collapse = ",\n    "), "\n  ]")
+```
+
+This tool converts scores from the [**GHSI-3**](items.html) (3-item), [**GHSI-7**](items.html) (7-item), or [**GHSI-10**](items.html) (10-item) Gambling Harms Severity Index into a GHSI harm category and estimated health utility tariffs on the [ICECAP-A](https://www.bristol.ac.uk/population-health-sciences/projects/icecap/icecap-a/) and SF-6D scales. If you enter a GHSI-3 or GHSI-7 score, it will first be converted to a GHSI-10 equivalent.
+
+<style type="text/css">
+.converter-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.converter-form {
+  background: #fff9ef;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: #252323;
+}
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.25rem;
+}
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.radio-group input[type="radio"] {
+  accent-color: #EB6534;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.score-input-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.score-input-row input[type="number"] {
+  width: 100px;
+  padding: 0.6rem 0.8rem;
+  font-family: "Bitter", serif;
+  font-size: 1.1rem;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  background: white;
+  color: #252323;
+  transition: border-color 0.2s;
+}
+.score-input-row input[type="number"]:focus {
+  outline: none;
+  border-color: #EB6534;
+}
+.score-range-hint {
+  font-size: 0.85rem;
+  color: rgba(37, 35, 35, 0.6);
+}
+.convert-btn {
+  font-family: "Hanken Grotesk", sans-serif;
+  padding: 0.75rem 2rem;
+  background-color: #698F3F;
+  color: #E6EFE9;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block;
+  width: 100%;
+}
+.convert-btn:hover {
+  background-color: #5a7835;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(105, 143, 63, 0.3);
+}
+.convert-btn:active {
+  transform: translateY(0);
+}
+.results-panel {
+  display: none;
+  margin-top: 2rem;
+}
+.results-panel.visible {
+  display: block;
+}
+.result-card {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #698F3F;
+}
+.result-card h3 {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(37, 35, 35, 0.5);
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+.result-card .result-value {
+  font-family: "Bitter", serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #252323;
+  margin: 0;
+}
+.result-card .result-detail {
+  font-size: 0.9rem;
+  color: rgba(37, 35, 35, 0.65);
+  margin: 0.25rem 0 0 0;
+}
+.result-card.category-card {
+  border-left-color: #EB6534;
+}
+.category-no-harm { border-left-color: #698F3F; }
+.category-low-harm { border-left-color: #E8B931; }
+.category-moderate-harm { border-left-color: #EB6534; }
+.category-high-harm { border-left-color: #C1292E; }
+.category-severe-harm { border-left-color: #6B1D24; }
+.category-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+}
+.badge-no-harm { background-color: #698F3F; }
+.badge-low-harm { background-color: #E8B931; color: #252323; }
+.badge-moderate-harm { background-color: #EB6534; }
+.badge-high-harm { background-color: #C1292E; }
+.badge-severe-harm { background-color: #6B1D24; }
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 600px) {
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+  .score-input-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.ghsi10-conversion-note {
+  font-size: 0.9rem;
+  color: rgba(37, 35, 35, 0.65);
+  margin-top: 0.15rem;
+}
+.error-message {
+  color: #C1292E;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+.error-message.visible {
+  display: block;
+}
+d-article .converter-container a,
+d-article .converter-form a {
+  border-bottom: none;
+}
+d-article .converter-container input,
+d-article .converter-container button,
+d-article .converter-container label {
+  border-bottom: none;
+}
+</style>
+
+<div class="converter-container">
+<div class="converter-form">
+<div class="form-group">
+<label>Which GHSI version are you converting from?</label>
+<div class="radio-group">
+<label><input type="radio" name="ghsi-version" value="ghsi3" /> GHSI-3</label>
+<label><input type="radio" name="ghsi-version" value="ghsi7" checked /> GHSI-7</label>
+<label><input type="radio" name="ghsi-version" value="ghsi10" /> GHSI-10</label>
+</div>
+</div>
+<div class="form-group">
+<label for="score-input" id="score-label">Enter your GHSI-7 score</label>
+<div class="score-input-row">
+<input type="number" id="score-input" min="0" max="21" step="1" placeholder="0" />
+<span class="score-range-hint" id="range-hint">Valid range: 0 &ndash; 21</span>
+</div>
+<p class="error-message" id="error-msg"></p>
+</div>
+<button class="convert-btn" id="convert-btn" type="button">Convert Score</button>
+</div>
+<div class="results-panel" id="results-panel">
+<div class="result-card category-card" id="category-card">
+<h3>GHSI Harm Category</h3>
+<p class="result-value"><span class="category-badge" id="category-badge"></span></p>
+</div>
+<div class="result-card" id="ghsi10-card" style="display: none;">
+<h3>GHSI-10 Equivalent Score</h3>
+<p class="result-value" id="ghsi10-value"></p>
+<p class="result-detail ghsi10-conversion-note" id="ghsi10-detail"></p>
+</div>
+<div class="results-grid">
+<div class="result-card">
+<h3>ICECAP-A Tariff</h3>
+<p class="result-value" id="icecap-value"></p>
+<p class="result-detail">Disutility: <span id="icecap-disutility"></span></p>
+</div>
+<div class="result-card">
+<h3>SF-6D Tariff</h3>
+<p class="result-value" id="sf6d-value"></p>
+<p class="result-detail">Disutility: <span id="sf6d-disutility"></span></p>
+</div>
+</div>
+</div>
+</div>
+
+## Understanding Health Utility and Disutility
+
+Health utility is a way of measuring quality of life on a scale from 0 to 1. A score of 1 represents perfect health and wellbeing, while 0 represents a health state considered equivalent to death. These scores help us understand how much gambling harm affects someone's overall wellbeing in a standardised way that can be compared to other health conditions.
+
+We use two different measures because gambling harm affects people in different ways. ICECAP-A captures your overall capability to live a fulfilling life, including things like relationships, stability, achievements, enjoyment, and independence. SF-6D focuses more specifically on health-related quality of life, covering physical functioning, pain, mental health, and energy levels. Healthy adults typically score around 0.86 on ICECAP-A and 0.90 on SF-6D ([see research publications](papers.html)).
+
+Disutility simply means how much wellbeing someone has lost compared to a healthy person. Research shows that gambling harm affects capability wellbeing more than health-related quality of life alone, which is why ICECAP-A scores tend to be lower --- gambling disrupts many aspects of life beyond just physical and mental health symptoms ([see research publications](papers.html)).
+
+```{r converter-js, results='asis'}
+cat(paste0('
+<script type="application/javascript">
+(function() {
+
+  var LOOKUP = ', lookup_json, ';
+
+  var GHSI7_TO_GHSI10 = {};
+  var GHSI3_TO_GHSI10 = {};
+  for (var i = 0; i < LOOKUP.length; i++) {
+    if (LOOKUP[i].ghsi7 !== null) {
+      GHSI7_TO_GHSI10[LOOKUP[i].ghsi7] = i;
+    }
+    if (LOOKUP[i].ghsi3 !== null) {
+      GHSI3_TO_GHSI10[LOOKUP[i].ghsi3] = i;
+    }
+  }
+
+  var versionRadios = document.querySelectorAll(\'input[name="ghsi-version"]\');
+  var scoreInput = document.getElementById("score-input");
+  var scoreLabel = document.getElementById("score-label");
+  var rangeHint = document.getElementById("range-hint");
+  var convertBtn = document.getElementById("convert-btn");
+  var resultsPanel = document.getElementById("results-panel");
+  var errorMsg = document.getElementById("error-msg");
+
+  var categoryCard = document.getElementById("category-card");
+  var categoryBadge = document.getElementById("category-badge");
+  var ghsi10Card = document.getElementById("ghsi10-card");
+  var ghsi10Value = document.getElementById("ghsi10-value");
+  var ghsi10Detail = document.getElementById("ghsi10-detail");
+  var icecapValue = document.getElementById("icecap-value");
+  var icecapDisutility = document.getElementById("icecap-disutility");
+  var sf6dValue = document.getElementById("sf6d-value");
+  var sf6dDisutility = document.getElementById("sf6d-disutility");
+
+  function getSelectedVersion() {
+    for (var i = 0; i < versionRadios.length; i++) {
+      if (versionRadios[i].checked) return versionRadios[i].value;
+    }
+    return "ghsi7";
+  }
+
+  function updateFormForVersion() {
+    var version = getSelectedVersion();
+    if (version === "ghsi3") {
+      scoreLabel.textContent = "Enter your GHSI-3 score";
+      scoreInput.max = 9;
+      rangeHint.textContent = "Valid range: 0 \\u2013 9";
+    } else if (version === "ghsi7") {
+      scoreLabel.textContent = "Enter your GHSI-7 score";
+      scoreInput.max = 21;
+      rangeHint.textContent = "Valid range: 0 \\u2013 21";
+    } else {
+      scoreLabel.textContent = "Enter your GHSI-10 score";
+      scoreInput.max = 30;
+      rangeHint.textContent = "Valid range: 0 \\u2013 30";
+    }
+    scoreInput.value = "";
+    resultsPanel.classList.remove("visible");
+    errorMsg.classList.remove("visible");
+  }
+
+  for (var i = 0; i < versionRadios.length; i++) {
+    versionRadios[i].addEventListener("change", updateFormForVersion);
+  }
+
+  function getCategoryClass(category) {
+    var map = {
+      "No Harm": "no-harm",
+      "Low Harm": "low-harm",
+      "Moderate Harm": "moderate-harm",
+      "High Harm": "high-harm",
+      "Severe Harm": "severe-harm"
+    };
+    return map[category] || "";
+  }
+
+  function formatNum(n, dp) {
+    if (typeof dp === "undefined") dp = 2;
+    return Number(n).toFixed(dp);
+  }
+
+  function doConvert() {
+    var version = getSelectedVersion();
+    var rawVal = scoreInput.value.trim();
+
+    if (rawVal === "") {
+      showError("Please enter a score.");
+      return;
+    }
+
+    var score = parseInt(rawVal, 10);
+    if (isNaN(score) || score !== parseFloat(rawVal)) {
+      showError("Please enter a whole number.");
+      return;
+    }
+
+    var maxScore = (version === "ghsi3") ? 9 : (version === "ghsi7") ? 21 : 30;
+    if (score < 0 || score > maxScore) {
+      showError("Score must be between 0 and " + maxScore + ".");
+      return;
+    }
+
+    errorMsg.classList.remove("visible");
+
+    var ghsi10Score;
+    if (version === "ghsi3") {
+      ghsi10Score = GHSI3_TO_GHSI10[score];
+      if (ghsi10Score === undefined) {
+        showError("No GHSI-10 conversion available for this GHSI-3 score.");
+        return;
+      }
+    } else if (version === "ghsi7") {
+      ghsi10Score = GHSI7_TO_GHSI10[score];
+    } else {
+      ghsi10Score = score;
+    }
+
+    var row = LOOKUP[ghsi10Score];
+
+    if (version === "ghsi3") {
+      ghsi10Card.style.display = "block";
+      ghsi10Value.textContent = ghsi10Score;
+      ghsi10Detail.textContent = "Precise estimate: " + formatNum(row.ghsi3_10_precise) +
+        " (95% CI: " + formatNum(row.ghsi3_10_lower) + " \\u2013 " + formatNum(row.ghsi3_10_upper) + ")";
+    } else if (version === "ghsi7") {
+      ghsi10Card.style.display = "block";
+      ghsi10Value.textContent = ghsi10Score;
+      ghsi10Detail.textContent = "Precise estimate: " + formatNum(row.ghsi7_10_precise) +
+        " (95% CI: " + formatNum(row.ghsi7_10_lower) + " \\u2013 " + formatNum(row.ghsi7_10_upper) + ")";
+    } else {
+      ghsi10Card.style.display = "none";
+    }
+
+    var cat = row.category;
+    var catClass = getCategoryClass(cat);
+    categoryBadge.textContent = cat;
+    categoryBadge.className = "category-badge badge-" + catClass;
+    categoryCard.className = "result-card category-card category-" + catClass;
+
+    icecapValue.textContent = formatNum(row.icecap);
+    icecapDisutility.textContent = formatNum(row.icecap_dis);
+
+    sf6dValue.textContent = formatNum(row.sf6d);
+    sf6dDisutility.textContent = formatNum(row.sf6d_dis);
+
+    resultsPanel.classList.add("visible");
+    resultsPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.classList.add("visible");
+    resultsPanel.classList.remove("visible");
+  }
+
+  convertBtn.addEventListener("click", doConvert);
+
+  scoreInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      doConvert();
+    }
+  });
+
+})();
+</script>
+'))
+```

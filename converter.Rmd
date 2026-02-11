@@ -1,7 +1,7 @@
 ---
 title: "GHSI Score Converter"
-description: "Convert GHSI-3, GHSI-7, and GHSI-10 scores to harm categories, ICECAP-A
-  and SF-6D tariffs.\n"
+description: "Convert GHSI, GHSI-AO, and PGSI scores to harm categories, ICECAP-A and
+  SF-6D tariffs.\n"
 site: distill::distill_website
 ---
 
@@ -13,9 +13,14 @@ library(tidyverse)
 # Read lookup table -- update this CSV to change the conversion data
 lookup <- read_csv("data/GHSI_Rasch_Lookup_2026-02-10.csv", show_col_types = FALSE)
 
-# Build JSON array for JavaScript, indexed by GHSI10_estimate (0-30)
-js_rows <- lookup %>%
-  arrange(GHSI10_estimate) %>%
+# De-duplicate for the GHSI lookup (indexed by GHSI10_estimate 0-30)
+# Some rows are duplicated when PGSI scores share a GHSI10 estimate
+lookup_ghsi <- lookup %>%
+  distinct(GHSI10_estimate, .keep_all = TRUE) %>%
+  arrange(GHSI10_estimate)
+
+# Build JSON array for GHSI conversions, indexed by GHSI10_estimate (0-30)
+js_rows <- lookup_ghsi %>%
   rowwise() %>%
   mutate(
     js = paste0(
@@ -38,9 +43,62 @@ js_rows <- lookup %>%
   pull(js)
 
 lookup_json <- paste0("[\n    ", paste(js_rows, collapse = ",\n    "), "\n  ]")
+
+# Build separate PGSI lookup array, indexed by PGSI score (0-27)
+pgsi_rows <- lookup %>%
+  filter(!is.na(PGSI_score)) %>%
+  arrange(PGSI_score) %>%
+  rowwise() %>%
+  mutate(
+    js = paste0(
+      '{ pgsi: ', PGSI_score,
+      ', ghsi10: ', GHSI10_estimate,
+      ', pgsi_10_precise: ', sprintf("%.2f", PGSI_10_precise),
+      ', pgsi_10_lower: ', sprintf("%.2f", PGSI_10_lower),
+      ', pgsi_10_upper: ', sprintf("%.2f", PGSI_10_upper),
+      ', category: "', GHSI_Category, '"',
+      ', icecap: ', sprintf("%.2f", ICECAP),
+      ', icecap_dis: ', sprintf("%.2f", ICECAP_disutility),
+      ', sf6d: ', sprintf("%.2f", SF6D),
+      ', sf6d_dis: ', sprintf("%.2f", SF6D_disutility),
+      ' }'
+    )
+  ) %>%
+  pull(js)
+
+pgsi_json <- paste0("[\n    ", paste(pgsi_rows, collapse = ",\n    "), "\n  ]")
+
+# Read GHSI-AO lookup table for Affected Others
+lookup_ao <- read_csv("data/GHSI-AO_Lookup_2026-02-11.csv", show_col_types = FALSE)
+
+# Build JSON array for GHSI-AO conversions, indexed by GHSIAO10_estimate (0-30)
+ao_rows <- lookup_ao %>%
+  arrange(GHSIAO10_estimate) %>%
+  rowwise() %>%
+  mutate(
+    js = paste0(
+      '{ ao7: ', ifelse(is.na(GHSIAO7_score), 'null', GHSIAO7_score),
+      ', ao7_10_precise: ', ifelse(is.na(GHSIAO7_10_precise), 'null', sprintf("%.2f", GHSIAO7_10_precise)),
+      ', ao7_10_lower: ', ifelse(is.na(GHSIAO7_10_lower), 'null', sprintf("%.2f", GHSIAO7_10_lower)),
+      ', ao7_10_upper: ', ifelse(is.na(GHSIAO7_10_upper), 'null', sprintf("%.2f", GHSIAO7_10_upper)),
+      ', ao3: ', ifelse(is.na(GHSIAO3_score), 'null', GHSIAO3_score),
+      ', ao3_10_precise: ', ifelse(is.na(GHSIAO3_10_precise), 'null', sprintf("%.2f", GHSIAO3_10_precise)),
+      ', ao3_10_lower: ', ifelse(is.na(GHSIAO3_10_lower), 'null', sprintf("%.2f", GHSIAO3_10_lower)),
+      ', ao3_10_upper: ', ifelse(is.na(GHSIAO3_10_upper), 'null', sprintf("%.2f", GHSIAO3_10_upper)),
+      ', category: "', GHSIAO_Category, '"',
+      ', icecap: ', sprintf("%.2f", ICECAP),
+      ', icecap_dis: ', sprintf("%.2f", ICECAP_disutility),
+      ', sf6d: ', sprintf("%.2f", SF6D),
+      ', sf6d_dis: ', sprintf("%.2f", SF6D_disutility),
+      ' }'
+    )
+  ) %>%
+  pull(js)
+
+ao_json <- paste0("[\n    ", paste(ao_rows, collapse = ",\n    "), "\n  ]")
 ```
 
-This tool converts scores from the [**GHSI-3**](items.html) (3-item), [**GHSI-7**](items.html) (7-item), or [**GHSI-10**](items.html) (10-item) Gambling Harms Severity Index into a GHSI harm category and estimated health utility tariffs on the [ICECAP-A](https://www.bristol.ac.uk/population-health-sciences/projects/icecap/icecap-a/) and SF-6D scales. If you enter a GHSI-3 or GHSI-7 score, it will first be converted to a GHSI-10 equivalent.
+This tool converts scores from different versions of the Gambling Harms Severity Index ([**GHSI-3**](items.html#ghsi), [**GHSI-7**](docs/items.html#ghsi), or [**GHSI-10**](items.html#ghsi)) into a GHSI harm category and estimated health utility tariffs on the [ICECAP-A](https://www.bristol.ac.uk/population-health-sciences/projects/icecap/icecap-a/) and SF-6D scales. The Affected Others tab provides the same conversions for the Affected Others ([**GHSI-AO-3**](items.html#ghsi-ao), [**GHSI-AO-7**](items.html#ghsi-ao), or [**GHSI-AO-10**](items.html#ghsi-ao)) versions. You can also convert **PGSI** (Problem Gambling Severity Index) scores to GHSI-10 equivalents using the Alternative Measures tab. If you enter a shorter-form or alternative measure score, it will first be converted to a GHSI-10 (or GHSI-AO-10) equivalent.
 
 <style type="text/css">
 .converter-container {
@@ -226,10 +284,58 @@ d-article .converter-container button,
 d-article .converter-container label {
   border-bottom: none;
 }
+.converter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 0;
+}
+.converter-tab {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: #f0ece4;
+  color: rgba(37, 35, 35, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.converter-tab:hover {
+  background: #f5f0e8;
+}
+.converter-tab.active {
+  background: #fff9ef;
+  color: #252323;
+  border-bottom: 1px solid #fff9ef;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 1;
+}
+d-article .converter-tab {
+  border-bottom: none;
+}
+.converter-form.tabbed {
+  border-radius: 0 8px 8px 8px;
+}
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
 </style>
 
 <div class="converter-container">
-<div class="converter-form">
+<div class="converter-tabs">
+<button class="converter-tab active" id="tab-ghsi" type="button">GHSI Versions</button>
+<button class="converter-tab" id="tab-ao" type="button">Affected Others</button>
+<button class="converter-tab" id="tab-alt" type="button">Alternative Measures</button>
+</div>
+<div class="converter-form tabbed">
+<div class="tab-panel active" id="panel-ghsi">
 <div class="form-group">
 <label>Which GHSI version are you converting from?</label>
 <div class="radio-group">
@@ -248,13 +354,44 @@ d-article .converter-container label {
 </div>
 <button class="convert-btn" id="convert-btn" type="button">Convert Score</button>
 </div>
+<div class="tab-panel" id="panel-ao">
+<div class="form-group">
+<label>Which GHSI-AO version are you converting from?</label>
+<div class="radio-group">
+<label><input type="radio" name="ao-version" value="ao3" /> GHSI-AO-3</label>
+<label><input type="radio" name="ao-version" value="ao7" checked /> GHSI-AO-7</label>
+<label><input type="radio" name="ao-version" value="ao10" /> GHSI-AO-10</label>
+</div>
+</div>
+<div class="form-group">
+<label for="ao-score-input" id="ao-score-label">Enter your GHSI-AO-7 score</label>
+<div class="score-input-row">
+<input type="number" id="ao-score-input" min="0" max="21" step="1" placeholder="0" />
+<span class="score-range-hint" id="ao-range-hint">Valid range: 0 &ndash; 21</span>
+</div>
+<p class="error-message" id="ao-error-msg"></p>
+</div>
+<button class="convert-btn" id="ao-convert-btn" type="button">Convert Score</button>
+</div>
+<div class="tab-panel" id="panel-alt">
+<div class="form-group">
+<label for="pgsi-score-input">Enter your PGSI score</label>
+<div class="score-input-row">
+<input type="number" id="pgsi-score-input" min="0" max="27" step="1" placeholder="0" />
+<span class="score-range-hint">Valid range: 0 &ndash; 27</span>
+</div>
+<p class="error-message" id="pgsi-error-msg"></p>
+</div>
+<button class="convert-btn" id="pgsi-convert-btn" type="button">Convert Score</button>
+</div>
+</div>
 <div class="results-panel" id="results-panel">
 <div class="result-card category-card" id="category-card">
-<h3>GHSI Harm Category</h3>
+<h3 id="category-heading">GHSI Harm Category</h3>
 <p class="result-value"><span class="category-badge" id="category-badge"></span></p>
 </div>
 <div class="result-card" id="ghsi10-card" style="display: none;">
-<h3>GHSI-10 Equivalent Score</h3>
+<h3 id="ghsi10-heading">GHSI-10 Equivalent Score</h3>
 <p class="result-value" id="ghsi10-value"></p>
 <p class="result-detail ghsi10-conversion-note" id="ghsi10-detail"></p>
 </div>
@@ -275,18 +412,33 @@ d-article .converter-container label {
 
 ## Understanding Health Utility and Disutility
 
-Health utility is a way of measuring quality of life on a scale from 0 to 1. A score of 1 represents perfect health and wellbeing, while 0 represents a health state considered equivalent to death. These scores help us understand how much gambling harm affects someone's overall wellbeing in a standardised way that can be compared to other health conditions.
+The ICECAP-A and SF-6D scores shown above are measures of *health utility*. Health utility is a standard approach in health economics and is routinely used by NICE and the NHS to assess whether interventions are clinically meaningful and represent good value for money.
 
-We use two different measures because gambling harm affects people in different ways. ICECAP-A captures your overall capability to live a fulfilling life, including things like relationships, stability, achievements, enjoyment, and independence. SF-6D focuses more specifically on health-related quality of life, covering physical functioning, pain, mental health, and energy levels. Healthy adults typically score around 0.86 on ICECAP-A and 0.90 on SF-6D ([see research publications](papers.html)).
+Health utility is a way of measuring quality of life on a scale from 0 to 1. A score of 1 represents full health and wellbeing, while 0 represents a state considered equivalent to death. In UK population studies, average scores are typically around 0.86 on the ICECAP-A and 0.90 on the SF6D ([see research publications](papers.html#reports)).
 
-Disutility simply means how much wellbeing someone has lost compared to a healthy person. Research shows that gambling harm affects capability wellbeing more than health-related quality of life alone, which is why ICECAP-A scores tend to be lower --- gambling disrupts many aspects of life beyond just physical and mental health symptoms ([see research publications](papers.html)).
+These measures allow gambling harms to be understood in the same way as other long-term conditions, enabling direct comparison with mental health disorders, addictions, and chronic illness.
+
+We use two complementary measures because gambling harms affect people in different ways:
+- **ICECAP-A** captures broader capability and life functioning, including stability, relationships, achievement, enjoyment and independence.
+
+- **SF-6D** focuses more specifically on health-related quality of life, including physical functioning, pain, mental health and energy.
+
+**Disutility** refers to the reduction in wellbeing compared to a healthy population. As GHSI (or GHSI-AO) scores increase (indicating greater harm), health utility scores decrease.
+
+
+In practical terms, a 2–3 point change on the GHSI corresponds to changes in quality of life that meet accepted thresholds for clinical meaningfulness in NICE-aligned health-economic evaluation."
+
+
 
 ```{r converter-js, results='asis'}
 cat(paste0('
 <script type="application/javascript">
 (function() {
 
+  // --- Data lookups ---
   var LOOKUP = ', lookup_json, ';
+  var PGSI_LOOKUP = ', pgsi_json, ';
+  var AO_LOOKUP = ', ao_json, ';
 
   var GHSI7_TO_GHSI10 = {};
   var GHSI3_TO_GHSI10 = {};
@@ -299,17 +451,57 @@ cat(paste0('
     }
   }
 
+  var AO7_TO_AO10 = {};
+  var AO3_TO_AO10 = {};
+  for (var i = 0; i < AO_LOOKUP.length; i++) {
+    if (AO_LOOKUP[i].ao7 !== null) {
+      AO7_TO_AO10[AO_LOOKUP[i].ao7] = i;
+    }
+    if (AO_LOOKUP[i].ao3 !== null) {
+      AO3_TO_AO10[AO_LOOKUP[i].ao3] = i;
+    }
+  }
+
+  var PGSI_BY_SCORE = {};
+  for (var i = 0; i < PGSI_LOOKUP.length; i++) {
+    PGSI_BY_SCORE[PGSI_LOOKUP[i].pgsi] = PGSI_LOOKUP[i];
+  }
+
+  // --- Tab elements ---
+  var tabs = [
+    { tab: document.getElementById("tab-ghsi"), panel: document.getElementById("panel-ghsi") },
+    { tab: document.getElementById("tab-ao"),   panel: document.getElementById("panel-ao") },
+    { tab: document.getElementById("tab-alt"),  panel: document.getElementById("panel-alt") }
+  ];
+
+  // --- GHSI form elements ---
   var versionRadios = document.querySelectorAll(\'input[name="ghsi-version"]\');
   var scoreInput = document.getElementById("score-input");
   var scoreLabel = document.getElementById("score-label");
   var rangeHint = document.getElementById("range-hint");
   var convertBtn = document.getElementById("convert-btn");
-  var resultsPanel = document.getElementById("results-panel");
   var errorMsg = document.getElementById("error-msg");
 
+  // --- AO form elements ---
+  var aoVersionRadios = document.querySelectorAll(\'input[name="ao-version"]\');
+  var aoScoreInput = document.getElementById("ao-score-input");
+  var aoScoreLabel = document.getElementById("ao-score-label");
+  var aoRangeHint = document.getElementById("ao-range-hint");
+  var aoConvertBtn = document.getElementById("ao-convert-btn");
+  var aoErrorMsg = document.getElementById("ao-error-msg");
+
+  // --- PGSI form elements ---
+  var pgsiScoreInput = document.getElementById("pgsi-score-input");
+  var pgsiConvertBtn = document.getElementById("pgsi-convert-btn");
+  var pgsiErrorMsg = document.getElementById("pgsi-error-msg");
+
+  // --- Shared result elements ---
+  var resultsPanel = document.getElementById("results-panel");
   var categoryCard = document.getElementById("category-card");
+  var categoryHeading = document.getElementById("category-heading");
   var categoryBadge = document.getElementById("category-badge");
   var ghsi10Card = document.getElementById("ghsi10-card");
+  var ghsi10Heading = document.getElementById("ghsi10-heading");
   var ghsi10Value = document.getElementById("ghsi10-value");
   var ghsi10Detail = document.getElementById("ghsi10-detail");
   var icecapValue = document.getElementById("icecap-value");
@@ -317,6 +509,25 @@ cat(paste0('
   var sf6dValue = document.getElementById("sf6d-value");
   var sf6dDisutility = document.getElementById("sf6d-disutility");
 
+  // --- Tab switching ---
+  function switchTab(activeIndex) {
+    for (var i = 0; i < tabs.length; i++) {
+      if (i === activeIndex) {
+        tabs[i].tab.classList.add("active");
+        tabs[i].panel.classList.add("active");
+      } else {
+        tabs[i].tab.classList.remove("active");
+        tabs[i].panel.classList.remove("active");
+      }
+    }
+    resultsPanel.classList.remove("visible");
+  }
+
+  tabs[0].tab.addEventListener("click", function() { switchTab(0); });
+  tabs[1].tab.addEventListener("click", function() { switchTab(1); });
+  tabs[2].tab.addEventListener("click", function() { switchTab(2); });
+
+  // --- GHSI version form logic ---
   function getSelectedVersion() {
     for (var i = 0; i < versionRadios.length; i++) {
       if (versionRadios[i].checked) return versionRadios[i].value;
@@ -348,6 +559,39 @@ cat(paste0('
     versionRadios[i].addEventListener("change", updateFormForVersion);
   }
 
+  // --- AO version form logic ---
+  function getSelectedAoVersion() {
+    for (var i = 0; i < aoVersionRadios.length; i++) {
+      if (aoVersionRadios[i].checked) return aoVersionRadios[i].value;
+    }
+    return "ao7";
+  }
+
+  function updateAoFormForVersion() {
+    var version = getSelectedAoVersion();
+    if (version === "ao3") {
+      aoScoreLabel.textContent = "Enter your GHSI-AO-3 score";
+      aoScoreInput.max = 9;
+      aoRangeHint.textContent = "Valid range: 0 \\u2013 9";
+    } else if (version === "ao7") {
+      aoScoreLabel.textContent = "Enter your GHSI-AO-7 score";
+      aoScoreInput.max = 21;
+      aoRangeHint.textContent = "Valid range: 0 \\u2013 21";
+    } else {
+      aoScoreLabel.textContent = "Enter your GHSI-AO-10 score";
+      aoScoreInput.max = 30;
+      aoRangeHint.textContent = "Valid range: 0 \\u2013 30";
+    }
+    aoScoreInput.value = "";
+    resultsPanel.classList.remove("visible");
+    aoErrorMsg.classList.remove("visible");
+  }
+
+  for (var i = 0; i < aoVersionRadios.length; i++) {
+    aoVersionRadios[i].addEventListener("change", updateAoFormForVersion);
+  }
+
+  // --- Shared helpers ---
   function getCategoryClass(category) {
     var map = {
       "No Harm": "no-harm",
@@ -364,24 +608,53 @@ cat(paste0('
     return Number(n).toFixed(dp);
   }
 
+  function displayResults(cat, equivalentScore, precise, lower, upper, showConversion, row, labelPrefix) {
+    var prefix = labelPrefix || "GHSI";
+    categoryHeading.textContent = prefix + " Harm Category";
+    ghsi10Heading.textContent = prefix + "-10 Equivalent Score";
+
+    var catClass = getCategoryClass(cat);
+    categoryBadge.textContent = cat;
+    categoryBadge.className = "category-badge badge-" + catClass;
+    categoryCard.className = "result-card category-card category-" + catClass;
+
+    if (showConversion) {
+      ghsi10Card.style.display = "block";
+      ghsi10Value.textContent = equivalentScore;
+      ghsi10Detail.textContent = "Precise estimate: " + formatNum(precise) +
+        " (95% CI: " + formatNum(lower) + " \\u2013 " + formatNum(upper) + ")";
+    } else {
+      ghsi10Card.style.display = "none";
+    }
+
+    icecapValue.textContent = formatNum(row.icecap);
+    icecapDisutility.textContent = formatNum(row.icecap_dis);
+    sf6dValue.textContent = formatNum(row.sf6d);
+    sf6dDisutility.textContent = formatNum(row.sf6d_dis);
+
+    resultsPanel.classList.add("visible");
+    resultsPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  // --- GHSI convert ---
   function doConvert() {
     var version = getSelectedVersion();
     var rawVal = scoreInput.value.trim();
 
     if (rawVal === "") {
-      showError("Please enter a score.");
+      showError(errorMsg, "Please enter a score.");
       return;
     }
 
     var score = parseInt(rawVal, 10);
     if (isNaN(score) || score !== parseFloat(rawVal)) {
-      showError("Please enter a whole number.");
+      showError(errorMsg, "Please enter a whole number.");
       return;
     }
 
     var maxScore = (version === "ghsi3") ? 9 : (version === "ghsi7") ? 21 : 30;
     if (score < 0 || score > maxScore) {
-      showError("Score must be between 0 and " + maxScore + ".");
+      showError(errorMsg, "Score must be between 0 and " + maxScore + ".");
       return;
     }
 
@@ -391,7 +664,7 @@ cat(paste0('
     if (version === "ghsi3") {
       ghsi10Score = GHSI3_TO_GHSI10[score];
       if (ghsi10Score === undefined) {
-        showError("No GHSI-10 conversion available for this GHSI-3 score.");
+        showError(errorMsg, "No GHSI-10 conversion available for this GHSI-3 score.");
         return;
       }
     } else if (version === "ghsi7") {
@@ -403,47 +676,121 @@ cat(paste0('
     var row = LOOKUP[ghsi10Score];
 
     if (version === "ghsi3") {
-      ghsi10Card.style.display = "block";
-      ghsi10Value.textContent = ghsi10Score;
-      ghsi10Detail.textContent = "Precise estimate: " + formatNum(row.ghsi3_10_precise) +
-        " (95% CI: " + formatNum(row.ghsi3_10_lower) + " \\u2013 " + formatNum(row.ghsi3_10_upper) + ")";
+      displayResults(row.category, ghsi10Score, row.ghsi3_10_precise, row.ghsi3_10_lower, row.ghsi3_10_upper, true, row, "GHSI");
     } else if (version === "ghsi7") {
-      ghsi10Card.style.display = "block";
-      ghsi10Value.textContent = ghsi10Score;
-      ghsi10Detail.textContent = "Precise estimate: " + formatNum(row.ghsi7_10_precise) +
-        " (95% CI: " + formatNum(row.ghsi7_10_lower) + " \\u2013 " + formatNum(row.ghsi7_10_upper) + ")";
+      displayResults(row.category, ghsi10Score, row.ghsi7_10_precise, row.ghsi7_10_lower, row.ghsi7_10_upper, true, row, "GHSI");
     } else {
-      ghsi10Card.style.display = "none";
+      displayResults(row.category, ghsi10Score, null, null, null, false, row, "GHSI");
     }
-
-    var cat = row.category;
-    var catClass = getCategoryClass(cat);
-    categoryBadge.textContent = cat;
-    categoryBadge.className = "category-badge badge-" + catClass;
-    categoryCard.className = "result-card category-card category-" + catClass;
-
-    icecapValue.textContent = formatNum(row.icecap);
-    icecapDisutility.textContent = formatNum(row.icecap_dis);
-
-    sf6dValue.textContent = formatNum(row.sf6d);
-    sf6dDisutility.textContent = formatNum(row.sf6d_dis);
-
-    resultsPanel.classList.add("visible");
-    resultsPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
-  function showError(msg) {
-    errorMsg.textContent = msg;
-    errorMsg.classList.add("visible");
+  // --- AO convert ---
+  function doAoConvert() {
+    var version = getSelectedAoVersion();
+    var rawVal = aoScoreInput.value.trim();
+
+    if (rawVal === "") {
+      showError(aoErrorMsg, "Please enter a score.");
+      return;
+    }
+
+    var score = parseInt(rawVal, 10);
+    if (isNaN(score) || score !== parseFloat(rawVal)) {
+      showError(aoErrorMsg, "Please enter a whole number.");
+      return;
+    }
+
+    var maxScore = (version === "ao3") ? 9 : (version === "ao7") ? 21 : 30;
+    if (score < 0 || score > maxScore) {
+      showError(aoErrorMsg, "Score must be between 0 and " + maxScore + ".");
+      return;
+    }
+
+    aoErrorMsg.classList.remove("visible");
+
+    var ao10Score;
+    if (version === "ao3") {
+      ao10Score = AO3_TO_AO10[score];
+      if (ao10Score === undefined) {
+        showError(aoErrorMsg, "No GHSI-AO-10 conversion available for this GHSI-AO-3 score.");
+        return;
+      }
+    } else if (version === "ao7") {
+      ao10Score = AO7_TO_AO10[score];
+    } else {
+      ao10Score = score;
+    }
+
+    var row = AO_LOOKUP[ao10Score];
+
+    if (version === "ao3") {
+      displayResults(row.category, ao10Score, row.ao3_10_precise, row.ao3_10_lower, row.ao3_10_upper, true, row, "GHSI-AO");
+    } else if (version === "ao7") {
+      displayResults(row.category, ao10Score, row.ao7_10_precise, row.ao7_10_lower, row.ao7_10_upper, true, row, "GHSI-AO");
+    } else {
+      displayResults(row.category, ao10Score, null, null, null, false, row, "GHSI-AO");
+    }
+  }
+
+  // --- PGSI convert ---
+  function doPgsiConvert() {
+    var rawVal = pgsiScoreInput.value.trim();
+
+    if (rawVal === "") {
+      showError(pgsiErrorMsg, "Please enter a score.");
+      return;
+    }
+
+    var score = parseInt(rawVal, 10);
+    if (isNaN(score) || score !== parseFloat(rawVal)) {
+      showError(pgsiErrorMsg, "Please enter a whole number.");
+      return;
+    }
+
+    if (score < 0 || score > 27) {
+      showError(pgsiErrorMsg, "Score must be between 0 and 27.");
+      return;
+    }
+
+    pgsiErrorMsg.classList.remove("visible");
+
+    var row = PGSI_BY_SCORE[score];
+    if (!row) {
+      showError(pgsiErrorMsg, "No GHSI-10 conversion available for this PGSI score.");
+      return;
+    }
+
+    displayResults(row.category, row.ghsi10, row.pgsi_10_precise, row.pgsi_10_lower, row.pgsi_10_upper, true, row, "GHSI");
+  }
+
+  function showError(el, msg) {
+    el.textContent = msg;
+    el.classList.add("visible");
     resultsPanel.classList.remove("visible");
   }
 
   convertBtn.addEventListener("click", doConvert);
+  aoConvertBtn.addEventListener("click", doAoConvert);
+  pgsiConvertBtn.addEventListener("click", doPgsiConvert);
 
   scoreInput.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
       e.preventDefault();
       doConvert();
+    }
+  });
+
+  aoScoreInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      doAoConvert();
+    }
+  });
+
+  pgsiScoreInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      doPgsiConvert();
     }
   });
 
