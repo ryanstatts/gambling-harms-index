@@ -12,16 +12,22 @@ knitr::opts_chunk$set(echo = FALSE)
 
 **A Holistic Framework of Gambling Harms and Recovery, Derived from a Rapid Evidence Assessment and Qualitative Interviews with People who Gamble and Affected Others.** 
 *Collard, S., Wheaton, J., Davies, S., Statton, R., Martin, I., Pinto, C., Browne, M., Conway, M., Walsh, C., Dobson, N., & Close, J. (2025).* 
-PsyArXiv. https://doi.org/10.31234/osf.io/yudq6_v1
+PsyArXiv. https://doi.org/10.31234/osf.io/yudq6_v2
 
 This study developed a holistic, empirically grounded framework of gambling-related harm and recovery tailored to the Great Britain context. Through a Rapid Evidence Assessment and 40 qualitative interviews with people experiencing gambling harms and affected others, the framework encompasses three broad components of harm: resources, wellbeing, and relationships. It explicitly acknowledges stigma as a gambling harm and conceptualises recovery as a multidimensional process involving financial stability, identity repair, and social connection, underpinned by support networks alongside control, insight, behaviour change, and ownership. The framework advances gambling harms research by integrating lived experience, acknowledging affected others, and embedding recovery as a central component.
 
 **Development and Validation of the Gambling Harms Severity Index (GHSI-10) and the GHSI for Affected Others (GHSI-AO-10): Measurement Instruments for People Experiencing Gambling Related Harms and Affected Others.** 
 *Close, J., Statton, R., Collard, S., Wheaton, J., Davies, S., Martin, I., Pinto, C., Conway, M., Walsh, C., & Browne, M. (2025).*
-PsyArXiv. https://doi.org/10.31234/osf.io/w8fb6_v1
+PsyArXiv. https://doi.org/10.31234/osf.io/w8fb6_v2
 
 This study reports the development and validation of the GHSI-10 and GHSI-AO-10, co-designed instruments for measuring gambling-related harms among people who gamble and affected others. Using a multi-phase, mixed-methods approach grounded in a holistic framework of gambling harm and recovery, items were co-produced with individuals with lived experience, affected others, practitioners, and academic experts. Psychometric validation conducted with over 3,000 participants in the UK demonstrated strong reliability, convergent validity with existing measures, and good fit using both classical test theory and Rasch measurement approaches. The instruments use non-stigmatising, person-centred language designed to reduce denial and social desirability biases, with a focus on harms that are dynamic and responsive to recovery pathways.
 
+
+**The Burden of Gambling Harms on Health‐Related Quality of Life in Great Britain.** 
+*Close, J., Statton, R., Collard, S., Wheaton, J., Davies, S., Martin, I., Pinto, C., Conway, M., Walsh, C., & Browne, M. (2025).*
+PsyArXiv. https://doi.org/10.31234/osf.io/6fqv8_v1
+
+This study estimates the impacts that gambling harms have on the health, wellbeing, and capability of people in Great Britain who experience harm - both directly affected and affected others. Using standard health economic approaches, estimates of impact to health related quality of life are made using the GHSI-10 and the GHSI-AO-10 for affected others. This study presents the first GB estimates of harm. Severe harm (≥15) was associated with reductions of 31.7% (SF-6D) and 35.0% (ICECAP-A) – impacts similar in magnitude to long term conditions and substance related harms. Notably, affected others experienced impacts of a similarly substantial magnitude. 
 
 # Reports
 

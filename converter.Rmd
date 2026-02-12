@@ -419,6 +419,7 @@ Health utility is a way of measuring quality of life on a scale from 0 to 1. A s
 These measures allow gambling harms to be understood in the same way as other long-term conditions, enabling direct comparison with mental health disorders, addictions, and chronic illness.
 
 We use two complementary measures because gambling harms affect people in different ways:
+
 - **ICECAP-A** captures broader capability and life functioning, including stability, relationships, achievement, enjoyment and independence.
 
 - **SF-6D** focuses more specifically on health-related quality of life, including physical functioning, pain, mental health and energy.
